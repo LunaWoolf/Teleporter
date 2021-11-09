@@ -234,6 +234,33 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Debug"",
+            ""id"": ""03d94444-ea8d-443d-b7b2-ba71dd721415"",
+            ""actions"": [
+                {
+                    ""name"": ""ToggleDebug"",
+                    ""type"": ""Button"",
+                    ""id"": ""6ce10f88-789c-48eb-9959-d2cb5f228f01"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""9ea066ba-87b9-4429-b28e-322e35734268"",
+                    ""path"": ""<Keyboard>/slash"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleDebug"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -246,6 +273,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_PlayerAction_CameraMovement = m_PlayerAction.FindAction("CameraMovement", throwIfNotFound: true);
         m_PlayerAction_NextLine = m_PlayerAction.FindAction("NextLine", throwIfNotFound: true);
         m_PlayerAction_OpenBigMap = m_PlayerAction.FindAction("OpenBigMap", throwIfNotFound: true);
+        // Debug
+        m_Debug = asset.FindActionMap("Debug", throwIfNotFound: true);
+        m_Debug_ToggleDebug = m_Debug.FindAction("ToggleDebug", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -364,6 +394,39 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         }
     }
     public PlayerActionActions @PlayerAction => new PlayerActionActions(this);
+
+    // Debug
+    private readonly InputActionMap m_Debug;
+    private IDebugActions m_DebugActionsCallbackInterface;
+    private readonly InputAction m_Debug_ToggleDebug;
+    public struct DebugActions
+    {
+        private @PlayerControls m_Wrapper;
+        public DebugActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @ToggleDebug => m_Wrapper.m_Debug_ToggleDebug;
+        public InputActionMap Get() { return m_Wrapper.m_Debug; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(DebugActions set) { return set.Get(); }
+        public void SetCallbacks(IDebugActions instance)
+        {
+            if (m_Wrapper.m_DebugActionsCallbackInterface != null)
+            {
+                @ToggleDebug.started -= m_Wrapper.m_DebugActionsCallbackInterface.OnToggleDebug;
+                @ToggleDebug.performed -= m_Wrapper.m_DebugActionsCallbackInterface.OnToggleDebug;
+                @ToggleDebug.canceled -= m_Wrapper.m_DebugActionsCallbackInterface.OnToggleDebug;
+            }
+            m_Wrapper.m_DebugActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @ToggleDebug.started += instance.OnToggleDebug;
+                @ToggleDebug.performed += instance.OnToggleDebug;
+                @ToggleDebug.canceled += instance.OnToggleDebug;
+            }
+        }
+    }
+    public DebugActions @Debug => new DebugActions(this);
     public interface IPlayerActionActions
     {
         void OnTeleport(InputAction.CallbackContext context);
@@ -372,5 +435,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         void OnCameraMovement(InputAction.CallbackContext context);
         void OnNextLine(InputAction.CallbackContext context);
         void OnOpenBigMap(InputAction.CallbackContext context);
+    }
+    public interface IDebugActions
+    {
+        void OnToggleDebug(InputAction.CallbackContext context);
     }
 }

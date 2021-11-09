@@ -142,7 +142,7 @@ public class PlayerMovement : MonoBehaviour
             gravityVelocity.y = -2f;
             if (fallHurt)
             {
-                gm.updateHealth(-5f);
+                gm.UpdateHealth(-5f);
                 gm.CameraShake();
                 fallHurt = false;
             }
@@ -513,6 +513,17 @@ public class PlayerMovement : MonoBehaviour
 
         }
     }
+
+    public void DisableAllInput()
+    {
+        PlayerControls.PlayerAction.Disable();
+    }
+
+    public void EnableAllInput()
+    {
+        PlayerControls.PlayerAction.Enable();
+    }
+
 
 
 

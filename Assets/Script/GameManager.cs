@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using MilkShake;
 using UnityEngine.UI;
+using MilkShake;
 using TMPro;
 
 
@@ -10,7 +10,12 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField]
     public static float playerHealth = 1000;
-    
+
+    [SerializeField]
+    public List<Quest> questList = new List<Quest>();
+
+    [SerializeField]
+    public List<Quest> inventoryList = new List<Quest>();
 
     public Shaker MyShaker;
     public ShakePreset MyShakePreset;
@@ -43,7 +48,7 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public void updateHealth(float change)
+    public void UpdateHealth(float change)
     {
         playerHealth = Mathf.Clamp(playerHealth + change, 0, 100);
         if (timeSlider != null)
@@ -60,15 +65,25 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSeconds(1f);
             if (inLight)
             {
-                updateHealth(-3f);
+                UpdateHealth(-3f);
             }
             else
             {
-                updateHealth(-1f);
-
+                UpdateHealth(-1f);
             }
            
         }
     }
+
+    public void GetQuest(Quest quest)
+    {
+
+    }
+
+    public void CompleteQuest(Quest quest)
+    {
+
+    }
+
 
 }

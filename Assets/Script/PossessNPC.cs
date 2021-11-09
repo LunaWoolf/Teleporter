@@ -31,5 +31,6 @@ public class PossessNPC : MonoBehaviour
         {
             meshRenderer.material = normalMaterial;
         }
+
     }
 }
