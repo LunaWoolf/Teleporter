@@ -246,6 +246,14 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""ReturnDebug"",
+                    ""type"": ""Button"",
+                    ""id"": ""dac3b100-11bf-49a9-b7de-c2aba27b4102"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -257,6 +265,17 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""ToggleDebug"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""129f2692-cbfb-4456-84db-205c8d0a00cc"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ReturnDebug"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -276,6 +295,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         // Debug
         m_Debug = asset.FindActionMap("Debug", throwIfNotFound: true);
         m_Debug_ToggleDebug = m_Debug.FindAction("ToggleDebug", throwIfNotFound: true);
+        m_Debug_ReturnDebug = m_Debug.FindAction("ReturnDebug", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -399,11 +419,13 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputActionMap m_Debug;
     private IDebugActions m_DebugActionsCallbackInterface;
     private readonly InputAction m_Debug_ToggleDebug;
+    private readonly InputAction m_Debug_ReturnDebug;
     public struct DebugActions
     {
         private @PlayerControls m_Wrapper;
         public DebugActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @ToggleDebug => m_Wrapper.m_Debug_ToggleDebug;
+        public InputAction @ReturnDebug => m_Wrapper.m_Debug_ReturnDebug;
         public InputActionMap Get() { return m_Wrapper.m_Debug; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -416,6 +438,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @ToggleDebug.started -= m_Wrapper.m_DebugActionsCallbackInterface.OnToggleDebug;
                 @ToggleDebug.performed -= m_Wrapper.m_DebugActionsCallbackInterface.OnToggleDebug;
                 @ToggleDebug.canceled -= m_Wrapper.m_DebugActionsCallbackInterface.OnToggleDebug;
+                @ReturnDebug.started -= m_Wrapper.m_DebugActionsCallbackInterface.OnReturnDebug;
+                @ReturnDebug.performed -= m_Wrapper.m_DebugActionsCallbackInterface.OnReturnDebug;
+                @ReturnDebug.canceled -= m_Wrapper.m_DebugActionsCallbackInterface.OnReturnDebug;
             }
             m_Wrapper.m_DebugActionsCallbackInterface = instance;
             if (instance != null)
@@ -423,6 +448,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @ToggleDebug.started += instance.OnToggleDebug;
                 @ToggleDebug.performed += instance.OnToggleDebug;
                 @ToggleDebug.canceled += instance.OnToggleDebug;
+                @ReturnDebug.started += instance.OnReturnDebug;
+                @ReturnDebug.performed += instance.OnReturnDebug;
+                @ReturnDebug.canceled += instance.OnReturnDebug;
             }
         }
     }
@@ -439,5 +467,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     public interface IDebugActions
     {
         void OnToggleDebug(InputAction.CallbackContext context);
+        void OnReturnDebug(InputAction.CallbackContext context);
     }
 }

@@ -28,12 +28,12 @@ public class PlayerInteraction : MonoBehaviour
     public GameObject bigMap;
 
     //___________________________________________________________________________________________________________
-    [Header("TEST")]
+    /*[Header("TEST")]
     public GameObject CG_1;
     public GameObject CG_2;
     public TMP_Text text;
     public TMP_FontAsset FontAssetA;
-    public TMP_FontAsset FontAssetB;
+    public TMP_FontAsset FontAssetB;*/
     //___________________________________________________________________________________________________________
 
 
@@ -120,7 +120,7 @@ public class PlayerInteraction : MonoBehaviour
     {
         dialogueManager.GetComponent<DialogueUI>().MarkLineComplete();
         //___________________________________________________________________________________________________________
-        CG_1.SetActive(!CG_1.activeSelf);
+        /*CG_1.SetActive(!CG_1.activeSelf);
         CG_2.SetActive(!CG_2.activeSelf);
         if (text.font == FontAssetA)
         {
@@ -129,14 +129,15 @@ public class PlayerInteraction : MonoBehaviour
         else
         {
             text.font = FontAssetA;
-        }
+        }*/
    
 
     //___________________________________________________________________________________________________________
 
-}
+    }
 
-private void OpenMap()
+
+    private void OpenMap()
     {
         if (bigMap != null)
         {
@@ -144,4 +145,18 @@ private void OpenMap()
 
         }
     }
+
+    public void DisableAllInput()
+    {
+        PlayerControls.PlayerAction.Disable();
+    }
+
+
+    public void EnableAllInput()
+    {
+        PlayerControls.PlayerAction.Enable();
+    }
+
+
+
 }

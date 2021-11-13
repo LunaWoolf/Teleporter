@@ -233,6 +233,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "ReturnDebug",
+                    "type": "Button",
+                    "id": "dac3b100-11bf-49a9-b7de-c2aba27b4102",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -244,6 +252,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "ToggleDebug",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "129f2692-cbfb-4456-84db-205c8d0a00cc",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ReturnDebug",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

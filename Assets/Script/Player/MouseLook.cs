@@ -34,8 +34,7 @@ public class MouseLook : MonoBehaviour
         float mouseX =  CameraMovement.ReadValue<Vector2>().x * mouseSensitivity * Time.deltaTime;
         float mouseY =  CameraMovement.ReadValue<Vector2>().y * mouseSensitivity * Time.deltaTime;
 
-        //float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
-        //float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
+        
 
         xRotation -= mouseY;
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
