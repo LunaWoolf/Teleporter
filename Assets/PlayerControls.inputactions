@@ -267,6 +267,44 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "UI",
+            "id": "96ca4498-2f20-4bc9-a41f-65a75384c922",
+            "actions": [
+                {
+                    "name": "OpenUIPage",
+                    "type": "Button",
+                    "id": "431729bd-2424-4323-a1f5-b532c9d5e6dc",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "664664f2-6118-4499-945e-3871cd37edee",
+                    "path": "<Keyboard>/p",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "OpenUIPage",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "38a3e01c-e271-4776-ae72-72348cbcb49d",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "OpenUIPage",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

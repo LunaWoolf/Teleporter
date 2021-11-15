@@ -22,6 +22,7 @@ public class DebugConsole : MonoBehaviour
     public static DebugCommand Help;
     public static DebugCommand<int> Health_set;
     public static DebugCommand Health_max;
+    public static DebugCommand<string> Create_quest;
 
     public GameManager gm;
     public bool showHelp;
@@ -49,15 +50,20 @@ public class DebugConsole : MonoBehaviour
 
         });
 
+        Create_quest = new DebugCommand<string>("create_quest", "create_quest", "create_quest", (x) =>
+        {
+            string[] p = input.Split(',');
+            gm.CreateQuest(p[0], p[1], p[2]);
+
+        });
 
 
         commandList = new List<object>
         {
-
             Health_set,
             Health_max,
-            Help
-
+            Help,
+            Create_quest
         };
     }
 
@@ -161,7 +167,12 @@ public class DebugConsole : MonoBehaviour
                 {
                     (commandList[i] as DebugCommand<int>).Invoke(int.Parse(properties[1]));
                 }
-                //Debug.Log((commandList[i] as DebugCommand).commandDescription);
+                else if (commandList[i] as DebugCommand<string> != null)
+                {
+
+                    (commandList[i] as DebugCommand<string>).Invoke(properties[1]);
+
+                }
 
             }
 

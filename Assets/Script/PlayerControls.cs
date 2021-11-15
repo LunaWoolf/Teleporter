@@ -280,6 +280,44 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""UI"",
+            ""id"": ""96ca4498-2f20-4bc9-a41f-65a75384c922"",
+            ""actions"": [
+                {
+                    ""name"": ""OpenUIPage"",
+                    ""type"": ""Button"",
+                    ""id"": ""431729bd-2424-4323-a1f5-b532c9d5e6dc"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""664664f2-6118-4499-945e-3871cd37edee"",
+                    ""path"": ""<Keyboard>/p"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""OpenUIPage"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""38a3e01c-e271-4776-ae72-72348cbcb49d"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""OpenUIPage"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -296,6 +334,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_Debug = asset.FindActionMap("Debug", throwIfNotFound: true);
         m_Debug_ToggleDebug = m_Debug.FindAction("ToggleDebug", throwIfNotFound: true);
         m_Debug_ReturnDebug = m_Debug.FindAction("ReturnDebug", throwIfNotFound: true);
+        // UI
+        m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
+        m_UI_OpenUIPage = m_UI.FindAction("OpenUIPage", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -455,6 +496,39 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         }
     }
     public DebugActions @Debug => new DebugActions(this);
+
+    // UI
+    private readonly InputActionMap m_UI;
+    private IUIActions m_UIActionsCallbackInterface;
+    private readonly InputAction m_UI_OpenUIPage;
+    public struct UIActions
+    {
+        private @PlayerControls m_Wrapper;
+        public UIActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @OpenUIPage => m_Wrapper.m_UI_OpenUIPage;
+        public InputActionMap Get() { return m_Wrapper.m_UI; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(UIActions set) { return set.Get(); }
+        public void SetCallbacks(IUIActions instance)
+        {
+            if (m_Wrapper.m_UIActionsCallbackInterface != null)
+            {
+                @OpenUIPage.started -= m_Wrapper.m_UIActionsCallbackInterface.OnOpenUIPage;
+                @OpenUIPage.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnOpenUIPage;
+                @OpenUIPage.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnOpenUIPage;
+            }
+            m_Wrapper.m_UIActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @OpenUIPage.started += instance.OnOpenUIPage;
+                @OpenUIPage.performed += instance.OnOpenUIPage;
+                @OpenUIPage.canceled += instance.OnOpenUIPage;
+            }
+        }
+    }
+    public UIActions @UI => new UIActions(this);
     public interface IPlayerActionActions
     {
         void OnTeleport(InputAction.CallbackContext context);
@@ -468,5 +542,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     {
         void OnToggleDebug(InputAction.CallbackContext context);
         void OnReturnDebug(InputAction.CallbackContext context);
+    }
+    public interface IUIActions
+    {
+        void OnOpenUIPage(InputAction.CallbackContext context);
     }
 }
