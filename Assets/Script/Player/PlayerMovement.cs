@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     private PlayerControls PlayerControls;
     private InputAction movement;
     private InputAction CameraMovement;
+    private InputAction uiInputMap;
 
     public float speed = 12f;
     public float gravity = -9.18f;
@@ -52,8 +53,6 @@ public class PlayerMovement : MonoBehaviour
     public Image PossessTimer;
     public GameObject AimPossessTarget;
 
-
-
    [Header("Head Bob")]
     [SerializeField] bool headBob = true;
     [SerializeField] float bobFrequncy = 5f;
@@ -65,7 +64,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Post Processing")]
     public GameObject PostProcessing;
-    Volume PostProcessingVolume;
+    Volume TeleportPostProcessingVolume;
 
     [Header("LayerMask")]
     public LayerMask groundMask;
@@ -86,8 +85,8 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    private void OnEnable()
-    {
+    private void OnEnable() { 
+   
         movement = PlayerControls.PlayerAction.Movement;
         movement.Enable();
 
@@ -96,6 +95,9 @@ public class PlayerMovement : MonoBehaviour
 
         PlayerControls.PlayerAction.Teleport.started += ctx => AimAction();
         PlayerControls.PlayerAction.Teleport.performed += ctx => TeleportAction();
+        PlayerControls.PlayerAction.Teleport.Enable();
+
+        PlayerControls.UI.OpenUIPage.performed += ctx => gm.OpenUIPage();
         PlayerControls.PlayerAction.Teleport.Enable();
 
         //___________________________________________________________________________________________________________
@@ -120,7 +122,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         cam = firstPersonCamera.GetComponent<Camera>();
-        PostProcessingVolume = PostProcessing.GetComponent<Volume>();
+        TeleportPostProcessingVolume = PostProcessing.GetComponent<Volume>();
         if (gm == null)
         {
             gm = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -249,10 +251,9 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Aimming)
         {
-            //float x = movement.ReadValue<Vector2>().x;
+           
             float z = movement.ReadValue<Vector2>().y * speed * Time.deltaTime;
 
-            //Vector3 moveDistance = transform.forward * z;
 
             targetDistance = Mathf.Clamp(targetDistance + z,0, teleportingDistance);
 
@@ -261,9 +262,9 @@ public class PlayerMovement : MonoBehaviour
             bool possessTargetExist = false;
             //PostProcessing Effect 
             LensDistortion _LensDistortion;
-            PostProcessingVolume.profile.TryGet<LensDistortion>(out _LensDistortion);
+            TeleportPostProcessingVolume.profile.TryGet<LensDistortion>(out _LensDistortion);
             _LensDistortion.intensity.value = 0f;
-            PostProcessingVolume.weight = 1;
+            TeleportPostProcessingVolume.weight = 1;
 
             phantomTargetPosition = cam.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height / 2, targetDistance));
             RaycastHit hit;
@@ -343,7 +344,7 @@ public class PlayerMovement : MonoBehaviour
 
         //PostProcessing Effect 
         LensDistortion _LensDistortion;
-        PostProcessingVolume.profile.TryGet<LensDistortion>(out _LensDistortion);
+        TeleportPostProcessingVolume.profile.TryGet<LensDistortion>(out _LensDistortion);
         _LensDistortion.intensity.value = -0.55f;
 
 
@@ -363,7 +364,7 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
 
         //PostProcessing Effect 
-        PostProcessingVolume.weight = 0;
+        TeleportPostProcessingVolume.weight = 0;
 
         Teleporting = false;
         gravity = -3f;
@@ -381,7 +382,7 @@ public class PlayerMovement : MonoBehaviour
 
         //PostProcessing Effect 
         LensDistortion _LensDistortion;
-        PostProcessingVolume.profile.TryGet<LensDistortion>(out _LensDistortion);
+        TeleportPostProcessingVolume.profile.TryGet<LensDistortion>(out _LensDistortion);
         _LensDistortion.intensity.value = -0.55f;
 
        
@@ -397,7 +398,7 @@ public class PlayerMovement : MonoBehaviour
 
         possess = true;
         PossessBody = teleportPosition.gameObject;
-        PostProcessingVolume.weight = 0;
+        TeleportPostProcessingVolume.weight = 0;
         cam.cullingMask ^= 1 << LayerMask.NameToLayer("PlayerEye");
         cam.cullingMask ^= 1 << LayerMask.NameToLayer("GuardEye");
         Teleporting = false;

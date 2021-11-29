@@ -30,6 +30,8 @@ public class GameManager : MonoBehaviour
 
     public bool inLight = false;
 
+    public GameObject UICanvas;
+
     void Start()
     {
 
@@ -119,6 +121,16 @@ public class GameManager : MonoBehaviour
         {
             Quest quest = questList[i];
         }*/
+    }
+
+    public void OpenUIPage()
+    {
+        if (UICanvas == null)
+        {
+            UICanvas = GameObject.Find("UICanvas");
+        }
+
+
     }
 
 }
