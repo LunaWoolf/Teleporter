@@ -97,14 +97,16 @@ public class PlayerMovement : MonoBehaviour
         PlayerControls.PlayerAction.Teleport.performed += ctx => TeleportAction();
         PlayerControls.PlayerAction.Teleport.Enable();
 
-        PlayerControls.UI.OpenUIPage.performed += ctx => gm.OpenUIPage();
-        PlayerControls.PlayerAction.Teleport.Enable();
+        PlayerControls.UI.OpenUIPage.performed += ctx => gm.ToogleUIPage();
+        PlayerControls.UI.OpenUIPage.Enable();
 
         //___________________________________________________________________________________________________________
 
 
         PlayerControls.PlayerAction.SuperTeleport.started += ctx => SuperTeleport();
+        PlayerControls.PlayerAction.SuperTeleport.performed += ctx => CancleSuperTeleport();
         PlayerControls.PlayerAction.SuperTeleport.Enable();
+
 
         //___________________________________________________________________________________________________________
     }
@@ -114,9 +116,15 @@ public class PlayerMovement : MonoBehaviour
     {
         Building_regular.SetActive(false);
         Building_transparent.SetActive(true);
-        AimAction();
+        //AimAction();
     
     }
+
+    void CancleSuperTeleport()
+    {
+        Building_regular.SetActive(true);
+        Building_transparent.SetActive(false);
+    }    
     //___________________________________________________________________________________________________________
 
     void Start()

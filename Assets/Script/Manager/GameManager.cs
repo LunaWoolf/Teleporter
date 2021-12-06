@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using MilkShake;
 using TMPro;
+using Yarn.Unity;
 
 [System.Serializable]
 public class GameManager : MonoBehaviour
@@ -34,12 +35,6 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-
-        //CreateQuest("01", "01", "01");
-
-        //CreateQuest("01", "02", "02");
-
-        //CreateQuest("01", "03", "03");
 
         if (healthText != null)
         {
@@ -75,23 +70,28 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSeconds(1f);
             if (inLight)
             {
-                UpdateHealth(-3f);
+                UpdateHealth(-5f);
             }
             else
             {
-                UpdateHealth(-1f);
+                //UpdateHealth(-1f);
             }
            
         }
     }
 
-  
 
+    [YarnCommand("CreateQuest")]
     public void CreateQuest(string id, string title, string description)
     {
         Debug.Log(id);
         Debug.Log(title);
         Debug.Log(description);
+
+        title = title.Replace('/', ' ');
+        description = description.Replace('/', ' ');
+
+   
 
         Quest questNew = new Quest(id,title,description);
 
@@ -103,15 +103,31 @@ public class GameManager : MonoBehaviour
 
         questList.Add(questNew);
 
+
+        QuestUI.GetComponentInChildren<QuestObject>().SetQuest(questNew);
+        PlayAddQuestAnimation();
+
     }
+
+    public GameObject QuestUI;
+    public void PlayAddQuestAnimation()
+    {
+        QuestUI.GetComponent<Animator>().SetTrigger("appear");
+    }
+
+    
 
     public void GetQuest(Quest quest)
     {
 
     }
 
-    public void CompleteQuest(Quest quest)
+    public GameObject CompleteQuestUI;
+    [YarnCommand("CompleteQuest")]
+    public void CompleteQuest()
     {
+
+        CompleteQuestUI.GetComponent<Animator>().SetTrigger("complete");
 
     }
 
@@ -123,12 +139,14 @@ public class GameManager : MonoBehaviour
         }*/
     }
 
-    public void OpenUIPage()
+    public void ToogleUIPage()
     {
         if (UICanvas == null)
         {
             UICanvas = GameObject.Find("UICanvas");
         }
+
+        UICanvas.SetActive(!UICanvas.activeSelf);
 
 
     }

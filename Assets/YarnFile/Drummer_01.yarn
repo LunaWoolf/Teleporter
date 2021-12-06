@@ -1,0 +1,18 @@
+title: Start
+tags: 
+colorID: 0
+position: -28,22
+---
+Oh, it's you…
+I’m about to go to rehearsal for another band. 
+So… if you excuse me, I don’t want to talk to you right now.
+...
+Wait...
+Are you still doing that… delivery job?
+...
+send this disk to Ray for me
+Don’t ask what it is
+You know his address
+And he will pay you...
+<<CreateQuest GameManager Send/Disk/To/Ray Send/Disk/To/Ray Send/A/Disk/To/Ray's/Place>>
+===

@@ -15,8 +15,6 @@ public class QuestObject : MonoBehaviour
     public void SetQuest(Quest q)
     {
         quest = q;
-        Debug.Log(q.title);
-        Debug.Log(quest.title);
         this.title.text = quest.title;
         this.description.text = quest.description;
     }

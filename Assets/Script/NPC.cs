@@ -8,6 +8,9 @@ public class NPC : MonoBehaviour
     public string CurrentStartNode = "Start";
     public DialogueRunner dialogueRunner;
 
+    public bool talkable;
+    public GameObject TalkUI;
+
 
     public void SetDialogue()
     {
@@ -19,5 +22,22 @@ public class NPC : MonoBehaviour
         
     }
 
-   
+    public void ShowTalkUI(bool show)
+    {
+        if (show)
+        {
+            TalkUI.SetActive(true);
+        }
+        else
+        {
+            TalkUI.SetActive(false);
+
+        }
+       
+
+    }
+
+
+
+
 }

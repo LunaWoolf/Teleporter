@@ -24,17 +24,13 @@ public class PlayerInteraction : MonoBehaviour
 
     private InputAction NextLine;
     private InputAction OpenBigMap;
+    private InputAction StartConversation;
 
     public GameObject bigMap;
 
-    //___________________________________________________________________________________________________________
-    /*[Header("TEST")]
-    public GameObject CG_1;
-    public GameObject CG_2;
-    public TMP_Text text;
-    public TMP_FontAsset FontAssetA;
-    public TMP_FontAsset FontAssetB;*/
-    //___________________________________________________________________________________________________________
+    public GameObject Monologue_Text;
+
+    public Camera cam;
 
 
 
@@ -50,10 +46,12 @@ public class PlayerInteraction : MonoBehaviour
         NextLine.Enable();
         OpenBigMap = PlayerControls.PlayerAction.OpenBigMap;
         OpenBigMap.Enable();
+        StartConversation = PlayerControls.PlayerAction.StartConversation;
+        StartConversation.Enable();
 
         PlayerControls.PlayerAction.NextLine.performed += ctx => NextDialogue();
         PlayerControls.PlayerAction.OpenBigMap.performed += ctx => OpenMap();
-
+        PlayerControls.PlayerAction.StartConversation.performed += ctx => StartNPCConversation();
 
     }
 
@@ -69,10 +67,10 @@ public class PlayerInteraction : MonoBehaviour
 
 
 
-  
+
     void Update()
     {
-       
+
         //Set up the new Pointer Event
         m_PointerEventData = new PointerEventData(m_EventSystem);
         //Set the Pointer Event Position to that of the mouse position
@@ -90,14 +88,57 @@ public class PlayerInteraction : MonoBehaviour
             if (result.gameObject.GetComponent<Button>() != null)
             {
                 result.gameObject.GetComponent<Button>().Select();
-                //result.gameObject.GetComponent<Button>().OnSelect(null);
-                //EventSystem.current.SetSelectedGameObject(result.gameObject.GetComponentInChildren<Button>().gameObject, null);
+
                 if (Input.GetMouseButton(0))
                 {
                     result.gameObject.GetComponent<Button>().onClick.Invoke();
                 }
 
             }
+        }
+
+
+        Vector3 InteractRay;
+        InteractRay = cam.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height / 2, 15));
+        Debug.DrawRay(transform.position, InteractRay - this.transform.position, Color.green);
+        RaycastHit hit;
+        if (Physics.Raycast(this.transform.position, InteractRay - this.transform.position, out hit))
+        {
+            if (hit.transform.gameObject.tag == "NPC")
+            {
+                GameObject curNPC = hit.transform.gameObject;
+
+                PossessNPC npcScript = curNPC.GetComponent<PossessNPC>();
+                
+                if (npcScript != null && npcScript.talkable)
+                {
+                    if (conversationNPC == null)
+                    {
+                        conversationNPC = hit.transform.gameObject;
+                        npcScript.ShowTalkUI(true);
+                    }
+                    else if (hit.transform.gameObject != conversationNPC)
+                    {
+                        conversationNPC = hit.transform.gameObject;
+                        npcScript.ShowTalkUI(true);
+                    }
+                    
+                }
+            }
+
+            if (hit.transform.gameObject == null || (conversationNPC != null && hit.transform.gameObject != conversationNPC))
+            {
+                if (conversationNPC.TryGetComponent<PossessNPC>(out PossessNPC NPCscript))
+                {
+                  
+                    NPCscript.ShowTalkUI(false);
+
+                }
+
+                conversationNPC = null;
+            }
+
+
         }
     }
 
@@ -119,21 +160,7 @@ public class PlayerInteraction : MonoBehaviour
     private void NextDialogue()
     {
         dialogueManager.GetComponent<DialogueUI>().MarkLineComplete();
-        //___________________________________________________________________________________________________________
-        /*CG_1.SetActive(!CG_1.activeSelf);
-        CG_2.SetActive(!CG_2.activeSelf);
-        if (text.font == FontAssetA)
-        {
-            text.font = FontAssetB;
-        }
-        else
-        {
-            text.font = FontAssetA;
-        }*/
-   
-
-    //___________________________________________________________________________________________________________
-
+     
     }
 
 
@@ -156,6 +183,33 @@ public class PlayerInteraction : MonoBehaviour
     {
         PlayerControls.PlayerAction.Enable();
     }
+
+    public void EndDialogue()
+    {
+        inTheMiddleOfConversation = false;
+        Monologue_Text.SetActive(true);
+    }
+
+    public GameObject conversationNPC;
+    public bool inTheMiddleOfConversation = false;
+
+    public void StartNPCConversation()
+    {
+        if (!inTheMiddleOfConversation)
+        {
+            if (conversationNPC != null && conversationNPC.TryGetComponent<PossessNPC>(out PossessNPC npcScript))
+            {
+                
+                npcScript.SetDialogue();
+                npcScript.ShowTalkUI(false);
+                inTheMiddleOfConversation = true;
+                Monologue_Text.SetActive(false);
+            }
+
+        }
+        
+    }
+
 
 
 

@@ -65,6 +65,14 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""StartConversation"",
+                    ""type"": ""Button"",
+                    ""id"": ""f50f15f4-fdb9-45fa-8676-ab391a26ffbc"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -232,6 +240,17 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""action"": ""SuperTeleport"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""456818a9-181a-414c-b6e6-e6e9f6c3ff21"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""StartConversation"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -330,6 +349,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_PlayerAction_CameraMovement = m_PlayerAction.FindAction("CameraMovement", throwIfNotFound: true);
         m_PlayerAction_NextLine = m_PlayerAction.FindAction("NextLine", throwIfNotFound: true);
         m_PlayerAction_OpenBigMap = m_PlayerAction.FindAction("OpenBigMap", throwIfNotFound: true);
+        m_PlayerAction_StartConversation = m_PlayerAction.FindAction("StartConversation", throwIfNotFound: true);
         // Debug
         m_Debug = asset.FindActionMap("Debug", throwIfNotFound: true);
         m_Debug_ToggleDebug = m_Debug.FindAction("ToggleDebug", throwIfNotFound: true);
@@ -392,6 +412,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputAction m_PlayerAction_CameraMovement;
     private readonly InputAction m_PlayerAction_NextLine;
     private readonly InputAction m_PlayerAction_OpenBigMap;
+    private readonly InputAction m_PlayerAction_StartConversation;
     public struct PlayerActionActions
     {
         private @PlayerControls m_Wrapper;
@@ -402,6 +423,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         public InputAction @CameraMovement => m_Wrapper.m_PlayerAction_CameraMovement;
         public InputAction @NextLine => m_Wrapper.m_PlayerAction_NextLine;
         public InputAction @OpenBigMap => m_Wrapper.m_PlayerAction_OpenBigMap;
+        public InputAction @StartConversation => m_Wrapper.m_PlayerAction_StartConversation;
         public InputActionMap Get() { return m_Wrapper.m_PlayerAction; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -429,6 +451,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @OpenBigMap.started -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnOpenBigMap;
                 @OpenBigMap.performed -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnOpenBigMap;
                 @OpenBigMap.canceled -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnOpenBigMap;
+                @StartConversation.started -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnStartConversation;
+                @StartConversation.performed -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnStartConversation;
+                @StartConversation.canceled -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnStartConversation;
             }
             m_Wrapper.m_PlayerActionActionsCallbackInterface = instance;
             if (instance != null)
@@ -451,6 +476,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @OpenBigMap.started += instance.OnOpenBigMap;
                 @OpenBigMap.performed += instance.OnOpenBigMap;
                 @OpenBigMap.canceled += instance.OnOpenBigMap;
+                @StartConversation.started += instance.OnStartConversation;
+                @StartConversation.performed += instance.OnStartConversation;
+                @StartConversation.canceled += instance.OnStartConversation;
             }
         }
     }
@@ -537,6 +565,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         void OnCameraMovement(InputAction.CallbackContext context);
         void OnNextLine(InputAction.CallbackContext context);
         void OnOpenBigMap(InputAction.CallbackContext context);
+        void OnStartConversation(InputAction.CallbackContext context);
     }
     public interface IDebugActions
     {
