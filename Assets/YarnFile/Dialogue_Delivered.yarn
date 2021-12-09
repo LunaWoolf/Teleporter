@@ -1,7 +1,7 @@
 title: Start
 tags: 
 colorID: 0
-position: 319,662
+position: 317,661
 ---
 Thanks...
 Hey...
@@ -18,5 +18,7 @@ Unread
 Forget about it...
 Don't take my order in the future
 or I will rate you one start every time you do my order
-<<CompleteQuest GameManager>>
+<<CompleteQuest GameManager Order0154>>
+<<MapAddPoint GameManager green>>
+<<LoadDialogueScript InteractBox 03>>
 ===

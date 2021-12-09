@@ -52,8 +52,8 @@ public class DebugConsole : MonoBehaviour
 
         Create_quest = new DebugCommand<string>("create_quest", "create_quest", "create_quest", (x) =>
         {
-            string[] p = input.Split(',');
-            gm.CreateQuest(p[0], p[1], p[2]);
+            string[] p = input.Split(' ');
+            gm.CreateQuest(p[1], p[2], p[3]);
 
         });
 

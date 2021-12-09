@@ -1,7 +1,7 @@
 title: Start
 tags: 
 colorID: 0
-position: -28,22
+position: -32,19
 ---
 Oh, it's you…
 I’m about to go to rehearsal for another band. 
@@ -14,5 +14,8 @@ send this disk to Ray for me
 Don’t ask what it is
 You know his address
 And he will pay you...
-<<CreateQuest GameManager Send/Disk/To/Ray Send/Disk/To/Ray Send/A/Disk/To/Ray's/Place>>
+(*Ray's house is highlight in yellow in the map*)
+<<CreateQuest GameManager Ray Send/Disk/To/Ray Send/A/Disk/To/Ray's/Place>>
+<<LoadDialogueScript InteractBox 02>>
+<<MapAddPoint GameManager blue>>
 ===

@@ -1,7 +1,7 @@
 title: Start
 tags: 
 colorID: 0
-position: 91,269
+position: 88,266
 ---
 Hi, my little fan!
 What’s your name again...
@@ -12,7 +12,7 @@ If you are still trying to convince him to... stay alive
 Just quit it. He made his mind, sweetie
 I have known him for 20 years
 Once he set his mind, nobody can change it
-Excep...
+Except...
 Well, it doesn’t matter...
 ......
 Oh, you are delivering stuff for Di?
@@ -22,4 +22,5 @@ I’m joking again ; )
 ...
 Here you go, take the rest as tips
 Have a wonderful night
+<<CompleteQuest GameManager Ray>>
 ===

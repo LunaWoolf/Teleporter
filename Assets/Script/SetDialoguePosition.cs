@@ -8,9 +8,13 @@ public class SetDialoguePosition : MonoBehaviour
 
     void Update()
     {
-       
-        this.transform.LookAt(Player.transform);
-        this.transform.RotateAround(transform.position, transform.up, 180f);
+       if(Player != null)
+       {
+            this.transform.LookAt(Player.transform);
+            this.transform.RotateAround(transform.position, transform.up, 180f);
+
+       }
+        
     }
 
 }

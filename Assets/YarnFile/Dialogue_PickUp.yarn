@@ -18,4 +18,5 @@ I know there is no curfew anymore.
  But the night is still the same in this city. 
 All I’m saying is, be safe kid.
 <<CreateQuest GameManager Order0154 Order0154 Delivery/To/Green/Spot/Thrid/Floor>>
+<<MapAddPoint GameManager green>>
 ===

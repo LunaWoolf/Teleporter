@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
 
 
     public List<Quest> inventoryList = new List<Quest>();
+    //public List<Object> questObjectList = new List<GameObject>()
 
 
     public Shaker MyShaker;
@@ -32,6 +33,7 @@ public class GameManager : MonoBehaviour
     public bool inLight = false;
 
     public GameObject UICanvas;
+
 
     void Start()
     {
@@ -97,11 +99,14 @@ public class GameManager : MonoBehaviour
 
         GameObject questObject = Instantiate(QuestPrefab);
 
+        questNew.questObject = questObject;
+
         questObject.GetComponent<QuestObject>().SetQuest(new Quest(id, title, description));
 
         questObject.transform.SetParent(QuestPanel.transform,false);
 
         questList.Add(questNew);
+        
 
 
         QuestUI.GetComponentInChildren<QuestObject>().SetQuest(questNew);
@@ -117,27 +122,39 @@ public class GameManager : MonoBehaviour
 
     
 
-    public void GetQuest(Quest quest)
-    {
-
-    }
-
     public GameObject CompleteQuestUI;
+    public TextMeshProUGUI Complete_Title;
+    public TextMeshProUGUI Complete_Description;
     [YarnCommand("CompleteQuest")]
-    public void CompleteQuest()
+    public void CompleteQuest(string id)
     {
+        foreach (Quest q in questList)
+        {
+            if (q.id == id)
+            {
+                q.questObject.SetActive(false);
+            }
+        }
+
+        switch (id)
+        {
+            case "Order0154":
+                Complete_Title.text = "Order0154";
+                Complete_Description.text = "Complete. Delivered On Time. Tip : 5.75";
+                break;
+            case "Ray":
+                Debug.Log("Ray");
+                Complete_Title.text = "Ray";
+                Complete_Description.text = "Complete. Tip : 25";
+                break;
+            default:
+                break;
+        }
 
         CompleteQuestUI.GetComponent<Animator>().SetTrigger("complete");
-
     }
 
-    public void LoadQuest()
-    {
-        /*for (int i = 0; i < questList.Count; i++)
-        {
-            Quest quest = questList[i];
-        }*/
-    }
+ 
 
     public void ToogleUIPage()
     {
@@ -149,6 +166,22 @@ public class GameManager : MonoBehaviour
         UICanvas.SetActive(!UICanvas.activeSelf);
 
 
+    }
+
+    public GameObject mapGreenPoint;
+    public GameObject mapBluePoint;
+
+    [YarnCommand("MapAddPoint")]
+    public void TriggerGreenSpot(string color)
+    {
+        if (color == "green")
+        {
+            mapGreenPoint.SetActive(!mapGreenPoint.activeSelf);
+        }
+        if (color == "blue")
+        {
+            mapBluePoint.SetActive(!mapGreenPoint.activeSelf);
+        }
     }
 
 }

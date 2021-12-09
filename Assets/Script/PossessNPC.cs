@@ -63,7 +63,7 @@ public class PossessNPC : MonoBehaviour
 
     public void SetDialogue()
     {
-        if (currentDialogueYarnProgarm != null && dialogueRunner != null)
+        if (currentDialogueYarnProgarm != null && dialogueRunner != null && talkable)
         {
             dialogueRunner.yarnScripts[0] = currentDialogueYarnProgarm;
             dialogueRunner.StartDialogue();
@@ -98,5 +98,9 @@ public class PossessNPC : MonoBehaviour
 
     }
 
+    public void DisableTalkable()
+    {
+        talkable = false;
+    }
 
 }

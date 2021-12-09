@@ -10,7 +10,7 @@ using TMPro;
 
 public class PlayerInteraction : MonoBehaviour
 {
-    
+
 
     public DialogueRunner dialogueRunner;
     public GameObject dialogueManager;
@@ -32,6 +32,7 @@ public class PlayerInteraction : MonoBehaviour
 
     public Camera cam;
 
+    public LayerMask TalkNPCMask;
 
 
     private void Awake()
@@ -57,12 +58,14 @@ public class PlayerInteraction : MonoBehaviour
 
     void Start()
     {
-        
+
         //Fetch the Raycaster from the GameObject (the Canvas)
         m_Raycaster = Canvas.GetComponent<GraphicRaycaster>();
         //Fetch the Event System from the Scene
         m_EventSystem = eventSystem.GetComponent<EventSystem>();
-        
+
+        StartCoroutine(AutomaticPlayDialogue());
+
     }
 
 
@@ -102,14 +105,14 @@ public class PlayerInteraction : MonoBehaviour
         InteractRay = cam.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height / 2, 15));
         Debug.DrawRay(transform.position, InteractRay - this.transform.position, Color.green);
         RaycastHit hit;
-        if (Physics.Raycast(this.transform.position, InteractRay - this.transform.position, out hit))
+        if (Physics.Raycast(this.transform.position, InteractRay - this.transform.position, out hit, TalkNPCMask))
         {
             if (hit.transform.gameObject.tag == "NPC")
             {
                 GameObject curNPC = hit.transform.gameObject;
 
                 PossessNPC npcScript = curNPC.GetComponent<PossessNPC>();
-                
+
                 if (npcScript != null && npcScript.talkable)
                 {
                     if (conversationNPC == null)
@@ -122,20 +125,34 @@ public class PlayerInteraction : MonoBehaviour
                         conversationNPC = hit.transform.gameObject;
                         npcScript.ShowTalkUI(true);
                     }
-                    
+
                 }
             }
-
-            if (hit.transform.gameObject == null || (conversationNPC != null && hit.transform.gameObject != conversationNPC))
+            else if (hit.transform.gameObject == null || (conversationNPC != null && hit.transform.gameObject != conversationNPC))
             {
                 if (conversationNPC.TryGetComponent<PossessNPC>(out PossessNPC NPCscript))
                 {
-                  
+
                     NPCscript.ShowTalkUI(false);
 
                 }
 
                 conversationNPC = null;
+            }
+            else
+            {
+                if (conversationNPC != null)
+                {
+                    if (conversationNPC.TryGetComponent<PossessNPC>(out PossessNPC NPCscript))
+                    {
+
+                        NPCscript.ShowTalkUI(false);
+
+                    }
+
+                    conversationNPC = null;
+                }
+
             }
 
 
@@ -152,7 +169,7 @@ public class PlayerInteraction : MonoBehaviour
             {
                 npcScript.SetDialogue();
             }
-            
+
         }
 
     }
@@ -160,7 +177,39 @@ public class PlayerInteraction : MonoBehaviour
     private void NextDialogue()
     {
         dialogueManager.GetComponent<DialogueUI>().MarkLineComplete();
-     
+
+    }
+
+    public YarnProgram[] Monologue1;
+    public YarnProgram[] Monologue2;
+    public YarnProgram[] Monologue3;
+
+    [YarnCommand("LoadDialogueScript")]
+    public void LoadDialogueScript(string id)
+    {
+        switch (id)
+        {
+            case "02":
+                dialogueManager.GetComponent<DialogueRunner>().Stop();
+                dialogueManager.GetComponent<DialogueRunner>().Clear();
+                dialogueManager.GetComponent<DialogueRunner>().yarnScripts = Monologue2;
+              
+               dialogueManager.GetComponent<DialogueRunner>().Add(Monologue2[0]);
+               dialogueManager.GetComponent<DialogueRunner>().StartDialogue();
+                break;
+
+            case "03":
+                dialogueManager.GetComponent<DialogueRunner>().Stop();
+                dialogueManager.GetComponent<DialogueRunner>().Clear();
+                dialogueManager.GetComponent<DialogueRunner>().yarnScripts = Monologue3;
+
+                dialogueManager.GetComponent<DialogueRunner>().Add(Monologue3[0]);
+                dialogueManager.GetComponent<DialogueRunner>().StartDialogue();
+                break;
+            default:
+                break;
+        }
+
     }
 
 
@@ -188,6 +237,7 @@ public class PlayerInteraction : MonoBehaviour
     {
         inTheMiddleOfConversation = false;
         Monologue_Text.SetActive(true);
+        automaticPlayDialogue = true;
     }
 
     public GameObject conversationNPC;
@@ -199,16 +249,50 @@ public class PlayerInteraction : MonoBehaviour
         {
             if (conversationNPC != null && conversationNPC.TryGetComponent<PossessNPC>(out PossessNPC npcScript))
             {
+                if (npcScript.talkable)
+                {
+                    npcScript.SetDialogue();
+                    npcScript.ShowTalkUI(false);
+                    inTheMiddleOfConversation = true;
+                    Monologue_Text.SetActive(false);
+
+                }
                 
-                npcScript.SetDialogue();
-                npcScript.ShowTalkUI(false);
-                inTheMiddleOfConversation = true;
-                Monologue_Text.SetActive(false);
             }
 
         }
         
     }
+
+    public bool automaticPlayDialogue = true;
+    IEnumerator AutomaticPlayDialogue()
+    {
+      
+        while (true)
+        {
+            yield return new WaitForSeconds(10f);
+            if (automaticPlayDialogue)
+            {
+
+                NextDialogue();
+            }
+           
+          
+
+        }
+    }
+
+    IEnumerator WaitPlayDialogue(float waitTime)
+    {
+        while (automaticPlayDialogue)
+        {
+            NextDialogue();
+            yield return new WaitForSeconds(waitTime);
+
+        }
+    }
+
+
 
 
 

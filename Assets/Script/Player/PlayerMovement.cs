@@ -111,19 +111,56 @@ public class PlayerMovement : MonoBehaviour
         //___________________________________________________________________________________________________________
     }
 
+    public Material TransparentMaterial;
+    public Material[] orginalMaterials;
+    public GameObject SuperTeleportObject;
     //___________________________________________________________________________________________________________
     void SuperTeleport()
     {
-        Building_regular.SetActive(false);
-        Building_transparent.SetActive(true);
+      
+        Vector3 phantomTargetPosition = cam.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height / 2, teleportingDistance));
+        RaycastHit hit;
+        if (Physics.Raycast(this.transform.position, phantomTargetPosition - this.transform.position, out hit, teleportingDistance, impenetrableMask))
+        {
+           
+            SuperTeleportObject = hit.transform.gameObject;
+            orginalMaterials = SuperTeleportObject.GetComponentInChildren<MeshRenderer>().materials;
+
+            SuperTeleportObject.GetComponentInChildren<MeshRenderer>().materials[0] = TransparentMaterial;
+
+            SuperTeleportObject.GetComponent<MeshRenderer>().materials[0] = TransparentMaterial;
+
+            Material[] tMaterials = new Material[hit.transform.gameObject.GetComponentInChildren<MeshRenderer>().materials.Length];
+
+
+            for (int i = 0; i < tMaterials.Length; i++)
+            {
+                tMaterials[i] = TransparentMaterial;
+                
+            }
+
+            SuperTeleportObject.GetComponentInChildren<MeshRenderer>().materials = tMaterials;
+            SuperTeleportObject.GetComponent<MeshRenderer>().materials = tMaterials;
+
+
+        }
+
+        //Building_regular.SetActive(false);
+        //Building_transparent.SetActive(true);
         //AimAction();
     
     }
 
     void CancleSuperTeleport()
     {
-        Building_regular.SetActive(true);
-        Building_transparent.SetActive(false);
+        if (SuperTeleportObject != null && orginalMaterials.Length > 0)
+        {
+            SuperTeleportObject.GetComponentInChildren<MeshRenderer>().materials = orginalMaterials;
+        }
+        
+
+        //Building_regular.SetActive(true);
+        //Building_transparent.SetActive(false);
     }    
     //___________________________________________________________________________________________________________
 

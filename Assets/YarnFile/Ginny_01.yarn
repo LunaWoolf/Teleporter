@@ -1,7 +1,7 @@
 title: Start
 tags: 
 colorID: 0
-position: 43,-82
+position: 40,-85
 ---
 Good Evening Brette, ready for work today?
 How does the new Prosthetic Eye I give you feel?
@@ -14,5 +14,4 @@ I did it last night
 And it has some good movies on it...
 Oh, I will also boil some water 
 so we can eat cup noodles when you’re back.
-<<CreateQuest GameManager Order0154 Order0154 Pick/Up/Food/at/Purple/spot>>
 ===
