@@ -13,7 +13,7 @@ public class PlayerInteraction : MonoBehaviour
 
 
     public DialogueRunner dialogueRunner;
-    public GameObject dialogueManager;
+    //public GameObject dialogueManager;
     private PlayerControls PlayerControls;
 
     public EventSystem eventSystem;
@@ -176,13 +176,13 @@ public class PlayerInteraction : MonoBehaviour
 
     private void NextDialogue()
     {
-        dialogueManager.GetComponent<DialogueUI>().MarkLineComplete();
+        if (!inTheMiddleOfConversation)
+            dialogueRunner.OnViewUserIntentNextLine();
+       // dialogueManager.GetComponent<DialogueUI>().MarkLineComplete();
 
     }
 
-    public YarnProgram[] Monologue1;
-    public YarnProgram[] Monologue2;
-    public YarnProgram[] Monologue3;
+ 
 
     [YarnCommand("LoadDialogueScript")]
     public void LoadDialogueScript(string id)
@@ -190,27 +190,20 @@ public class PlayerInteraction : MonoBehaviour
         switch (id)
         {
             case "02":
-                dialogueManager.GetComponent<DialogueRunner>().Stop();
-                dialogueManager.GetComponent<DialogueRunner>().Clear();
-                dialogueManager.GetComponent<DialogueRunner>().yarnScripts = Monologue2;
-              
-               dialogueManager.GetComponent<DialogueRunner>().Add(Monologue2[0]);
-               dialogueManager.GetComponent<DialogueRunner>().StartDialogue();
+                dialogueRunner.Stop();
+                dialogueRunner.StartDialogue("Start02");
                 break;
 
             case "03":
-                dialogueManager.GetComponent<DialogueRunner>().Stop();
-                dialogueManager.GetComponent<DialogueRunner>().Clear();
-                dialogueManager.GetComponent<DialogueRunner>().yarnScripts = Monologue3;
-
-                dialogueManager.GetComponent<DialogueRunner>().Add(Monologue3[0]);
-                dialogueManager.GetComponent<DialogueRunner>().StartDialogue();
+                dialogueRunner.Stop();
+                dialogueRunner.StartDialogue("Start03");
                 break;
             default:
                 break;
         }
 
-    }
+
+     }
 
 
     private void OpenMap()

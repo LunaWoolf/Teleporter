@@ -276,7 +276,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7482004821114110621}
   - component: {fileID: 7482004821114110618}
-  - component: {fileID: 7482004821114110616}
   - component: {fileID: 7482004821114110619}
   - component: {fileID: 7482004821114110620}
   m_Layer: 0
@@ -312,13 +311,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bec29c0a230741bdac901dba8da47ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  yarnScripts:
-  - {fileID: 2480198943629176163, guid: 117af9d7054af4e78a54001ea4dd0248, type: 3}
-  textLanguage: 
-  variableStorage: {fileID: 7482004821114110619}
-  dialogueUI: {fileID: 7482004821114110616}
+  yarnProject: {fileID: 0}
+  _variableStorage: {fileID: 7482004821114110619}
+  dialogueViews: []
   startNode: Start
   startAutomatically: 1
+  automaticallyContinueLines: 0
+  runSelectedOptionAsLine: 0
+  lineProvider: {fileID: 0}
+  verboseLogging: 1
   onNodeStart:
     m_PersistentCalls:
       m_Calls:
@@ -340,57 +341,6 @@ MonoBehaviour:
   onDialogueComplete:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &7482004821114110616
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7482004821114110617}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04317fce65da54f4997a5c4465b4e93c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dialogueContainer: {fileID: 692784095197897706}
-  textSpeed: 0.025
-  optionButtons: []
-  onDialogueStart:
-    m_PersistentCalls:
-      m_Calls: []
-  onDialogueEnd:
-    m_PersistentCalls:
-      m_Calls: []
-  onLineStart:
-    m_PersistentCalls:
-      m_Calls: []
-  onLineFinishDisplaying:
-    m_PersistentCalls:
-      m_Calls: []
-  onLineUpdate:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1779575870}
-        m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
-        m_MethodName: set_text
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  onLineEnd:
-    m_PersistentCalls:
-      m_Calls: []
-  onOptionsStart:
-    m_PersistentCalls:
-      m_Calls: []
-  onOptionsEnd:
-    m_PersistentCalls:
-      m_Calls: []
   onCommand:
     m_PersistentCalls:
       m_Calls: []
@@ -406,7 +356,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 610c541718d694070a21327d1ae62e75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultVariables: []
+  showDebug: 0
   debugTextView: {fileID: 0}
 --- !u!114 &7482004821114110620
 MonoBehaviour:

@@ -13,9 +13,10 @@ public class PossessNPC : MonoBehaviour
     private PlayerControls PlayerControls;
     private InputAction StartConversation;
 
-    public YarnProgram currentDialogueYarnProgarm;
+    //public YarnProgram currentDialogueYarnProgarm;
+
     public string CurrentStartNode = "Start";
-    public GameObject dialogueManager;
+
     public DialogueRunner dialogueRunner;
 
     public bool talkable;
@@ -63,22 +64,32 @@ public class PossessNPC : MonoBehaviour
 
     public void SetDialogue()
     {
+
+
+        if (dialogueRunner != null && talkable)
+        {
+            dialogueRunner.StartDialogue("Start");
+            startDialogue = true;
+        }
+        
+
+        /*
         if (currentDialogueYarnProgarm != null && dialogueRunner != null && talkable)
         {
             dialogueRunner.yarnScripts[0] = currentDialogueYarnProgarm;
             dialogueRunner.StartDialogue();
             startDialogue = true;
         }
-
+        */
     }
 
     private void NextDialogue()
     {
-        if (startDialogue && dialogueManager != null)
+        /*if (startDialogue && dialogueManager != null)
         {
             Debug.Log("nextline");
-            dialogueManager.GetComponent<DialogueUI>().MarkLineComplete();
-        }
+            //dialogueManager.GetComponent<DialogueUI>().MarkLineComplete();
+        }*/
 
     }
 
@@ -101,6 +112,7 @@ public class PossessNPC : MonoBehaviour
     public void DisableTalkable()
     {
         talkable = false;
+     
     }
 
 }

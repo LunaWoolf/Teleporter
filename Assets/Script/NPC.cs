@@ -4,7 +4,7 @@ using UnityEngine;
 using Yarn.Unity;
 public class NPC : MonoBehaviour
 {
-    public YarnProgram currentDialogueYarnProgarm;
+    //public YarnProgram currentDialogueYarnProgarm;
     public string CurrentStartNode = "Start";
     public DialogueRunner dialogueRunner;
 
@@ -14,12 +14,12 @@ public class NPC : MonoBehaviour
 
     public void SetDialogue()
     {
-        if (currentDialogueYarnProgarm != null && dialogueRunner != null)
+        if (dialogueRunner != null && talkable)
         {
-            dialogueRunner.yarnScripts[0] = currentDialogueYarnProgarm;
-            dialogueRunner.StartDialogue();
+            dialogueRunner.StartDialogue("Start");
+            
         }
-        
+
     }
 
     public void ShowTalkUI(bool show)

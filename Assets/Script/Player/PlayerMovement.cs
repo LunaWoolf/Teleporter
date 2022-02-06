@@ -30,6 +30,7 @@ public class PlayerMovement : MonoBehaviour
     public bool Moveable = true;
 
     public GameObject Phantom;
+    public GameObject Brette_Phantom;
 
     public GameObject firstPersonCamera;
     public GameObject thridPersonCamera;
@@ -361,7 +362,8 @@ public class PlayerMovement : MonoBehaviour
 
 
 
-            Phantom.GetComponent<MeshRenderer>().enabled = true; //make phantom visible 
+            Phantom.GetComponent<MeshRenderer>().enabled = true; //make phantom visible
+            Brette_Phantom.SetActive(true);
             Phantom.transform.position = phantomTargetPosition; //transform it into correct position
         }
 
@@ -414,6 +416,7 @@ public class PlayerMovement : MonoBehaviour
         Teleporting = false;
         gravity = -3f;
         Phantom.GetComponent<MeshRenderer>().enabled = false;
+        Brette_Phantom.SetActive(false);
         this.GetComponent<CharacterController>().enabled = true;
         gravityVelocity.y = -2f;
         yield return new WaitForSeconds(floatTime);
@@ -449,7 +452,10 @@ public class PlayerMovement : MonoBehaviour
         Teleporting = false;
         gravity = -3f;
         this.GetComponent<CharacterController>().enabled = true;
+
         Phantom.GetComponent<MeshRenderer>().enabled = false;
+        Brette_Phantom.SetActive(false);
+        
 
         if (AimPossessTarget != null)
         {

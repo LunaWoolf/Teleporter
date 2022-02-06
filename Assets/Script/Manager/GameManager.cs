@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
   
     public static float playerHealth = 1000;
 
-    //[Header("Transform Reference")]
+    [Header("Transform Reference")]
   
     public List<Quest> questList = new List<Quest>();
     public GameObject QuestPanel;
@@ -140,18 +140,22 @@ public class GameManager : MonoBehaviour
         {
             case "Order0154":
                 Complete_Title.text = "Order0154";
+                //Debug.Log("k");
                 Complete_Description.text = "Complete. Delivered On Time. Tip : 5.75";
+                CompleteQuestUI.GetComponent<Animator>().SetTrigger("complete");
                 break;
             case "Ray":
                 Debug.Log("Ray");
                 Complete_Title.text = "Ray";
                 Complete_Description.text = "Complete. Tip : 25";
+                CompleteQuestUI.GetComponent<Animator>().SetTrigger("complete");
                 break;
             default:
+                Debug.Log("aaa");
                 break;
         }
 
-        CompleteQuestUI.GetComponent<Animator>().SetTrigger("complete");
+       
     }
 
  

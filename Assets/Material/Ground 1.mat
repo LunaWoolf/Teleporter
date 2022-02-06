@@ -65,7 +65,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _TextureSample0:
-        m_Texture: {fileID: 2800000, guid: 415ce025749654e0a81561c583415af8, type: 3}
+        m_Texture: {fileID: 2800000, guid: 759125765478b46dcae0a2048d5f9fa5, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _texcoord:
@@ -100,11 +100,11 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0.76157, g: 0.76539695, b: 0.8113208, a: 1}
+    - _BaseColor: {r: 0.76157, g: 0.76539695, b: 0.8113207, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _RIMTint: {r: 0.495283, g: 0.9271632, b: 1, a: 0}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
-    - _SpecularColor: {r: 1, g: 0.8254717, b: 0.8254717, a: 0}
+    - _SpecularColor: {r: 1, g: 0.82547176, b: 0.82547176, a: 0}
     - _Tint: {r: 0.63879496, g: 0.7934607, b: 0.8207547, a: 0}
   m_BuildTextureStacks: []
