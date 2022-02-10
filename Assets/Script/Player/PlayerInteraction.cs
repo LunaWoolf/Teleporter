@@ -13,7 +13,6 @@ public class PlayerInteraction : MonoBehaviour
 
 
     public DialogueRunner dialogueRunner;
-    //public GameObject dialogueManager;
     private PlayerControls PlayerControls;
 
     public EventSystem eventSystem;
@@ -45,13 +44,13 @@ public class PlayerInteraction : MonoBehaviour
     {
         NextLine = PlayerControls.PlayerAction.NextLine;
         NextLine.Enable();
-        OpenBigMap = PlayerControls.PlayerAction.OpenBigMap;
-        OpenBigMap.Enable();
+        //OpenBigMap = PlayerControls.PlayerAction.OpenBigMap;
+        //OpenBigMap.Enable();
         StartConversation = PlayerControls.PlayerAction.StartConversation;
         StartConversation.Enable();
 
         PlayerControls.PlayerAction.NextLine.performed += ctx => NextDialogue();
-        PlayerControls.PlayerAction.OpenBigMap.performed += ctx => OpenMap();
+        //PlayerControls.PlayerAction.OpenBigMap.performed += ctx => OpenMap();
         PlayerControls.PlayerAction.StartConversation.performed += ctx => StartNPCConversation();
 
     }
@@ -178,7 +177,7 @@ public class PlayerInteraction : MonoBehaviour
     {
         if (!inTheMiddleOfConversation)
             dialogueRunner.OnViewUserIntentNextLine();
-       // dialogueManager.GetComponent<DialogueUI>().MarkLineComplete();
+      
 
     }
 
