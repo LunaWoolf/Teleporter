@@ -5,6 +5,9 @@ using UnityEngine;
 [System.Serializable]
 public class Quest
 {
+
+    public enum Status { NotReady, ReadyPickUp, PickedUp, Delivered };
+
     [SerializeField]
     public bool isActive;
     [SerializeField]
@@ -14,8 +17,10 @@ public class Quest
     [SerializeField]
     public string description;
     [SerializeField]
+    public Status status;
+    [SerializeField]
     public GameObject questObject;
-
+   
 
 
     public void Complete()
@@ -28,6 +33,7 @@ public class Quest
         this.isActive = true;
         this.id = id;
         this.title = title;
+        this.status = Status.NotReady;
         this.description  = description;
         
     }

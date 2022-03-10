@@ -1,35 +1,35 @@
-title: Start
+﻿title: Start
 tags: 
 colorID: 0
 position: 40,-85
 ---
-Genny: Good evening Brette!
-Genny: I'm about to ask if you are going to take a rest for today.
-Genny: By the way,
-Genny: How does the new Prosthetic Eye I gave you feel?
+Genny: Good evening Brette! #line:0cecd84 
+Genny: I'm about to ask if you are going to take a rest for today. #line:0fa5016 
+Genny: By the way, #line:0d51a2b 
+Genny: How does the new Prosthetic Eye I gave you feel? #line:065e266 
 <<ChangeCG Genny Happy>>
-Genny: I tried some new Biomaterial with this one! I'm collecting data right now and I feel that my data will be the best in our lab…
-Genny: Okay I will stop there
-Genny: I know you are not interested in these.
+Genny: I tried some new Biomaterial with this one! I'm collecting data right now and I feel that my data will be the best in our lab… #line:08f14f1 
+Genny: Okay I will stop there #line:0b7de8d 
+Genny: I know you are not interested in these. #line:0cc2797 
 <<ChangeCG Genny Angry>>
-Genny: B U T, Remember!
-Genny: If anything feels weird, let me know and I will adjust some details.
-Genny: Don't try to fix it yourself, okay?
-Genny: I'm not blaming you for breaking the last one…
-Genny: If we could save some money on that, you can get the ticket faster
-Genny: There is only one month left!
+Genny: B U T, Remember! #line:07af2a5 
+Genny: If anything feels weird, let me know and I will adjust some details. #line:093a39a 
+Genny: Don't try to fix it yourself, okay? #line:01d2a7b 
+Genny: I'm not blaming you for breaking the last one… #line:04ac28a 
+Genny: If we could save some money on that, you can get the ticket faster #line:029acc5 
+Genny: There is only one month left! #line:0e963a6 
 <<ChangeCG Genny Normal>>
-Genny: I heard that UnRead is going to be the last one in row for the main stage
-Genny: Can't believe that they make it so far in this city
+Genny: I heard that UnRead is going to be the last one in row for the main stage #line:02e7d66 
+Genny: Can't believe that they make it so far in this city #line:0c99b91 
 <<ChangeCG Genny Happy>>
-Genny: Anyway, It's time to go
-Genny: I have two papers due at midnight, but I will try to finish them before you get back.
-Genny: So we can watch a movie together!
-Genny: Remember I said that I tried to hack into that website. 
-Genny: I did it last night!
-Genny: And it has some good movies on it...
-Genny: Oh, I will also boil some water 
-Genny: so we can eat cup noodles when you're back.
+Genny: Anyway, It's time to go #line:03b82b6 
+Genny: I have two papers due at midnight, but I will try to finish them before you get back. #line:08568b2 
+Genny: So we can watch a movie together! #line:020d4df 
+Genny: Remember I said that I tried to hack into that website.  #line:00ba314 
+Genny: I did it last night! #line:07431ab 
+Genny: And it has some good movies on it... #line:05018d7 
+Genny: Oh, I will also boil some water  #line:0ce6f0b 
+Genny: so we can eat cup noodles when you're back. #line:09245a5 
 <<ChangeCG Genny Normal>>
-Genny: Be careful and stay safe!
+Genny: Be careful and stay safe! #line:05b0eaf 
 ===

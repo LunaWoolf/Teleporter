@@ -13950,7 +13950,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8696216963300954827, guid: d2a9bfe2c7403425cade8c4f1b47ba38, type: 3}
       propertyPath: m_RootOrder
-      value: 15
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 8696216963300954827, guid: d2a9bfe2c7403425cade8c4f1b47ba38, type: 3}
       propertyPath: m_LocalPosition.x
@@ -15185,7 +15185,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 24889889917630465, guid: cd88d8e2d39d544cf94b903581a0b0ad, type: 3}
       propertyPath: m_RootOrder
-      value: 17
+      value: 21
       objectReference: {fileID: 0}
     - target: {fileID: 24889889917630465, guid: cd88d8e2d39d544cf94b903581a0b0ad, type: 3}
       propertyPath: m_LocalPosition.x
@@ -27863,7 +27863,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 20
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &1522954966
 AudioSource:
@@ -28006,7 +28006,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1537141026
 GameObject:
@@ -45843,7 +45843,7 @@ Transform:
   - {fileID: 424616758}
   - {fileID: 1779726027}
   m_Father: {fileID: 0}
-  m_RootOrder: 21
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1894286162
 GameObject:
@@ -62612,7 +62612,7 @@ RectTransform:
   - {fileID: 962189511}
   - {fileID: 159471400}
   m_Father: {fileID: 0}
-  m_RootOrder: 19
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -64240,7 +64240,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6631551378814898075, guid: 348eaefa8c22f47bfa5c7df236723b5b, type: 3}
       propertyPath: m_RootOrder
-      value: 16
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 6631551378814898075, guid: 348eaefa8c22f47bfa5c7df236723b5b, type: 3}
       propertyPath: m_LocalPosition.x

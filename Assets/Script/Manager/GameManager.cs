@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
 
 
     public List<Quest> inventoryList = new List<Quest>();
-    //public List<Object> questObjectList = new List<GameObject>()
+  
 
 
     public Shaker MyShaker;
@@ -106,8 +106,6 @@ public class GameManager : MonoBehaviour
         questObject.transform.SetParent(QuestPanel.transform,false);
 
         questList.Add(questNew);
-        
-
 
         QuestUI.GetComponentInChildren<QuestObject>().SetQuest(questNew);
         PlayAddQuestAnimation();
@@ -115,6 +113,8 @@ public class GameManager : MonoBehaviour
     }
 
     public GameObject QuestUI;
+    public TextMeshProUGUI QuestUI_Title;
+    public TextMeshProUGUI QuestUI_Description;
     public void PlayAddQuestAnimation()
     {
         QuestUI.GetComponent<Animator>().SetTrigger("appear");
@@ -136,29 +136,88 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        switch (id)
-        {
-            case "Order0154":
-                Complete_Title.text = "Order0154";
-                //Debug.Log("k");
-                Complete_Description.text = "Complete. Delivered On Time. Tip : 5.75";
-                CompleteQuestUI.GetComponent<Animator>().SetTrigger("complete");
-                break;
-            case "Ray":
-                Debug.Log("Ray");
-                Complete_Title.text = "Ray";
-                Complete_Description.text = "Complete. Tip : 25";
-                CompleteQuestUI.GetComponent<Animator>().SetTrigger("complete");
-                break;
-            default:
-                Debug.Log("aaa");
-                break;
-        }
-
        
     }
 
- 
+    [YarnCommand("CompleteQuestAnimation")]
+    public void CompleteQuestAnimation(string title, string des)
+    {
+
+        title = title.Replace('/', ' ');
+        des = des.Replace('/', ' ');
+
+        Complete_Title.text = title;
+        Complete_Description.text = des;
+        CompleteQuestUI.GetComponent<Animator>().SetTrigger("complete");
+
+    }
+
+
+    [YarnCommand("UpdateQuestAnimation")]
+    public void UpdateQuestAnimation(string title, string des)
+    {
+        title = title.Replace('/', ' ');
+        des = des.Replace('/', ' ');
+
+        QuestUI_Title.text = title;
+        QuestUI_Description.text = des;
+        QuestUI.GetComponent<Animator>().SetTrigger("appear");
+
+    }
+
+
+
+    [YarnCommand("UpdateQuest")]
+    public void UpdateQuest(string id, string status)
+    {
+        foreach (Quest q in questList)
+        {
+            if (q.id == id)
+            {
+                switch (status)
+                {
+                    case "NotReady":
+                        q.status = Quest.Status.NotReady;
+                        q.questObject.GetComponent<QuestObject>().ChangeStatus(Quest.Status.NotReady);
+                        break;
+                    case "ReadyPickUp":
+                        q.status = Quest.Status.ReadyPickUp;
+                        q.questObject.GetComponent<QuestObject>().ChangeStatus(Quest.Status.ReadyPickUp);
+                        break;
+                    case "PickedUp":
+                        q.status = Quest.Status.PickedUp;
+                        q.questObject.GetComponent<QuestObject>().ChangeStatus(Quest.Status.PickedUp);
+                        break;
+                    case "Delivered":
+                        q.status = Quest.Status.Delivered;
+                        q.questObject.GetComponent<QuestObject>().ChangeStatus(Quest.Status.Delivered);
+                        break;
+                    default:
+                        break;
+                }
+              
+            }
+        }
+
+      
+    }
+
+    [YarnCommand("UpdateQuestDescription")]
+    public void UpdateQuestDescription(string id, string des)
+    {
+        foreach (Quest q in questList)
+        {
+            if (q.id == id)
+            {
+                q.questObject.GetComponent<QuestObject>().ChangeDescription(des);
+
+            }
+        }
+
+
+    }
+
+
 
     public void ToogleUIPage()
     {
@@ -186,6 +245,13 @@ public class GameManager : MonoBehaviour
         {
             mapBluePoint.SetActive(!mapGreenPoint.activeSelf);
         }
+    }
+
+    public GameObject Dialoguebox;
+    public void ToogleDialogueUI()
+    {
+        Dialoguebox.SetActive(!Dialoguebox.activeSelf);
+
     }
 
 }

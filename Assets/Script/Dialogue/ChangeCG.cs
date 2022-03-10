@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using Yarn.Unity;
 
+
+
+[System.Serializable]
 public class ChangeCG : MonoBehaviour
 {
     public GameObject Normal_CG;
@@ -10,7 +13,46 @@ public class ChangeCG : MonoBehaviour
     public GameObject Angry_CG;
     public GameObject Sad_CG;
 
-    string currentMood = "Normal";
+    [System.Serializable]
+    public struct CG
+    {
+        public string name;
+        public GameObject image;
+    }
+    public CG[] CGList;
+
+
+    [SerializeField] public Dictionary<string, GameObject> CGDictionary= new Dictionary<string, GameObject>();
+
+    public string currentMood = "Normal";
+
+
+    public void Awake()
+    {
+        foreach (CG cg in CGList)
+        {
+            CGDictionary.Add(cg.name, cg.image);
+        }
+
+    }
+
+
+    [YarnCommand("TurnOnCG")]
+    public void TurnOnCG(string name)
+    {
+        CGDictionary[name].SetActive(true);
+
+    }
+
+    [YarnCommand("TurnOffCG")]
+    public void TurnOffCG(string name)
+    {
+        CGDictionary[name].SetActive(false);
+
+    }
+
+
+    //________________________________________________________________________
 
     [YarnCommand("ChangeCG")]
     public void CreateQuest(string mood)

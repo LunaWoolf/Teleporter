@@ -15,13 +15,20 @@ public class DialogueManager : MonoBehaviour
 
     private InputAction StartConversation;
 
-  
+    public TextLineProvider textLineProvider;
 
 
     private void Awake()
     {
         PlayerControls = new PlayerControls();
+        if(PresistenceManagerScript.Instance != null)
+            textLineProvider.textLanguageCode = PresistenceManagerScript.Instance.Language;
 
+    }
+
+    void Update()
+    {
+        
     }
 
     private void OnEnable()
@@ -41,7 +48,6 @@ public class DialogueManager : MonoBehaviour
         Debug.Log("click");
 
         lineView.OnContinueClicked();
-
 
     }
 

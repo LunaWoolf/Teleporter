@@ -44,13 +44,12 @@ public class PlayerInteraction : MonoBehaviour
     {
         NextLine = PlayerControls.PlayerAction.NextLine;
         NextLine.Enable();
-        //OpenBigMap = PlayerControls.PlayerAction.OpenBigMap;
-        //OpenBigMap.Enable();
+     
         StartConversation = PlayerControls.PlayerAction.StartConversation;
         StartConversation.Enable();
 
         PlayerControls.PlayerAction.NextLine.performed += ctx => NextDialogue();
-        //PlayerControls.PlayerAction.OpenBigMap.performed += ctx => OpenMap();
+    
         PlayerControls.PlayerAction.StartConversation.performed += ctx => StartNPCConversation();
 
     }
@@ -110,7 +109,7 @@ public class PlayerInteraction : MonoBehaviour
             {
                 GameObject curNPC = hit.transform.gameObject;
 
-                PossessNPC npcScript = curNPC.GetComponent<PossessNPC>();
+                NPCDialogueManager npcScript = curNPC.GetComponent<NPCDialogueManager>();
 
                 if (npcScript != null && npcScript.talkable)
                 {
@@ -129,7 +128,7 @@ public class PlayerInteraction : MonoBehaviour
             }
             else if (hit.transform.gameObject == null || (conversationNPC != null && hit.transform.gameObject != conversationNPC))
             {
-                if (conversationNPC.TryGetComponent<PossessNPC>(out PossessNPC NPCscript))
+                if (conversationNPC.TryGetComponent<NPCDialogueManager>(out NPCDialogueManager NPCscript))
                 {
 
                     NPCscript.ShowTalkUI(false);
@@ -142,7 +141,7 @@ public class PlayerInteraction : MonoBehaviour
             {
                 if (conversationNPC != null)
                 {
-                    if (conversationNPC.TryGetComponent<PossessNPC>(out PossessNPC NPCscript))
+                    if (conversationNPC.TryGetComponent<NPCDialogueManager>(out NPCDialogueManager NPCscript))
                     {
 
                         NPCscript.ShowTalkUI(false);
@@ -239,7 +238,7 @@ public class PlayerInteraction : MonoBehaviour
     {
         if (!inTheMiddleOfConversation)
         {
-            if (conversationNPC != null && conversationNPC.TryGetComponent<PossessNPC>(out PossessNPC npcScript))
+            if (conversationNPC != null && conversationNPC.TryGetComponent<NPCDialogueManager>(out NPCDialogueManager npcScript))
             {
                 if (npcScript.talkable)
                 {

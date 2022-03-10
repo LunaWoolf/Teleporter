@@ -78,19 +78,19 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     - _blend: -0.06
-    - _midblend: 2.26
-    - _speed: 0.1
-    - _topblend: 0.64
+    - _midblend: 3.19
+    - _speed: 0.03
+    - _topblend: 3
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _CloudColor: {r: 0.12188502, g: 0.13110572, b: 0.31132078, a: 1}
+    - _CloudColor: {r: 0.26877892, g: 0.26877892, b: 0.3773585, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _LandColor: {r: 0, g: 0, b: 0, a: 1}
-    - _MidColor: {r: 0.5187789, g: 0.53857785, b: 0.5471698, a: 1}
-    - _MidColor2: {r: 0.14440192, g: 0.23930958, b: 0.5188679, a: 1}
-    - _SkyColorBottom: {r: 0.12181334, g: 0.12126203, b: 0.23584908, a: 1}
-    - _SkyColorTop: {r: 0.6415094, g: 0.36009255, b: 0.36009255, a: 1}
+    - _LandColor: {r: 1, g: 0, b: 0.87590456, a: 1}
+    - _MidColor: {r: 1, g: 0.51526874, b: 0, a: 1}
+    - _MidColor2: {r: 0.8679245, g: 0.39414066, b: 0, a: 1}
+    - _SkyColorBottom: {r: 0.6603774, g: 0.41721827, b: 0.21493416, a: 1}
+    - _SkyColorTop: {r: 0.13769346, g: 0.08210219, b: 0.38679248, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &7935716772433703666

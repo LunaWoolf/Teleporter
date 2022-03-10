@@ -230,6 +230,17 @@
                 },
                 {
                     "name": "",
+                    "id": "4861fd3f-2260-44be-a023-b96f2735262f",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SuperTeleport",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "456818a9-181a-414c-b6e6-e6e9f6c3ff21",
                     "path": "<Gamepad>/buttonEast",
                     "interactions": "",

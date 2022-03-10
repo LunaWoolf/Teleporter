@@ -7,6 +7,7 @@ public class OpenningSceneManager : MonoBehaviour
 {
     public VideoPlayer vid;
     public SceneManage sceneManager;
+    public GameObject LanguagechoicePage;
 
 
     void Start()
@@ -16,13 +17,19 @@ public class OpenningSceneManager : MonoBehaviour
 
     void CheckOver(UnityEngine.Video.VideoPlayer vp)
     {
-        sceneManager.LoadLevel("DialogueScene");
+        LanguagechoicePage.SetActive(true);
     }
 
-
-    // Update is called once per frame
-    void Update()
+    public void SkipVideo()
     {
-        
+        vid.Stop();
     }
+
+    public void SetLanaguage(string lan)
+    {
+        PresistenceManagerScript.Instance.Language = lan;
+        sceneManager.LoadLevel("Dialogue_00_01");
+    }
+
+   
 }

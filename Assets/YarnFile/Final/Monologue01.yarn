@@ -3,7 +3,7 @@ tags:
 colorID: 0
 position: 343,751
 ---
-<<CreateQuest GameManager Order0154P Order0154P Pick/Up/Food/at/Purple/spot>>
+<<CreateQuest GameManager Quest1 Quest/1/Pick/Up Pick/Up/Food/at/Purple/spot>>
 So Ginny didn't know you existed, right?
 To be honest, I thought you were some kind of AI she made at first. 
 Like an AI program in the Prosthetic Eye that talks. 

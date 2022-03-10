@@ -1,0 +1,153 @@
+﻿title: Start
+tags:
+---
+城市的万家灯火灯火映入眼帘 #line:01d607f 
+
+远处闪烁的灯光，仿佛是一片触手可及的星空 #line:0d982d5 
+
+Brette久久地注视着这一切 #line:03043fa 
+
+…… #line:0f35d68 
+
+Brette轻轻偏过头去，你们这才注意到，屋顶上的你们并非孤身 #line:0dc6bd2 
+
+<<TurnOnCG Yi Black>>
+
+就在屋顶的边缘，坐着一个单薄的背影 #line:0209785 
+
+？？？ : do —— sa —— mi —— re….. #line:04d30c8 
+
+不知名的背影晃动着双腿。三月初的楼顶依然是凉风习习，他的头发和嘴里轻快的曲调被风吹得七零八落 #line:0ffaab8 
+
+<<TurnOffCG Yi Black>>
+
+Brette似乎对这个身影有一些在意 #line:03da71d 
+
+Brette : 喂，不要坐在那么靠边的位置，很危险的！ #line:03ada0a 
+
+<<TurnOnCG Yi Black>>
+
+？？？ : do —— sa —— mi —— re….. #line:02f3d63 
+
+Brette 提高了声音又说了一遍 #line:043f719 
+
+Brette : 说你呢！离楼边远一点，太危险了！ #line:0f7f6e0 
+
+？？？ : do —— sa —— mi —— re….. #line:03e2545 
+
+背影依然哼着不知名的曲调，仿佛完全没有听见Brette的警告，也注意不到自己身下的城市 #line:0eecf3c 
+
+Brette忍不住走了过去，一边接近这个身影，一边再次警告到： #line:01dee5f 
+
+Brette : 你有没有听到我说话，这样很危险......诶 ? ? ? #line:0b8fbbd 
+
+<<TurnOffCG Yi Black>>
+
+<<TurnOnCG Yi EyeClose>>
+
+Brette走进才发现，背影的主人是个相貌清秀的少年，少年闭着双眼，在哼歌的同时，发出平稳的鼾声 #line:06ed5f1 
+
+Brette : 这家伙....难道坐在这里...睡着了？ #line:022459d 
+
+Brette : 这也太危险了吧？这里是22层楼诶，摔下去会没命的! #line:05e0caf 
+
+Brette : ... #line:05fc31b 
+
+Brette : 这种情况贸然叫醒他不会直接受惊摔下去吧.... #line:08ad1b4 
+
+Brette : 但也不可能把他放在这里不管... #line:0326d09 
+
+Brette : 总之先把他从楼檐上抱下来吧。 #line:03f6d56 
+
+Brette考虑了一下，伸出了双臂准备将少年从楼檐上抱下来。然而就在Brette手碰到少年的一瞬间，少年一下子惊醒了。 #line:03fb2a2 
+
+<<TurnOffCG Yi EyeClose>>
+
+<<TurnOnCG Yi Color>>
+
+？？？ : Zzzzz —— 嗯？..... ！啊....!———啊啊啊啊啊啊！ #line:0b7a318 
+
+少年身体一下子失去了平衡，猛地向下倒去。 #line:006b8c6 
+
+Brette : 不好！！Luna！ #line:05e0f79 
+
+<<TurnOffCG Background Color>>
+
+千钧一发的时刻，Brette整个人冲出了楼顶，一只手抓住了楼檐边，一只手拉住了下坠到一半的少年 #line:0ae4a65 
+
+Brette : 呼 —— 呼 —— 呼——...至少，抓住了。 #line:055db9d 
+
+Brette : 但是，这样我撑不住几秒的....该死，啊啊啊应该平时多练练引体向上的。 #line:06b5dc4 
+
+Brette往下望过去，少年似乎终于彻底清醒了，眼神里充满了恐惧。 #line:045ef70 
+
+刚刚还像星空般美丽的灯火一瞬间变成了可怕的万丈深渊，两个人的身体全靠Brette的一只手悬挂在22层的楼外，风过时两人的身体不住地随风摇摆。 #line:05f9bb5 
+
+Brette四周环望了一下，就在少年左下方两三米的位置，有一个小平台，连接着大楼的窗户。Brette对着少年大喊： #line:0170a28 
+
+Brette : 喂，你的脚够得到那边的平台吗 #line:0952ac9 
+
+？？？ : 大概....有点困难 #line:02a8a27 
+
+Brette : 我数到三，我会尽全力把你往平台那边甩，你同时往那边跳！ #line:05b4e8b 
+
+？？？ : 诶....不行的！而且就算我能跳过去，对你来说也太高太远了.... #line:0c41b2d 
+
+Brette : 你用不着管我！ 你跳过去就好！ #line:0678a88 
+
+？？？ : 你疯了吗？ #line:0f00210 
+
+Brette : 一! #line:0e81708 
+
+？？？ : 喂你认真的吗？ #line:0548174 
+
+Brette : 二！ #line:0ec5a25 
+
+？？？ : 那你怎么办？ #line:007de1e 
+
+Brette : 三！ #line:0042d4d 
+
+Brette用尽全力把身体荡起来，将少年向左侧甩过去，少年看准时机松开手，抓住了平台栏杆。 #line:0688aaa 
+
+与此同时，剧烈的摇晃让本来就已经没了力气的Brette彻底失去了平衡。Brette松开了抓着楼檐的手，整个人坠落了下去。 #line:06606e2 
+
+
+？？？ : 啊啊啊啊——————！ #line:0427b4f 
+
+Brette : Luna！交给你了！ #line:03a100d 
+
+<<TurnOffCG Yi Color>>
+
+
+急速下落的过程中，风将Brette的头发向后吹去，全身的衣服都被风吹地哗哗作响，Brette紧紧盯着地面，判断着自己和地面的距离。 #line:03eba1e 
+
+Brette :  Okay，差不多了！ #line:0390fc4 
+
+瞬移发动后，势能清零 #line:0bb406a 
+
+Brette : 呼———— 还好平安落地了。 #line:09862fd 
+
+手机的提示音突然响起。 #line:0727316 
+
+Brette : 啊.....最后一单做好了！得去取餐了！ #line:04ddc1c 
+
+Brette : 还要去工厂区送餐，还是蛮远的。 #line:0928ecb 
+
+Brette再次向上望去 #line:0a715cb 
+
+Brette : 嗯....这个角度看不见他，但那个平台上的窗子应该是开着的，只要爬进去就没问题。 #line:0f0d6a3 
+
+Brette : 至少他没掉下来，应该是安全了....就先不管他好了。 #line:0b3aac5 
+
+Brette : ...难得我的这个能力，还是有点用的。 #line:024c8b9 
+
+Brette : ...不对，不是我的能力，是你的。 #line:019debe 
+
+Brette : 好了，走吧。 #line:0ef214e 
+
+Brette : 走，取单去了 #line:0516052 
+
+
+
+
+===

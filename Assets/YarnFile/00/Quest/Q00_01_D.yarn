@@ -1,0 +1,9 @@
+﻿title: Start
+tags:
+---
+
+Delivered Quest 1
+<<CompleteQuest GameManager Quest1>>
+<<CompleteQuestAnimation GameManager Quest1 Complete./Tip:/3.5$>>
+<<CreateQuest GameManager Quest2 Ques2/1/Pick/Up Pick/Up/Food/at/Purple/spot>>
+===

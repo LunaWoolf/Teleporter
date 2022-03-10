@@ -27,6 +27,7 @@ public class PlayerMovement : MonoBehaviour
     public bool isGrounded;
     public bool Aimming;
     public bool Teleporting;
+    public int TeleportTimes = 2;
     public bool Moveable = true;
 
     public GameObject Phantom;
@@ -53,6 +54,9 @@ public class PlayerMovement : MonoBehaviour
     public float possessTime = 5f;
     public Image PossessTimer;
     public GameObject AimPossessTarget;
+    public Image BretteEye;
+    public Color EyeColor_Ready;
+    public Color EyeColor_Charge;
 
    [Header("Head Bob")]
     [SerializeField] bool headBob = true;
@@ -146,10 +150,7 @@ public class PlayerMovement : MonoBehaviour
 
         }
 
-        //Building_regular.SetActive(false);
-        //Building_transparent.SetActive(true);
-        //AimAction();
-    
+        
     }
 
     void CancleSuperTeleport()
@@ -159,9 +160,6 @@ public class PlayerMovement : MonoBehaviour
             SuperTeleportObject.GetComponentInChildren<MeshRenderer>().materials = orginalMaterials;
         }
         
-
-        //Building_regular.SetActive(true);
-        //Building_transparent.SetActive(false);
     }    
     //___________________________________________________________________________________________________________
 
@@ -245,7 +243,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        if (Aimming)
+        if (Aimming) //实时更新Aiming 位置
         {
             CheckAimming();
         }
@@ -254,7 +252,7 @@ public class PlayerMovement : MonoBehaviour
 
     void AimAction()
     {
-        if (!Teleporting)
+        if (!Teleporting && TeleportTimes > 0)
         {
             Aimming = true;
             CheckAimming();
@@ -263,15 +261,20 @@ public class PlayerMovement : MonoBehaviour
 
     void TeleportAction()
     {
-        Aimming = false;
-        if (CheckPossess() == null)
+        if (Aimming)
         {
-            StartCoroutine(Teleport(0f, Phantom.transform));
+            Aimming = false;
+            if (CheckPossess() == null)
+            {
+                StartCoroutine(Teleport(0f, Phantom.transform));
+            }
+            else
+            {
+                StartCoroutine(Possess(0f, CheckPossess().transform));
+            }
+
         }
-        else
-        {
-            StartCoroutine(Possess(0f, CheckPossess().transform));
-        }
+       
         
     }
 
@@ -291,13 +294,16 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
+    public GameObject Testxxxx;
+
     Vector3 phantomTargetPosition;
     float targetDistance = 15f;
     void CheckAimming()
     {
         if (Aimming)
         {
-           
+
+            Testxxxx.SetActive(true);
             float z = movement.ReadValue<Vector2>().y * speed * Time.deltaTime;
 
 
@@ -371,6 +377,14 @@ public class PlayerMovement : MonoBehaviour
 
     IEnumerator Teleport(float delayTime, Transform teleportPosition)
     {
+        Testxxxx.SetActive(false);
+        TeleportTimes--;
+
+        if (TeleportTimes < 1)
+        {
+            BretteEye.color = EyeColor_Charge;
+        }
+
         if (possess)
         {
             Moveable = true;
@@ -404,6 +418,8 @@ public class PlayerMovement : MonoBehaviour
             yield return 1; 
         }
         StartCoroutine(Float(1f));
+
+        StartCoroutine(RestoreTeleportTimes());
     }
 
     IEnumerator Float(float floatTime)
@@ -421,6 +437,21 @@ public class PlayerMovement : MonoBehaviour
         gravityVelocity.y = -2f;
         yield return new WaitForSeconds(floatTime);
         gravity = -9.18f;
+    }
+
+    IEnumerator RestoreTeleportTimes()
+    {
+        yield return new WaitForSeconds(5f);
+
+        if (TeleportTimes < 2)
+        {
+            TeleportTimes++;
+        }
+
+        if (TeleportTimes > 0)
+        {
+            BretteEye.color = EyeColor_Ready;
+        }
     }
 
     IEnumerator Possess(float delayTime, Transform teleportPosition)

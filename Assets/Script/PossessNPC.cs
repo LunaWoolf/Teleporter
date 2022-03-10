@@ -73,14 +73,7 @@ public class PossessNPC : MonoBehaviour
         }
         
 
-        /*
-        if (currentDialogueYarnProgarm != null && dialogueRunner != null && talkable)
-        {
-            dialogueRunner.yarnScripts[0] = currentDialogueYarnProgarm;
-            dialogueRunner.StartDialogue();
-            startDialogue = true;
-        }
-        */
+
     }
 
     private void NextDialogue()
