@@ -157,6 +157,7 @@ public class PlayerInteraction : MonoBehaviour
         }
     }
 
+    public GameObject BoundaryNotice;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -170,6 +171,22 @@ public class PlayerInteraction : MonoBehaviour
 
         }
 
+        if (other.gameObject.tag == "MapBoundary")
+        {
+            Debug.Log("bound");
+            BoundaryNotice.SetActive(true);
+
+        }
+
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "MapBoundary")
+        {
+            BoundaryNotice.SetActive(false);
+
+        }
     }
 
     private void NextDialogue()
@@ -282,7 +299,6 @@ public class PlayerInteraction : MonoBehaviour
 
         }
     }
-
 
 
 

@@ -1,7 +1,9 @@
 ﻿title: Start
 tags:
 ---
-Pick Up Quest 2
-<<UpdateQuest GameManager Quest2 PickedUp>>
-<<UpdateQuestAnimation GameManager Quest2 STATU/UPDATE>>
+Here is the food
+Pick Up Quest 3
+<<UpdateQuest GameManager Quest3 PickedUp>>
+<<UpdateQuestAnimation GameManager Quest3 STATU/UPDATE>>
+<<UpdateQuestDescription GameManager Quest3 Send/To/the/Factory>>
 ===

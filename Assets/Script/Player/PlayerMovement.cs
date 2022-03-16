@@ -579,6 +579,7 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
+   
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Light")
@@ -588,6 +589,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.tag == "Light" && gm.inLight)
@@ -595,6 +597,7 @@ public class PlayerMovement : MonoBehaviour
             gm.inLight = false;
 
         }
+
     }
 
     public void DisableAllInput()
