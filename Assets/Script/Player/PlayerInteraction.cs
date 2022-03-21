@@ -33,6 +33,8 @@ public class PlayerInteraction : MonoBehaviour
 
     public LayerMask TalkNPCMask;
 
+    public GameManager gm;
+
 
     private void Awake()
     {
@@ -105,6 +107,7 @@ public class PlayerInteraction : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(this.transform.position, InteractRay - this.transform.position, out hit, TalkNPCMask))
         {
+            /*
             if (hit.transform.gameObject.tag == "NPC")
             {
                 GameObject curNPC = hit.transform.gameObject;
@@ -153,6 +156,8 @@ public class PlayerInteraction : MonoBehaviour
 
             }
 
+            */
+
 
         }
     }
@@ -161,19 +166,30 @@ public class PlayerInteraction : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("NPC");
+        //Debug.Log("NPC");
         if (other.gameObject.tag == "NPC")
         {
-            if (other.gameObject.TryGetComponent(out NPC npcScript))
+            if (other.gameObject.TryGetComponent(out NPCDialogueManager npcScript))
             {
-                npcScript.SetDialogue();
+                if (npcScript != null && npcScript.talkable)
+                {
+                    if (conversationNPC == null)
+                    {
+                        conversationNPC = other.gameObject;
+                        npcScript.ShowTalkUI(true);
+                    }
+
+                }
+
+                //npcScript.SetDialogue();
+                gm.ToggleUIInstruction("Possess", true); //UI instruction
             }
 
         }
 
         if (other.gameObject.tag == "MapBoundary")
         {
-            Debug.Log("bound");
+            //Debug.Log("bound");
             BoundaryNotice.SetActive(true);
 
         }
@@ -187,6 +203,43 @@ public class PlayerInteraction : MonoBehaviour
             BoundaryNotice.SetActive(false);
 
         }
+
+        if (other.gameObject.tag == "NPC")
+        {
+
+            if (inTheMiddleOfConversation)
+            {
+                EndDialogue();
+                gm.ToogleDialogueUI();
+
+            }
+
+            if (other.gameObject.TryGetComponent(out NPCDialogueManager npcScript))
+            {
+                if (npcScript != null)
+                {
+
+                        npcScript.PlayerExitBound();
+                        inTheMiddleOfConversation = false;
+                        conversationNPC = null;
+                        npcScript.ShowTalkUI(false);
+                    
+
+                }
+            }
+
+          
+
+
+            /*if (other.gameObject.TryGetComponent(out NPCDialogueManager npcScript))
+            {
+                npcScript.PlayerExitBound();
+                inTheMiddleOfConversation = false;
+            }*/
+
+            gm.ToggleUIInstruction("Possess", false);
+        }
+
     }
 
     private void NextDialogue()
@@ -221,15 +274,7 @@ public class PlayerInteraction : MonoBehaviour
      }
 
 
-    private void OpenMap()
-    {
-        if (bigMap != null)
-        {
-            bigMap.SetActive(!bigMap.activeSelf);
-
-        }
-    }
-
+ 
     public void DisableAllInput()
     {
         PlayerControls.PlayerAction.Disable();

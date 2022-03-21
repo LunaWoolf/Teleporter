@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Yarn.Unity;
+
+//已经废弃！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！
 public class NPC : MonoBehaviour
 {
     //public YarnProgram currentDialogueYarnProgarm;
@@ -19,6 +21,18 @@ public class NPC : MonoBehaviour
             dialogueRunner.StartDialogue("Start");
             
         }
+
+    }
+
+    public void PlayerExitBound()
+    {
+        if (dialogueRunner != null)
+        {
+            Debug.Log("Exit");
+            dialogueRunner.Stop();
+            dialogueRunner.Clear();
+        }
+
 
     }
 

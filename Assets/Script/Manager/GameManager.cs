@@ -33,10 +33,79 @@ public class GameManager : MonoBehaviour
     public bool inLight = false;
 
     public GameObject UICanvas;
+    public GameObject BigMapCamera;
+    public bool UIPageOpen;
 
+    public DialogueRunner MainDialogueRunner;
+    public YarnProject Monologue2;
+
+    PresistenceManagerScript pms;
+    public GameObject Player;
+
+    [System.Serializable]
+
+    public struct QuestSign
+    {
+        public string Questname;
+        public GameObject QuestSignObject;
+        public bool complete;
+    }
+    public QuestSign[] QuestSignList;
+    [SerializeField] public Dictionary<string, GameObject> QuestSignDictionary = new Dictionary<string, GameObject>();
+
+
+   
+    void Awake()
+    {
+    
+
+        foreach (QuestSign q in QuestSignList)
+        {
+            QuestSignDictionary.Add(q.Questname, q.QuestSignObject);
+
+        }
+
+        
+       
+    }
 
     void Start()
     {
+        /*pms = GameObject.Find("PersistenceManager").GetComponent<PresistenceManagerScript>();
+        pms.LoadPlayerPosition();
+        if (pms.Player != null)
+        {
+           
+        }
+        else
+        {
+            pms = GameObject.Find("PersistenceManager").GetComponent<PresistenceManagerScript>();
+            pms.GetPlayer();
+        }*/
+
+        ToggleQuestSign(PlayerStatus.currentQuest, true);
+
+        if (PlayerStatus.QuestList == null)
+        {
+            PlayerStatus.QuestList = QuestSignList;
+        }
+
+        if (PlayerStatus.currentYarnProject != null)
+        {
+            MainDialogueRunner.yarnProject = PlayerStatus.currentYarnProject;
+
+        }
+
+
+
+        Player.transform.position = PlayerStatus.playerPosition;
+
+
+        PlayerStatus.currentYarnProject = Monologue2;
+
+
+
+
 
         if (healthText != null)
         {
@@ -50,7 +119,7 @@ public class GameManager : MonoBehaviour
 
     public void CameraShake()
     {
-        Debug.Log("Shake");
+        //Debug.Log("Shake");
         MyShaker.Shake(MyShakePreset);
 
     }
@@ -60,8 +129,8 @@ public class GameManager : MonoBehaviour
         playerHealth = Mathf.Clamp(playerHealth + change, 0, 100);
         if (timeSlider != null)
             timeSlider.value = playerHealth;
-        if(healthText != null)
-            healthText.text = " " + playerHealth + " % ";
+        //if(healthText != null)
+            //healthText.text = " " + playerHealth + " % ";
     }
 
     IEnumerator Timer()
@@ -70,13 +139,13 @@ public class GameManager : MonoBehaviour
         {
             
             yield return new WaitForSeconds(1f);
-            if (inLight)
+            if (inLight && !Player.GetComponent<PlayerMovement>().possess)
             {
                 UpdateHealth(-5f);
             }
-            else
+            else if(playerHealth < 100f)
             {
-                //UpdateHealth(-1f);
+                UpdateHealth(1f);
             }
            
         }
@@ -86,9 +155,9 @@ public class GameManager : MonoBehaviour
     [YarnCommand("CreateQuest")]
     public void CreateQuest(string id, string title, string description)
     {
-        Debug.Log(id);
-        Debug.Log(title);
-        Debug.Log(description);
+        //Debug.Log(id);
+        //Debug.Log(title);
+        //Debug.Log(description);
 
         title = title.Replace('/', ' ');
         description = description.Replace('/', ' ');
@@ -133,10 +202,27 @@ public class GameManager : MonoBehaviour
             if (q.id == id)
             {
                 q.questObject.SetActive(false);
+
+                PlayerStatus.questStatus = id;
             }
         }
 
        
+    }
+
+
+
+    public void InCompleteQuest(string id)
+    {
+        foreach (Quest q in questList)
+        {
+            if (q.id == id)
+            {
+                q.questObject.SetActive(false);
+            }
+        }
+
+
     }
 
     [YarnCommand("CompleteQuestAnimation")]
@@ -150,8 +236,21 @@ public class GameManager : MonoBehaviour
         Complete_Description.text = des;
         CompleteQuestUI.GetComponent<Animator>().SetTrigger("complete");
 
+       
+
     }
 
+    public void InCompleteQuestAnimation(string title, string des)
+    {
+
+        title = title.Replace('/', ' ');
+        des = des.Replace('/', ' ');
+
+        Complete_Title.text = title;
+        Complete_Description.text = des;
+        CompleteQuestUI.GetComponent<Animator>().SetTrigger("complete");
+
+    }
 
     [YarnCommand("UpdateQuestAnimation")]
     public void UpdateQuestAnimation(string title, string des)
@@ -164,6 +263,8 @@ public class GameManager : MonoBehaviour
         QuestUI.GetComponent<Animator>().SetTrigger("appear");
 
     }
+
+ 
 
 
 
@@ -217,34 +318,67 @@ public class GameManager : MonoBehaviour
 
     }
 
-
-
-    public void ToogleUIPage()
+    [YarnCommand("SetCurrentQuest")]
+    public void SetCurrentQuest(string questID)
     {
-        if (UICanvas == null)
+        PlayerStatus.currentQuest = questID;
+    }
+
+
+
+
+    public void ToggleUIPage()
+    {
+        //if (UICanvas == null)
+        //{
+        //UICanvas = GameObject.Find("UICanvas");
+        
+
+        if (UICanvas != null)
         {
-            UICanvas = GameObject.Find("UICanvas");
+            UICanvas.SetActive(!UICanvas.activeSelf);
+            UIPageOpen = UICanvas.activeSelf;
+            BigMapCamera.GetComponent<Transform>().position = new Vector3(0, 500, 0);
+
         }
-
-        UICanvas.SetActive(!UICanvas.activeSelf);
-
+       
 
     }
 
-    public GameObject mapGreenPoint;
-    public GameObject mapBluePoint;
-
-    [YarnCommand("MapAddPoint")]
-    public void TriggerGreenSpot(string color)
+    [Header("UI Instruction")]
+    public GameObject Aim;
+    public GameObject Teleport;
+    public GameObject Possess;
+    public void ToggleUIInstruction(string ui, bool on)
     {
-        if (color == "green")
+        switch (ui)
         {
-            mapGreenPoint.SetActive(!mapGreenPoint.activeSelf);
+            case "Aim":
+                Aim.SetActive(on);
+                break;
+            case "Teleport":
+                Teleport.SetActive(on);
+                break;
+            case "Possess":
+                Possess.SetActive(on);
+                break;
+
+
         }
-        if (color == "blue")
-        {
-            mapBluePoint.SetActive(!mapGreenPoint.activeSelf);
-        }
+       
+
+    }
+
+    
+   
+
+    [YarnCommand("MapQuestObject")]
+    public void ToggleQuestSign(string questName, bool on)
+    {
+
+        QuestSignDictionary[questName].SetActive(on);
+
+
     }
 
     public GameObject Dialoguebox;

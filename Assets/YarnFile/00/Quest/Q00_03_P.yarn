@@ -5,5 +5,8 @@ Here is the food
 Pick Up Quest 3
 <<UpdateQuest GameManager Quest3 PickedUp>>
 <<UpdateQuestAnimation GameManager Quest3 STATU/UPDATE>>
-<<UpdateQuestDescription GameManager Quest3 Send/To/the/Factory>>
+<<UpdateQuestDescription GameManager Quest3 Send/To/the/Factory./Red/Spot/On/Map>>
+<<MapQuestObject GameManager Quest3_P false>>
+<<MapQuestObject GameManager Quest3_D true>>
+<<SetCurrentQuest GameManager Quest3_D>>
 ===

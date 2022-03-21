@@ -45,7 +45,6 @@ public class DialogueManager : MonoBehaviour
 
     private void NextDialogue()
     {
-        Debug.Log("click");
 
         lineView.OnContinueClicked();
 

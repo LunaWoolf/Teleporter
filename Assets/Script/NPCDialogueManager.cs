@@ -40,13 +40,31 @@ public class NPCDialogueManager : MonoBehaviour
     public void SetDialogue()
     {
 
-
         if (dialogueRunner != null && talkable)
         {
+   
             dialogueRunner.StartDialogue("Start");
             startDialogue = true;
         }
     }
+
+    public void PlayerExitBound()
+    {
+        if (dialogueRunner != null)
+        {
+            Debug.Log("Exit");
+
+           
+            dialogueRunner.Stop();
+            //dialogueRunner.lineProvider.gameObject.SetActive(false);
+            dialogueRunner.dialogueViews[0].gameObject.transform.parent.gameObject.SetActive(false);
+          
+            //dialogueRunner.Clear();
+        }
+
+
+    }
+
 
     private void NextDialogue()
     {

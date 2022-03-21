@@ -7,7 +7,6 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 
-
 public class PlayerMovement : MonoBehaviour
 {
     public CharacterController controller;
@@ -16,8 +15,11 @@ public class PlayerMovement : MonoBehaviour
     private InputAction CameraMovement;
     private InputAction uiInputMap;
 
+
     public float speed = 12f;
     public float gravity = -9.18f;
+    public float jumpHeight = 3.5f;
+    public bool jump;
  
     public Vector3 gravityVelocity;
 
@@ -34,6 +36,7 @@ public class PlayerMovement : MonoBehaviour
     public GameObject Brette_Phantom;
 
     public GameObject firstPersonCamera;
+    public GameObject BigMapCamera;
     public GameObject thridPersonCamera;
     public GameManager gm;
 
@@ -81,12 +84,18 @@ public class PlayerMovement : MonoBehaviour
     public GameObject Building_regular;
     public GameObject Building_transparent;
     //___________________________________________________________________________________________________________
+    public VolumeProfile SpotLightProfile;
+    public Color SpotLightRed;
+    public Color SpotLightGreen;
+
+
 
     private void Awake()
     {
         PlayerControls = new PlayerControls();
 
         Moveable = true;
+
 
     }
 
@@ -102,8 +111,16 @@ public class PlayerMovement : MonoBehaviour
         PlayerControls.PlayerAction.Teleport.performed += ctx => TeleportAction();
         PlayerControls.PlayerAction.Teleport.Enable();
 
-        PlayerControls.UI.OpenUIPage.performed += ctx => gm.ToogleUIPage();
+        PlayerControls.UI.OpenUIPage.performed += ctx => gm.ToggleUIPage();
         PlayerControls.UI.OpenUIPage.Enable();
+
+        PlayerControls.PlayerAction.AbortAimming.performed += ctx => AbortAiming();
+        PlayerControls.PlayerAction.AbortAimming.Enable();
+
+        PlayerControls.PlayerAction.Jump.performed += ctx => Jump();
+        PlayerControls.PlayerAction.Jump.Enable();
+
+
 
         //___________________________________________________________________________________________________________
 
@@ -111,6 +128,39 @@ public class PlayerMovement : MonoBehaviour
         PlayerControls.PlayerAction.SuperTeleport.started += ctx => SuperTeleport();
         PlayerControls.PlayerAction.SuperTeleport.performed += ctx => CancleSuperTeleport();
         PlayerControls.PlayerAction.SuperTeleport.Enable();
+
+
+        //___________________________________________________________________________________________________________
+    }
+
+    private void OnDestroy()
+    {
+
+        
+        movement.Disable();
+        CameraMovement.Disable();
+
+        PlayerControls.PlayerAction.Teleport.started -= ctx => AimAction();
+        PlayerControls.PlayerAction.Teleport.performed -= ctx => TeleportAction();
+        PlayerControls.PlayerAction.Teleport.Disable();
+
+        PlayerControls.UI.OpenUIPage.performed -= ctx => gm.ToggleUIPage();
+        PlayerControls.UI.OpenUIPage.Disable();
+
+        PlayerControls.PlayerAction.AbortAimming.performed -= ctx => AbortAiming();
+        PlayerControls.PlayerAction.AbortAimming.Disable();
+
+        PlayerControls.PlayerAction.Jump.performed -= ctx => Jump();
+        PlayerControls.PlayerAction.Jump.Disable();
+
+
+
+        //___________________________________________________________________________________________________________
+
+
+        PlayerControls.PlayerAction.SuperTeleport.started -= ctx => SuperTeleport();
+        PlayerControls.PlayerAction.SuperTeleport.performed -= ctx => CancleSuperTeleport();
+        PlayerControls.PlayerAction.SuperTeleport.Disable();
 
 
         //___________________________________________________________________________________________________________
@@ -165,6 +215,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
+        Debug.Log("LoadStart");
         cam = firstPersonCamera.GetComponent<Camera>();
         TeleportPostProcessingVolume = PostProcessing.GetComponent<Volume>();
         if (gm == null)
@@ -172,13 +223,16 @@ public class PlayerMovement : MonoBehaviour
             gm = GameObject.Find("GameManager").GetComponent<GameManager>();
         }
 
+        if (SpotLightProfile.TryGet<ColorAdjustments>(out var c))
+        {
+            c.colorFilter.value = SpotLightRed;
+        }
 
     }
 
     bool fallHurt = false;
     void Update()
     {
-        
 
         isGrounded = Physics.CheckSphere(groundCheck.position,groundDistance,groundMask);
 
@@ -192,10 +246,12 @@ public class PlayerMovement : MonoBehaviour
                 gm.CameraShake();
                 fallHurt = false;
             }
+
+         
         }
         else
         {
-            if (!Teleporting)
+            if (!Teleporting && !jump)
             {
                 gravityVelocity.y += gravity * Time.deltaTime;
 
@@ -213,34 +269,66 @@ public class PlayerMovement : MonoBehaviour
 
         if (!Teleporting && Moveable && !Aimming)
         {
-            float x = movement.ReadValue<Vector2>().x;
-            float z = movement.ReadValue<Vector2>().y;
-
-           
-
-            Vector3 move = transform.right * x + transform.forward * z;
-
-            controller.Move(move * speed * Time.deltaTime);
-
-            if (possess && PossessBody != null)
+            if (gm.UIPageOpen) //如果打开UI界面， 玩家无法移动，移动相机
             {
-                PossessBody.transform.position += move * speed * Time.deltaTime;
-            }
+                float x = movement.ReadValue<Vector2>().x;
+                float z = movement.ReadValue<Vector2>().y;
 
-            if (isGrounded && headBob && Mathf.Abs(x) + Mathf.Abs(z) > 0.1f)
-            {
-                walkingTime += Time.deltaTime;
-                targetCameraPosition = headTransform.position + CalculateHeadBobOffset(walkingTime);
-                cameraTransform.position = Vector3.Lerp(cameraTransform.position, targetCameraPosition, headBobSmoothing);
+                Vector3 move = transform.right * x + transform.forward * z;
 
-                if ((cameraTransform.position - targetCameraPosition).magnitude <= 0.001f)
-                    cameraTransform.position = targetCameraPosition;
+                BigMapCamera.GetComponent<Transform>().position += move;
 
             }
-            else
+            else //如果打开UI界面关闭， 玩家移动
             {
-                walkingTime = 0;
+                float x = movement.ReadValue<Vector2>().x;
+                float z = movement.ReadValue<Vector2>().y;
+
+
+
+                Vector3 move = transform.right * x + transform.forward * z;
+
+
+              
+
+                controller.Move(move * speed * Time.deltaTime);
+
+                Vector3 jumpMove = new Vector3(0,0,0);
+
+                if (jump && isGrounded)
+                {
+
+                    jumpMove= transform.up * Mathf.Sqrt(jumpHeight * gravity * -2f) ;
+                    jump = false;
+
+                }
+
+                controller.Move(jumpMove * Time.deltaTime);
+
+
+                if (possess && PossessBody != null)
+                {
+                    PossessBody.transform.position += move * speed * Time.deltaTime;
+                }
+
+                if (isGrounded && headBob && Mathf.Abs(x) + Mathf.Abs(z) > 0.1f)
+                {
+                    walkingTime += Time.deltaTime;
+                    targetCameraPosition = headTransform.position + CalculateHeadBobOffset(walkingTime);
+                    cameraTransform.position = Vector3.Lerp(cameraTransform.position, targetCameraPosition, headBobSmoothing);
+
+                    if ((cameraTransform.position - targetCameraPosition).magnitude <= 0.001f)
+                        cameraTransform.position = targetCameraPosition;
+
+                }
+                else
+                {
+                    walkingTime = 0;
+                }
+
             }
+
+            
         }
 
         if (Aimming) //实时更新Aiming 位置
@@ -250,17 +338,48 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
+    void Jump()
+    {
+        if (isGrounded)
+        {
+            jump = true;
+
+        }
+    }
+
+    void AbortAiming()
+    {
+
+        if (Aimming) 
+        {
+            Aimming = false;
+            TeleportPostProcessingVolume.weight = 0;
+            Teleporting = false;
+            Phantom.GetComponent<MeshRenderer>().enabled = false;
+            Brette_Phantom.SetActive(false);
+            this.GetComponent<CharacterController>().enabled = true;
+
+            gm.ToggleUIInstruction("Teleport", false);
+        }
+    }
+
+
     void AimAction()
     {
         if (!Teleporting && TeleportTimes > 0)
         {
             Aimming = true;
             CheckAimming();
-        }    
+        }
+
+        gm.ToggleUIInstruction("Aim",false);
+        gm.ToggleUIInstruction("Teleport", true);
     }
 
     void TeleportAction()
     {
+        gm.ToggleUIInstruction("Teleport",false);
+
         if (Aimming)
         {
             Aimming = false;
@@ -294,7 +413,7 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    public GameObject Testxxxx;
+    //public GameObject Testxxxx;
 
     Vector3 phantomTargetPosition;
     float targetDistance = 15f;
@@ -303,7 +422,7 @@ public class PlayerMovement : MonoBehaviour
         if (Aimming)
         {
 
-            Testxxxx.SetActive(true);
+            //Testxxxx.SetActive(true);
             float z = movement.ReadValue<Vector2>().y * speed * Time.deltaTime;
 
 
@@ -317,6 +436,15 @@ public class PlayerMovement : MonoBehaviour
             TeleportPostProcessingVolume.profile.TryGet<LensDistortion>(out _LensDistortion);
             _LensDistortion.intensity.value = 0f;
             TeleportPostProcessingVolume.weight = 1;
+
+            if (cam == null)
+            {
+                cam = firstPersonCamera.GetComponent<Camera>();
+            }else
+            { 
+
+           
+
 
             phantomTargetPosition = cam.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height / 2, targetDistance));
             RaycastHit hit;
@@ -365,7 +493,7 @@ public class PlayerMovement : MonoBehaviour
                     AimPossessTarget = null;
                 }
             }
-
+            }
 
 
             Phantom.GetComponent<MeshRenderer>().enabled = true; //make phantom visible
@@ -377,7 +505,7 @@ public class PlayerMovement : MonoBehaviour
 
     IEnumerator Teleport(float delayTime, Transform teleportPosition)
     {
-        Testxxxx.SetActive(false);
+        //Testxxxx.SetActive(false);
         TeleportTimes--;
 
         if (TeleportTimes < 1)
@@ -454,6 +582,9 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+   
+
+
     IEnumerator Possess(float delayTime, Transform teleportPosition)
     {
         Teleporting = true;
@@ -480,6 +611,13 @@ public class PlayerMovement : MonoBehaviour
         TeleportPostProcessingVolume.weight = 0;
         cam.cullingMask ^= 1 << LayerMask.NameToLayer("PlayerEye");
         cam.cullingMask ^= 1 << LayerMask.NameToLayer("GuardEye");
+
+        if (SpotLightProfile.TryGet<ColorAdjustments>(out var c))
+        {
+            c.colorFilter.value = SpotLightGreen;
+        }
+
+
         Teleporting = false;
         gravity = -3f;
         this.GetComponent<CharacterController>().enabled = true;
@@ -547,6 +685,13 @@ public class PlayerMovement : MonoBehaviour
         cam.cullingMask ^= 1 << LayerMask.NameToLayer("PlayerEye");
         cam.cullingMask ^= 1 << LayerMask.NameToLayer("GuardEye");
 
+
+        if (SpotLightProfile.TryGet<ColorAdjustments>(out var c))
+        {
+            c.colorFilter.value = SpotLightRed;
+        }
+
+
         if (thirdPersonPossess) // Thirdperson mode
         {
             firstPersonCamera.SetActive(true);
@@ -582,7 +727,7 @@ public class PlayerMovement : MonoBehaviour
    
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Light")
+        if (other.gameObject.tag == "Light" && !possess)
         {
             gm.inLight = true;
 
@@ -592,7 +737,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "Light" && gm.inLight)
+        if (other.gameObject.tag == "Light")
         {
             gm.inLight = false;
 

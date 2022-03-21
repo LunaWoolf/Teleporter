@@ -13,6 +13,8 @@ public class OpenningSceneManager : MonoBehaviour
     void Start()
     {
         vid.loopPointReached += CheckOver;
+        PlayerStatus.playerPosition = new Vector3(235.63f, 1.55f, -15.76f);
+        Debug.Log(PlayerStatus.playerPosition);
     }
 
     void CheckOver(UnityEngine.Video.VideoPlayer vp)
@@ -28,6 +30,7 @@ public class OpenningSceneManager : MonoBehaviour
     public void SetLanaguage(string lan)
     {
         PresistenceManagerScript.Instance.Language = lan;
+        //sceneManager.LoadLevel("Chapter0");
         sceneManager.LoadLevel("Dialogue_00_01");
     }
 

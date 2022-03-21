@@ -1,8 +1,11 @@
 ﻿title: Start
 tags:
 ---
-Delivered Quest 1
+Thank You
 <<CompleteQuest GameManager Quest1>>
 <<CompleteQuestAnimation GameManager Quest1 Complete./Tip:/3.5$>>
-<<CreateQuest GameManager Quest2 Ques/2/Pick/Up Pick/Up/Food/at/Gas/Station>>
+<<CreateQuest GameManager Quest2 Ques/2/Pick/Up Pick/Up/Food/at/Gas/Station./Purple/Spot/on/map.>>
+<<MapQuestObject GameManager Quest1_D false>>
+<<MapQuestObject GameManager Quest2_P true>>
+<<SetCurrentQuest GameManager Quest2_P>>
 ===

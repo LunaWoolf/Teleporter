@@ -44,9 +44,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": ""CameraMovement"",
-                    ""type"": ""Button"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""42e25212-7e24-41cc-8ae4-ca16227d9290"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
                 },
@@ -73,24 +73,29 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""AbortAimming"",
+                    ""type"": ""Button"",
+                    ""id"": ""a6300717-2ee3-48ec-a3ed-5e1b3b271e6f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Jump"",
+                    ""type"": ""Button"",
+                    ""id"": ""9a26ee05-2e29-46d5-b973-eff85e761c7a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""a12257a8-f559-43d5-8986-c99b9fed890d"",
-                    ""path"": ""<Keyboard>/space"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Teleport"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""1b507eb8-7564-47ce-81d7-ae766c861eb9"",
-                    ""path"": ""<DualShockGamepad>/rightShoulder"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -102,17 +107,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""be5cf101-e9d4-4602-8548-3fe22fd77e03"",
                     ""path"": ""<Gamepad>/rightStick"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""CameraMovement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""002bc828-fb6d-4790-bcef-d11f858b5c13"",
-                    ""path"": ""<Mouse>/Delta"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -188,28 +182,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""287f82ab-c3b5-4cf1-b37d-4de5e2630b76"",
-                    ""path"": ""<Gamepad>/dpad/down"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""NextLine"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""2e863097-c752-4e23-af84-2a8449d06709"",
-                    ""path"": ""<Keyboard>/enter"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""NextLine"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""3343568f-66a4-4898-8383-2a40dbb49710"",
                     ""path"": ""<Gamepad>/dpad/up"",
                     ""interactions"": """",
@@ -233,18 +205,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""886f81fb-c5c5-45af-9b0f-35b83ab1e34a"",
-                    ""path"": ""<DualShockGamepad>/rightTrigger"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""SuperTeleport"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""4861fd3f-2260-44be-a023-b96f2735262f"",
-                    ""path"": ""<Mouse>/rightButton"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -260,6 +221,61 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""StartConversation"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""255fade7-8e33-43d3-b729-9d98b68fe588"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""StartConversation"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b2e27797-c08a-4d9c-85cd-ddbb2eb57dbe"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AbortAimming"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""31f0fb72-2751-41d7-ac1f-ff08876a7913"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f831ce43-f61d-4361-be08-31326e5ad98d"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c7be8983-676b-4e8f-939d-436ff4f01414"",
+                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""NextLine"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -328,7 +344,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""664664f2-6118-4499-945e-3871cd37edee"",
-                    ""path"": ""<Keyboard>/p"",
+                    ""path"": ""<Keyboard>/shift"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -361,6 +377,8 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_PlayerAction_NextLine = m_PlayerAction.FindAction("NextLine", throwIfNotFound: true);
         m_PlayerAction_OpenBigMap = m_PlayerAction.FindAction("OpenBigMap", throwIfNotFound: true);
         m_PlayerAction_StartConversation = m_PlayerAction.FindAction("StartConversation", throwIfNotFound: true);
+        m_PlayerAction_AbortAimming = m_PlayerAction.FindAction("AbortAimming", throwIfNotFound: true);
+        m_PlayerAction_Jump = m_PlayerAction.FindAction("Jump", throwIfNotFound: true);
         // Debug
         m_Debug = asset.FindActionMap("Debug", throwIfNotFound: true);
         m_Debug_ToggleDebug = m_Debug.FindAction("ToggleDebug", throwIfNotFound: true);
@@ -424,6 +442,8 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputAction m_PlayerAction_NextLine;
     private readonly InputAction m_PlayerAction_OpenBigMap;
     private readonly InputAction m_PlayerAction_StartConversation;
+    private readonly InputAction m_PlayerAction_AbortAimming;
+    private readonly InputAction m_PlayerAction_Jump;
     public struct PlayerActionActions
     {
         private @PlayerControls m_Wrapper;
@@ -435,6 +455,8 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         public InputAction @NextLine => m_Wrapper.m_PlayerAction_NextLine;
         public InputAction @OpenBigMap => m_Wrapper.m_PlayerAction_OpenBigMap;
         public InputAction @StartConversation => m_Wrapper.m_PlayerAction_StartConversation;
+        public InputAction @AbortAimming => m_Wrapper.m_PlayerAction_AbortAimming;
+        public InputAction @Jump => m_Wrapper.m_PlayerAction_Jump;
         public InputActionMap Get() { return m_Wrapper.m_PlayerAction; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -465,6 +487,12 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @StartConversation.started -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnStartConversation;
                 @StartConversation.performed -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnStartConversation;
                 @StartConversation.canceled -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnStartConversation;
+                @AbortAimming.started -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnAbortAimming;
+                @AbortAimming.performed -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnAbortAimming;
+                @AbortAimming.canceled -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnAbortAimming;
+                @Jump.started -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnJump;
+                @Jump.performed -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnJump;
+                @Jump.canceled -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnJump;
             }
             m_Wrapper.m_PlayerActionActionsCallbackInterface = instance;
             if (instance != null)
@@ -490,6 +518,12 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @StartConversation.started += instance.OnStartConversation;
                 @StartConversation.performed += instance.OnStartConversation;
                 @StartConversation.canceled += instance.OnStartConversation;
+                @AbortAimming.started += instance.OnAbortAimming;
+                @AbortAimming.performed += instance.OnAbortAimming;
+                @AbortAimming.canceled += instance.OnAbortAimming;
+                @Jump.started += instance.OnJump;
+                @Jump.performed += instance.OnJump;
+                @Jump.canceled += instance.OnJump;
             }
         }
     }
@@ -577,6 +611,8 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         void OnNextLine(InputAction.CallbackContext context);
         void OnOpenBigMap(InputAction.CallbackContext context);
         void OnStartConversation(InputAction.CallbackContext context);
+        void OnAbortAimming(InputAction.CallbackContext context);
+        void OnJump(InputAction.CallbackContext context);
     }
     public interface IDebugActions
     {

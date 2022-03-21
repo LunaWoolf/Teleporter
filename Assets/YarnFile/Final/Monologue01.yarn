@@ -3,7 +3,7 @@ tags:
 colorID: 0
 position: 343,751
 ---
-<<CreateQuest GameManager Quest1 Quest/1/Pick/Up Pick/Up/Food/at/Purple/spot>>
+<<CreateQuest GameManager Quest1 Quest/1/Pick/Up Pick/Up/Food/at/the/Orange/spot>>
 So Ginny didn't know you existed, right?
 To be honest, I thought you were some kind of AI she made at first. 
 Like an AI program in the Prosthetic Eye that talks. 
@@ -39,6 +39,8 @@ I haven't heard from him for a while.
 ...
 I like to climb to the top of the tallest building in the city
 It reminds me of climbing this really big tree back in my hometown
+<<CreateQuest GameManager Top Climb/To/The/Top Climb/To/the/top/of/the/highest/building>>
+<<MapQuestObject GameManager SideQuest_01 true>>
 I'm not sure is that tree still alive though...
 I think its pretty old and I'm afriad it passed away
 But if it's alive, I would love to bring you to see it.

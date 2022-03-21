@@ -5,4 +5,6 @@ tags:
 Delivered Quest 2
 <<CompleteQuest GameManager Quest2>>
 <<CompleteQuestAnimation GameManager Quest2 Complete./Tip:/10.5$>>
+<<MapQuestObject GameManager Quest2_D false>>
+<<MapQuestObject GameManager Quest3_P true>>
 ===

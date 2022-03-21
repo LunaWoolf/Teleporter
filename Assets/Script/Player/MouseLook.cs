@@ -10,6 +10,8 @@ public class MouseLook : MonoBehaviour
     private PlayerControls PlayerControls;
     private InputAction CameraMovement;
     float xRotation = 0f;
+    public GameManager gm;
+    public GameObject BigMapCamera;
 
     private void Awake()
     {
@@ -31,15 +33,39 @@ public class MouseLook : MonoBehaviour
    
     void Update()
     {
-        float mouseX =  CameraMovement.ReadValue<Vector2>().x * mouseSensitivity * Time.deltaTime;
-        float mouseY =  CameraMovement.ReadValue<Vector2>().y * mouseSensitivity * Time.deltaTime;
+      
 
-        
+        if (gm.UIPageOpen) //如果打开UI界面， 玩家无法移动，移动相机
+        {
+            float mouseX = CameraMovement.ReadValue<Vector2>().x * mouseSensitivity * Time.deltaTime;
+            
 
-        xRotation -= mouseY;
-        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
-        transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f); //rotate self(camera)
-        playerBody.Rotate(Vector3.up * mouseX); //roate playerbody
+
+            playerBody.Rotate(Vector3.up * mouseX); //roate playerbody
+
+
+            float mouseY = CameraMovement.ReadValue<Vector2>().y;
+
+            Vector3 mapZoom = transform.up * mouseY;
+
+            BigMapCamera.GetComponent<Transform>().position += mapZoom;
+
+
+            
+        }
+        else //如果打开UI界面关闭， 玩家移动
+        {
+            float mouseX = CameraMovement.ReadValue<Vector2>().x * mouseSensitivity * Time.deltaTime;
+            float mouseY = CameraMovement.ReadValue<Vector2>().y * mouseSensitivity * Time.deltaTime;
+
+
+
+            xRotation -= mouseY;
+            xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+            transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f); //rotate self(camera)
+            playerBody.Rotate(Vector3.up * mouseX); //roate playerbody
+
+        }
 
 
     }

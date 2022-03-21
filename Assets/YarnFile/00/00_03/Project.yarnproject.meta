@@ -17,6 +17,9 @@ ScriptedImporter:
   - languageID: en
     stringsFile: {fileID: 4900000, guid: 51428091020cc417e9b3270509713f95, type: 3}
     assetsFolder: {instanceID: 0}
+  - languageID: zh-Hans
+    stringsFile: {fileID: 4900000, guid: 51428091020cc417e9b3270509713f95, type: 3}
+    assetsFolder: {instanceID: 0}
   useAddressableAssets: 0
   searchAllAssembliesForActions: 1
   assembliesToSearch: []

@@ -5,5 +5,7 @@ Here is the food
 Pick Up Quest 2
 <<UpdateQuest GameManager Quest2 PickedUp>>
 <<UpdateQuestAnimation GameManager Quest2 STATU/UPDATE>>
-<<UpdateQuestDescription GameManager Quest2 Send/To/White/Spot>>
+<<MapQuestObject GameManager Quest2_P false>>
+<<MapQuestObject GameManager Quest2_D true>>
+<<UpdateQuestDescription GameManager Quest2 Send/To/Purple/Spot>>
 ===

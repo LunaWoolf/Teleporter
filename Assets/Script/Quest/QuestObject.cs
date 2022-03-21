@@ -15,6 +15,24 @@ public class QuestObject : MonoBehaviour
     public GameObject Status_P;
     public GameObject Status_D;
 
+    public float time = 0;
+    float timeLeft;
+    public Slider timeSlider;
+    public GameManager gm;
+    public bool useTimer;
+
+    public void Awake()
+    {
+        gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+        if (useTimer)
+        {
+            timeLeft = time;
+            StartCoroutine(Timer());
+        }
+  
+        
+        
+    }
 
     public void SetQuest(Quest q)
     {
@@ -57,5 +75,32 @@ public class QuestObject : MonoBehaviour
         quest.description = d;
         this.description.text = d;
     }
+
+    IEnumerator Timer()
+    {
+        while (timeLeft > 0)
+        {
+
+            yield return new WaitForSeconds(1f);
+            
+            timeLeft--;
+            timeSlider.value = timeLeft / (time / 100);
+            
+        }
+
+        if (timeLeft == 0)
+        {
+            if (gm != null)
+            {
+                gm.InCompleteQuest(quest.id);
+                gm.InCompleteQuestAnimation(quest.title, "Out of Time");
+
+            }
+            
+
+
+        }
+    }
+
 
 }

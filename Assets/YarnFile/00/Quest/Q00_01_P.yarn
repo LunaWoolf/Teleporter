@@ -5,5 +5,7 @@ Here is the food
 Students from the university order it
 <<UpdateQuest GameManager Quest1 PickedUp>>
 <<UpdateQuestAnimation GameManager Quest1 STATU/UPDATE>>
-<<UpdateQuestDescription GameManager Quest1 Send/To/University/Dorm>>
+<<MapQuestObject GameManager Quest1_P false>>
+<<MapQuestObject GameManager Quest1_D true>>
+<<UpdateQuestDescription GameManager Quest1 Send/To/University/Dorm./Orange/Sign/On/Map>>
 ===
