@@ -1,10 +1,14 @@
 ﻿title: Start
 tags:
 ---
-
-Delivered Quest 2
+What…How…
+How you climb up here…
+I was waiting for your call to go downstairs.
+Thank you!
+No matter you’re a five-star delivery guy.
+Thanks, man!
 <<CompleteQuest GameManager Quest2>>
 <<CompleteQuestAnimation GameManager Quest2 Complete./Tip:/10.5$>>
 <<MapQuestObject GameManager Quest2_D false>>
-<<MapQuestObject GameManager Quest3_P true>>
+<<SetCurrentQuest GameManager Quest3_P>>
 ===

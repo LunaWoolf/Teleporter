@@ -675,6 +675,8 @@ MonoBehaviour:
   CGList:
   - name: Normal
     image: {fileID: 9089873}
+  - name: Genny
+    image: {fileID: 1024444932}
   currentMood: Normal
 --- !u!1 &1133413477
 GameObject:
@@ -904,6 +906,53 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1024444933}
   m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1569374533
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1569374535}
+  - component: {fileID: 1569374534}
+  m_Layer: 0
+  m_Name: pms
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1569374534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1569374533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2746a0fc91d194e058500fbbb9359ec1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Player: {fileID: 0}
+  PlayerNewPosition: {x: 0, y: 0, z: 0}
+  Language: en
+  dr: {fileID: 0}
+--- !u!4 &1569374535
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1569374533}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 247.46568, y: 1.5749435, z: 85.357666}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1682833798
 GameObject:
@@ -1600,7 +1649,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bec29c0a230741bdac901dba8da47ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  yarnProject: {fileID: 7545569452688597077, guid: 0a6f50eacf29e439ca754f922e3485fb, type: 3}
+  yarnProject: {fileID: 7545569452688597077, guid: c9dbbe6d192ed4f4494e7bd04ca6a590, type: 3}
   _variableStorage: {fileID: 3831113770588092822}
   dialogueViews:
   - {fileID: 7778558435945188821}
@@ -1680,7 +1729,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 610c541718d694070a21327d1ae62e75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showDebug: 0
+  showDebug: 1
   debugTextView: {fileID: 0}
 --- !u!1 &4540255440302011880
 GameObject:

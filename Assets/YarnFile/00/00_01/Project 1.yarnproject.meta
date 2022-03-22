@@ -1,0 +1,33 @@
+fileFormatVersion: 2
+guid: c9dbbe6d192ed4f4494e7bd04ca6a590
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 053561912b1654d80a424bb0696a74ae, type: 3}
+  sourceScripts:
+  - {fileID: 6391573757903218779, guid: e44559df2ef1b4f7b8dcef58e83412ef, type: 3}
+  compileErrors: []
+  serializedDeclarations:
+  - name: $greeting
+    typeName: String
+    defaultValueBool: 0
+    defaultValueNumber: 0
+    defaultValueString: 
+    description: 00_01.yarn, node Start, line 0
+    isImplicit: 1
+    sourceYarnAsset: {fileID: 6391573757903218779, guid: e44559df2ef1b4f7b8dcef58e83412ef, type: 3}
+  defaultLanguage: zh-Hans
+  languagesToSourceAssets:
+  - languageID: en
+    stringsFile: {fileID: 4900000, guid: 0a45834eb113646919d480da9428607e, type: 3}
+    assetsFolder: {instanceID: 0}
+  - languageID: zh-Hans
+    stringsFile: {instanceID: 0}
+    assetsFolder: {instanceID: 0}
+  useAddressableAssets: 0
+  searchAllAssembliesForActions: 1
+  assembliesToSearch: []

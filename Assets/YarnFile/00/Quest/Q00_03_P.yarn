@@ -1,8 +1,11 @@
 ﻿title: Start
 tags:
 ---
-Here is the food
-Pick Up Quest 3
+Good Evening, this order is for the factory.
+I don’t even know there are people still working there
+I thought the factory was closed for years
+Anyway…take care.
+You have a long way to go.
 <<UpdateQuest GameManager Quest3 PickedUp>>
 <<UpdateQuestAnimation GameManager Quest3 STATU/UPDATE>>
 <<UpdateQuestDescription GameManager Quest3 Send/To/the/Factory./Red/Spot/On/Map>>

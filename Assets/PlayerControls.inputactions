@@ -76,6 +76,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "InstructionMenu",
+                    "type": "Button",
+                    "id": "88fc33d5-ffe1-48c3-af17-3f7af607fc72",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -235,6 +243,17 @@
                 },
                 {
                     "name": "",
+                    "id": "cdae1028-0ae8-49a7-938a-73146f378bee",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AbortAimming",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "31f0fb72-2751-41d7-ac1f-ff08876a7913",
                     "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
@@ -263,6 +282,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "NextLine",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2d17e763-331b-4804-a4e7-c1c57063dd0a",
+                    "path": "<Keyboard>/p",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "InstructionMenu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "db451810-c5cb-40c8-8a63-bbbb2acd0116",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "InstructionMenu",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

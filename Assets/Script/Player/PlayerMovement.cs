@@ -114,6 +114,9 @@ public class PlayerMovement : MonoBehaviour
         PlayerControls.UI.OpenUIPage.performed += ctx => gm.ToggleUIPage();
         PlayerControls.UI.OpenUIPage.Enable();
 
+        PlayerControls.PlayerAction.InstructionMenu.performed += ctx => gm.ToggleInstructionPage();
+        PlayerControls.PlayerAction.InstructionMenu.Enable();
+
         PlayerControls.PlayerAction.AbortAimming.performed += ctx => AbortAiming();
         PlayerControls.PlayerAction.AbortAimming.Enable();
 
@@ -146,6 +149,9 @@ public class PlayerMovement : MonoBehaviour
 
         PlayerControls.UI.OpenUIPage.performed -= ctx => gm.ToggleUIPage();
         PlayerControls.UI.OpenUIPage.Disable();
+
+        PlayerControls.PlayerAction.InstructionMenu.performed -= ctx => gm.ToggleInstructionPage();
+        PlayerControls.PlayerAction.InstructionMenu.Disable();
 
         PlayerControls.PlayerAction.AbortAimming.performed -= ctx => AbortAiming();
         PlayerControls.PlayerAction.AbortAimming.Disable();
@@ -295,7 +301,7 @@ public class PlayerMovement : MonoBehaviour
 
                 Vector3 jumpMove = new Vector3(0,0,0);
 
-                if (jump && isGrounded)
+                if (jump && isGrounded && !Aimming)
                 {
 
                     jumpMove= transform.up * Mathf.Sqrt(jumpHeight * gravity * -2f) ;
@@ -732,6 +738,14 @@ public class PlayerMovement : MonoBehaviour
             gm.inLight = true;
 
         }
+
+        /*if (other.gameObject.tag == "XRayInstruction")
+       {
+           gm.ToggleUIInstruction("Xray", true);
+
+       }
+       */
+
     }
 
 
@@ -742,6 +756,12 @@ public class PlayerMovement : MonoBehaviour
             gm.inLight = false;
 
         }
+
+        /*if (other.gameObject.tag == "XRayInstruction")
+        {
+            gm.ToggleUIInstruction("Xray", false);
+
+        }*/
 
     }
 

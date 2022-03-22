@@ -194,6 +194,12 @@ public class PlayerInteraction : MonoBehaviour
 
         }
 
+        if (other.gameObject.tag == "XRayInstruction")
+        {
+            gm.ToggleUIInstruction("Xray", true);
+
+        }
+
     }
 
     private void OnTriggerExit(Collider other)
@@ -228,7 +234,13 @@ public class PlayerInteraction : MonoBehaviour
                 }
             }
 
-          
+
+            if (other.gameObject.tag == "XRayInstruction")
+            {
+                gm.ToggleUIInstruction("Xray", false);
+
+            }
+
 
 
             /*if (other.gameObject.TryGetComponent(out NPCDialogueManager npcScript))

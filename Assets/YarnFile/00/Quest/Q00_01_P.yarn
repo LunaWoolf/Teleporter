@@ -1,11 +1,17 @@
 ﻿title: Start
 tags:
 ---
-Here is the food
-Students from the university order it
+Here is the food!
+Students from the university ordered it.
+I’m telling you…
+My Grilled cold noodle is the best in the university area
+Students there, they all LOVE it.
+If the school let them out at night
+I will earn ten times of money as I get now.
 <<UpdateQuest GameManager Quest1 PickedUp>>
 <<UpdateQuestAnimation GameManager Quest1 STATU/UPDATE>>
 <<MapQuestObject GameManager Quest1_P false>>
 <<MapQuestObject GameManager Quest1_D true>>
 <<UpdateQuestDescription GameManager Quest1 Send/To/University/Dorm./Orange/Sign/On/Map>>
+<<SetCurrentQuest GameManager Quest1_D>>
 ===

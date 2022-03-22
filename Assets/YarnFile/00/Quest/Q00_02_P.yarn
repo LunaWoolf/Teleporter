@@ -1,11 +1,15 @@
 ﻿title: Start
 tags:
 ---
-Here is the food
-Pick Up Quest 2
+Here is the grocery bag.
+I think I got everything this guy wants
+I don’t know…
+I’m too sleepy…
+Bye.
 <<UpdateQuest GameManager Quest2 PickedUp>>
 <<UpdateQuestAnimation GameManager Quest2 STATU/UPDATE>>
 <<MapQuestObject GameManager Quest2_P false>>
 <<MapQuestObject GameManager Quest2_D true>>
 <<UpdateQuestDescription GameManager Quest2 Send/To/Purple/Spot>>
+<<SetCurrentQuest GameManager Quest2_D>>
 ===

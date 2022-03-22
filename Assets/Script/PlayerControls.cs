@@ -89,6 +89,14 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""InstructionMenu"",
+                    ""type"": ""Button"",
+                    ""id"": ""88fc33d5-ffe1-48c3-af17-3f7af607fc72"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -248,6 +256,17 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""cdae1028-0ae8-49a7-938a-73146f378bee"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AbortAimming"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""31f0fb72-2751-41d7-ac1f-ff08876a7913"",
                     ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": """",
@@ -276,6 +295,28 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""NextLine"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2d17e763-331b-4804-a4e7-c1c57063dd0a"",
+                    ""path"": ""<Keyboard>/p"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""InstructionMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""db451810-c5cb-40c8-8a63-bbbb2acd0116"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""InstructionMenu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -379,6 +420,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_PlayerAction_StartConversation = m_PlayerAction.FindAction("StartConversation", throwIfNotFound: true);
         m_PlayerAction_AbortAimming = m_PlayerAction.FindAction("AbortAimming", throwIfNotFound: true);
         m_PlayerAction_Jump = m_PlayerAction.FindAction("Jump", throwIfNotFound: true);
+        m_PlayerAction_InstructionMenu = m_PlayerAction.FindAction("InstructionMenu", throwIfNotFound: true);
         // Debug
         m_Debug = asset.FindActionMap("Debug", throwIfNotFound: true);
         m_Debug_ToggleDebug = m_Debug.FindAction("ToggleDebug", throwIfNotFound: true);
@@ -444,6 +486,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputAction m_PlayerAction_StartConversation;
     private readonly InputAction m_PlayerAction_AbortAimming;
     private readonly InputAction m_PlayerAction_Jump;
+    private readonly InputAction m_PlayerAction_InstructionMenu;
     public struct PlayerActionActions
     {
         private @PlayerControls m_Wrapper;
@@ -457,6 +500,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         public InputAction @StartConversation => m_Wrapper.m_PlayerAction_StartConversation;
         public InputAction @AbortAimming => m_Wrapper.m_PlayerAction_AbortAimming;
         public InputAction @Jump => m_Wrapper.m_PlayerAction_Jump;
+        public InputAction @InstructionMenu => m_Wrapper.m_PlayerAction_InstructionMenu;
         public InputActionMap Get() { return m_Wrapper.m_PlayerAction; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -493,6 +537,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Jump.started -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnJump;
+                @InstructionMenu.started -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnInstructionMenu;
+                @InstructionMenu.performed -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnInstructionMenu;
+                @InstructionMenu.canceled -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnInstructionMenu;
             }
             m_Wrapper.m_PlayerActionActionsCallbackInterface = instance;
             if (instance != null)
@@ -524,6 +571,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
+                @InstructionMenu.started += instance.OnInstructionMenu;
+                @InstructionMenu.performed += instance.OnInstructionMenu;
+                @InstructionMenu.canceled += instance.OnInstructionMenu;
             }
         }
     }
@@ -613,6 +663,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         void OnStartConversation(InputAction.CallbackContext context);
         void OnAbortAimming(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+        void OnInstructionMenu(InputAction.CallbackContext context);
     }
     public interface IDebugActions
     {

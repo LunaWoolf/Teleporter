@@ -6,12 +6,13 @@ using UnityEngine.UI;
 using MilkShake;
 using TMPro;
 using Yarn.Unity;
+using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public class GameManager : MonoBehaviour
 {
   
-    public static float playerHealth = 1000;
+    public float playerHealth = 100;
 
     [Header("Transform Reference")]
   
@@ -127,10 +128,15 @@ public class GameManager : MonoBehaviour
     public void UpdateHealth(float change)
     {
         playerHealth = Mathf.Clamp(playerHealth + change, 0, 100);
+
+        
         if (timeSlider != null)
             timeSlider.value = playerHealth;
-        //if(healthText != null)
-            //healthText.text = " " + playerHealth + " % ";
+
+        if (playerHealth == 0)
+        {
+            SceneManager.LoadScene("DeadScene", LoadSceneMode.Single);
+        }
     }
 
     IEnumerator Timer()
@@ -345,10 +351,26 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public GameObject InstructionCanvas;
+    public void ToggleInstructionPage()
+    {
+      
+
+
+        if (InstructionCanvas != null)
+        {
+            InstructionCanvas.SetActive(!InstructionCanvas.activeSelf);
+
+        }
+
+
+    }
+
     [Header("UI Instruction")]
     public GameObject Aim;
     public GameObject Teleport;
     public GameObject Possess;
+    public GameObject Xray;
     public void ToggleUIInstruction(string ui, bool on)
     {
         switch (ui)
@@ -361,6 +383,9 @@ public class GameManager : MonoBehaviour
                 break;
             case "Possess":
                 Possess.SetActive(on);
+                break;
+            case "Xray":
+                Xray.SetActive(on);
                 break;
 
 

@@ -16,6 +16,8 @@ public static class PlayerStatus
 
         public static YarnProject currentYarnProject;
 
+        public static string playerName = "Luna";
+
 
 
 

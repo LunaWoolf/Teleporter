@@ -1,7 +1,10 @@
 ﻿title: Start
 tags:
 ---
-Thank You
+Thanks, man!
+We can’t leave the dorm. You are the savior!
+I hope the school police won’t catch you on your way out.
+Five stars, there you go.
 <<CompleteQuest GameManager Quest1>>
 <<CompleteQuestAnimation GameManager Quest1 Complete./Tip:/3.5$>>
 <<CreateQuest GameManager Quest2 Ques/2/Pick/Up Pick/Up/Food/at/Gas/Station./Purple/Spot/on/map.>>

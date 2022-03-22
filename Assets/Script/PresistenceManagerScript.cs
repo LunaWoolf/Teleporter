@@ -12,7 +12,8 @@ public class PresistenceManagerScript : MonoBehaviour
 
     public string Language = "zh-Hans";
 
-    
+    public DialogueRunner dr;
+
     private void Awake()
     {
         if (Instance == null)
@@ -25,6 +26,8 @@ public class PresistenceManagerScript : MonoBehaviour
             Destroy(gameObject);
         }
 
+
+
     }
 
     [YarnCommand("SetCurrentQuest_pms")]
@@ -33,13 +36,20 @@ public class PresistenceManagerScript : MonoBehaviour
         PlayerStatus.currentQuest = questID;
     }
 
-    public void LoadPlayerPosition()
+    [YarnFunction("PlayerName")]
+    public static string GetPlayerName()
     {
-        Debug.Log("okay");
-        Player = GameObject.Find("Player");
-        Player.GetComponent<Transform>().position = PlayerNewPosition;
+        return PlayerStatus.playerName;
 
     }
+
+    public void ChangePlayerName(string name)
+    {
+
+        PlayerStatus.playerName = name;
+    }
+
+    
 
 
 
