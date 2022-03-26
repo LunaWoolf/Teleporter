@@ -39,9 +39,52 @@ Genny:你该出发了吧。啊！我也该去写论文了，12点就要交了啊
 Genny:我会争取在你回来前写完的！这样咱俩晚上可以一起看电影。 #line:080dfe3 
 Genny:还记得那个被404的电影网站吗？我跟你说哦，我昨天晚上成功黑进去了 #line:0074746 
 Genny:嘿嘿厉害吧，等你回来一边吃泡面一边看电影吧！ #line:0159aa2 
-Genny:那工作顺利哦！注意安全！ #line:01c8588 
-<<TurnOffCG Genny Genny>>
-Brette: 好了... #line:035da95 
-Breete: 那，{PlayerName()},走吧。 #line:0347013 
+
+
+<<jump Guide>>
 
 ===
+
+title: Guide
+---
+Genny: 啊！你好像收到今天第一单外卖了！ #line:05798cc 
+<<CreateQuest_Q QuestManager Quest1 Quest/1/Pick/Up Pick/Up/Food/at/the/Orange/spot>>
+*Buzz* #line:0643d1f 
+Genny: 看看第一单是在哪里取单的? #line:046b5b7 
+<<TurnOnCG MainCanvas PhoneIcon>>
+<<ChangeCG Genny Normal>>
+Brette可以在他的手机上随时查询订单和地图  #line:078035b 
+(在手柄上按下 Y 键，或者键盘上按下 SHIFT，打开手机) #line:002badc 
+(如果想暂时关闭手机，请按同样的按键) #line:0b01d0b 
+Genny: 我在你的义眼上加了一个新模块，可以把地图投射到你的视野里. #line:0c06509 
+<<TurnOnCG MainCanvas MiniMap>>
+Genny: 但关键的时候大地图还是能提供更多信息。 #line:0859f7c 
+Genny: 对了！还是要注意监控摄像。别忘了，如果被拍到次数太多会被取消外卖员资格的。 #line:0730825 
+<<TurnOnCG MainCanvas HealthBar>>
+Genny: 如果你需要任何帮助但我又不在身边的时候，可以参考我写给你的这份【操作指南】. #line:0bd4ab8 
+<<TurnOnCG MainCanvas Instruction>>
+Genny:那工作顺利哦！注意安全！ #line:01c8588 
+<<jump Meta>>
+===
+
+title: Meta
+---
+<<TurnOffCG Genny Genny>>
+Brette: 好了... #line:035da95 
+Brette: So Ginny didn't know you existed, right? {PlayerName()}. #line:04ea19e 
+Brette: To be honest, I thought you were some kind of AI she made at first.  #line:0b80aec 
+Brette: But then, with the super powers come with you, I don't know… #line:0eaaec9 
+Brette: She is the smartest person I ever knew #line:04b8f56 
+Brette: But like, creating superpowers against nature… #line:055fbe2 
+Brette: I don't think she could do that. #line:0aeadbd 
+Brette: I'm not gonna complain about it. #line:05016f8 
+Brette: The teleportation and x-Ray ability makes doing devliery job much easier for me. #line:0bf91fa 
+Brette:I don't like the feeling of possessing others....but it's also useful sometimes... #line:06c1be4 
+*Use R1 or Left Button on your mouse to do teleportation* #line:01d9698 
+*Use R2 or Right Button on your mouse to enter X-Ray mode when looking at a building* #line:0b85f1c 
+*Teleport you self onto NPC will enter possessed mode* #line:06daf95 
+Breete: 那，{PlayerName()},走吧。 #line:0347013 
+
+
+===
+

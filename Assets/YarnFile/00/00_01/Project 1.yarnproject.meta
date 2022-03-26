@@ -11,15 +11,7 @@ ScriptedImporter:
   sourceScripts:
   - {fileID: 6391573757903218779, guid: e44559df2ef1b4f7b8dcef58e83412ef, type: 3}
   compileErrors: []
-  serializedDeclarations:
-  - name: $greeting
-    typeName: String
-    defaultValueBool: 0
-    defaultValueNumber: 0
-    defaultValueString: 
-    description: 00_01.yarn, node Start, line 0
-    isImplicit: 1
-    sourceYarnAsset: {fileID: 6391573757903218779, guid: e44559df2ef1b4f7b8dcef58e83412ef, type: 3}
+  serializedDeclarations: []
   defaultLanguage: zh-Hans
   languagesToSourceAssets:
   - languageID: en

@@ -105,9 +105,10 @@ public class PlayerInteraction : MonoBehaviour
         InteractRay = cam.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height / 2, 15));
         Debug.DrawRay(transform.position, InteractRay - this.transform.position, Color.green);
         RaycastHit hit;
+        /*
         if (Physics.Raycast(this.transform.position, InteractRay - this.transform.position, out hit, TalkNPCMask))
         {
-            /*
+            
             if (hit.transform.gameObject.tag == "NPC")
             {
                 GameObject curNPC = hit.transform.gameObject;
@@ -156,21 +157,23 @@ public class PlayerInteraction : MonoBehaviour
 
             }
 
-            */
+            
 
 
         }
+         */
     }
 
     public GameObject BoundaryNotice;
 
     private void OnTriggerEnter(Collider other)
     {
-        //Debug.Log("NPC");
+        
         if (other.gameObject.tag == "NPC")
         {
             if (other.gameObject.TryGetComponent(out NPCDialogueManager npcScript))
             {
+                
                 if (npcScript != null && npcScript.talkable)
                 {
                     if (conversationNPC == null)
@@ -210,7 +213,8 @@ public class PlayerInteraction : MonoBehaviour
 
         }
 
-        if (other.gameObject.tag == "NPC")
+        
+         if (other.gameObject.tag == "NPC")
         {
 
             if (inTheMiddleOfConversation)
@@ -243,12 +247,7 @@ public class PlayerInteraction : MonoBehaviour
 
 
 
-            /*if (other.gameObject.TryGetComponent(out NPCDialogueManager npcScript))
-            {
-                npcScript.PlayerExitBound();
-                inTheMiddleOfConversation = false;
-            }*/
-
+      
             gm.ToggleUIInstruction("Possess", false);
         }
 

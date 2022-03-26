@@ -97,6 +97,14 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""MapZoom"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""58ada144-73e8-4f5f-a195-5e7c21548700"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -113,8 +121,30 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""ece6e2c8-d2dc-4685-bdc7-52208175b9d5"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Teleport"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""be5cf101-e9d4-4602-8548-3fe22fd77e03"",
                     ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CameraMovement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0871c768-874a-453a-8da6-502874587589"",
+                    ""path"": ""<Mouse>/delta"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -223,6 +253,17 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""01294cb3-8ad1-4647-b2ef-33e0b17cbfd3"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SuperTeleport"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""456818a9-181a-414c-b6e6-e6e9f6c3ff21"",
                     ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
@@ -317,6 +358,83 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""InstructionMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""6c0fc99a-c210-4af5-b37d-9545d52579cd"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MapZoom"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""6a4502f5-41fa-4a8c-a0d9-312e23abf46f"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MapZoom"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""9b465aab-e0b4-4278-95a0-f7fc66613b5e"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MapZoom"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""a2f5fd1a-1f9e-434f-870f-65b346ca86b0"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MapZoom"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""423586ec-2c2f-4316-9cb0-58838244fa03"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MapZoom"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9b9beb4b-fc58-40df-b4ba-c45e59faf4fa"",
+                    ""path"": ""<Mouse>/scroll"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MapZoom"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f61889a1-0a2c-4431-8570-ff520feda2bc"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MapZoom"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -421,6 +539,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_PlayerAction_AbortAimming = m_PlayerAction.FindAction("AbortAimming", throwIfNotFound: true);
         m_PlayerAction_Jump = m_PlayerAction.FindAction("Jump", throwIfNotFound: true);
         m_PlayerAction_InstructionMenu = m_PlayerAction.FindAction("InstructionMenu", throwIfNotFound: true);
+        m_PlayerAction_MapZoom = m_PlayerAction.FindAction("MapZoom", throwIfNotFound: true);
         // Debug
         m_Debug = asset.FindActionMap("Debug", throwIfNotFound: true);
         m_Debug_ToggleDebug = m_Debug.FindAction("ToggleDebug", throwIfNotFound: true);
@@ -487,6 +606,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputAction m_PlayerAction_AbortAimming;
     private readonly InputAction m_PlayerAction_Jump;
     private readonly InputAction m_PlayerAction_InstructionMenu;
+    private readonly InputAction m_PlayerAction_MapZoom;
     public struct PlayerActionActions
     {
         private @PlayerControls m_Wrapper;
@@ -501,6 +621,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         public InputAction @AbortAimming => m_Wrapper.m_PlayerAction_AbortAimming;
         public InputAction @Jump => m_Wrapper.m_PlayerAction_Jump;
         public InputAction @InstructionMenu => m_Wrapper.m_PlayerAction_InstructionMenu;
+        public InputAction @MapZoom => m_Wrapper.m_PlayerAction_MapZoom;
         public InputActionMap Get() { return m_Wrapper.m_PlayerAction; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -540,6 +661,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @InstructionMenu.started -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnInstructionMenu;
                 @InstructionMenu.performed -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnInstructionMenu;
                 @InstructionMenu.canceled -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnInstructionMenu;
+                @MapZoom.started -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnMapZoom;
+                @MapZoom.performed -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnMapZoom;
+                @MapZoom.canceled -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnMapZoom;
             }
             m_Wrapper.m_PlayerActionActionsCallbackInterface = instance;
             if (instance != null)
@@ -574,6 +698,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @InstructionMenu.started += instance.OnInstructionMenu;
                 @InstructionMenu.performed += instance.OnInstructionMenu;
                 @InstructionMenu.canceled += instance.OnInstructionMenu;
+                @MapZoom.started += instance.OnMapZoom;
+                @MapZoom.performed += instance.OnMapZoom;
+                @MapZoom.canceled += instance.OnMapZoom;
             }
         }
     }
@@ -664,6 +791,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         void OnAbortAimming(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnInstructionMenu(InputAction.CallbackContext context);
+        void OnMapZoom(InputAction.CallbackContext context);
     }
     public interface IDebugActions
     {

@@ -1,9 +1,0 @@
-title: Start
-tags: 
-colorID: 0
-position: 343,751
----
-<<MapQuestObject GameManager SideQuest_01 false>>
-<<CreateQuest GameManager Quest3 Quest/3/Pick/Up Pick/Up/Food/at/the/Red/spot>>
-<<MapQuestObject GameManager Quest3_P true>>
-===

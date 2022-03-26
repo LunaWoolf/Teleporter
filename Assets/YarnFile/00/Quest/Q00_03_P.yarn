@@ -4,12 +4,15 @@ tags:
 Good Evening, this order is for the factory.
 I don’t even know there are people still working there
 I thought the factory was closed for years
+Do Kids like you even know where the factory is? 
+It's the dark area behind the university.
+It's dark because...nobody lives there or works at there anymore.
 Anyway…take care.
-You have a long way to go.
 <<UpdateQuest GameManager Quest3 PickedUp>>
 <<UpdateQuestAnimation GameManager Quest3 STATU/UPDATE>>
 <<UpdateQuestDescription GameManager Quest3 Send/To/the/Factory./Red/Spot/On/Map>>
-<<MapQuestObject GameManager Quest3_P false>>
 <<MapQuestObject GameManager Quest3_D true>>
 <<SetCurrentQuest GameManager Quest3_D>>
+<<MapQuestObject GameManager Quest3_P false>>
+
 ===

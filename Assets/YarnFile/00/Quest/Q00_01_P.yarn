@@ -9,9 +9,10 @@ Students there, they all LOVE it.
 If the school let them out at night
 I will earn ten times of money as I get now.
 <<UpdateQuest GameManager Quest1 PickedUp>>
-<<UpdateQuestAnimation GameManager Quest1 STATU/UPDATE>>
-<<MapQuestObject GameManager Quest1_P false>>
+<<UpdateQuestAnimation GameManager Order0154 STATU/UPDATE>>
+
 <<MapQuestObject GameManager Quest1_D true>>
-<<UpdateQuestDescription GameManager Quest1 Send/To/University/Dorm./Orange/Sign/On/Map>>
+<<UpdateQuestDescription GameManager Quest1 Send/To/University/Dorm./Orange/Sign/On/Map./Comment:/Hey/can/you/send/it/to/the/second/floor./I'm/in/201./I/may/get/into/trouble/if/I/leave/my/room>>
 <<SetCurrentQuest GameManager Quest1_D>>
+<<MapQuestObject GameManager Quest1_P false>>
 ===

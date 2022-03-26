@@ -102,7 +102,7 @@ public class GameManager : MonoBehaviour
         Player.transform.position = PlayerStatus.playerPosition;
 
 
-        PlayerStatus.currentYarnProject = Monologue2;
+        //PlayerStatus.currentYarnProject = Monologue2;
 
 
 

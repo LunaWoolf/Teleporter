@@ -23,7 +23,11 @@ public class QuestObject : MonoBehaviour
 
     public void Awake()
     {
-        gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+        if (GameObject.Find("GameManager") != null)
+        {
+            gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+        }
+
         if (useTimer)
         {
             timeLeft = time;
@@ -75,6 +79,8 @@ public class QuestObject : MonoBehaviour
         quest.description = d;
         this.description.text = d;
     }
+
+
 
     IEnumerator Timer()
     {

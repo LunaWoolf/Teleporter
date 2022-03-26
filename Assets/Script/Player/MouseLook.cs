@@ -6,12 +6,15 @@ using UnityEngine.InputSystem;
 public class MouseLook : MonoBehaviour
 {
     public float mouseSensitivity = 100f;
+    public float mapZoomSensitivity = 2f;
     public Transform playerBody;
     private PlayerControls PlayerControls;
     private InputAction CameraMovement;
+    private InputAction MapZoom;
     float xRotation = 0f;
     public GameManager gm;
     public GameObject BigMapCamera;
+
 
     private void Awake()
     {
@@ -23,6 +26,22 @@ public class MouseLook : MonoBehaviour
     {
         CameraMovement = PlayerControls.PlayerAction.CameraMovement;
         CameraMovement.Enable();
+
+        MapZoom = PlayerControls.PlayerAction.MapZoom;
+        MapZoom.Enable();
+
+
+    }
+
+    private void OnDestroy()
+    {
+     
+        CameraMovement.Disable();
+
+        
+        MapZoom.Disable();
+
+
     }
 
     void Start()
@@ -44,7 +63,7 @@ public class MouseLook : MonoBehaviour
             playerBody.Rotate(Vector3.up * mouseX); //roate playerbody
 
 
-            float mouseY = CameraMovement.ReadValue<Vector2>().y;
+            float mouseY = MapZoom.ReadValue<Vector2>().y * mapZoomSensitivity;
 
             Vector3 mapZoom = transform.up * mouseY;
 

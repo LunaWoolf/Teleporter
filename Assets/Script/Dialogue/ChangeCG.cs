@@ -55,7 +55,7 @@ public class ChangeCG : MonoBehaviour
     //________________________________________________________________________
 
     [YarnCommand("ChangeCG")]
-    public void CreateQuest(string mood)
+    public void FadeIn(string mood)
     {
         StartCoroutine(FadeOut(currentMood));
    

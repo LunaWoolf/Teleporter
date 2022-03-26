@@ -6,9 +6,17 @@ We can’t leave the dorm. You are the savior!
 I hope the school police won’t catch you on your way out.
 Five stars, there you go.
 <<CompleteQuest GameManager Quest1>>
-<<CompleteQuestAnimation GameManager Quest1 Complete./Tip:/3.5$>>
-<<CreateQuest GameManager Quest2 Ques/2/Pick/Up Pick/Up/Food/at/Gas/Station./Purple/Spot/on/map.>>
+<<CompleteQuestAnimation GameManager Order0154 Complete./Tip:/3.5$>>
+
+
+<<CreateQuest GameManager Quest3 Quest0163/Pick/Up Pick/Up/Food/at/the/Red/spot>>
+<<MapQuestObject GameManager Quest3_P true>>
+<<SetCurrentQuest GameManager Quest3_P>>
 <<MapQuestObject GameManager Quest1_D false>>
-<<MapQuestObject GameManager Quest2_P true>>
-<<SetCurrentQuest GameManager Quest2_P>>
+
+
+
+//<<CreateQuest GameManager Quest2 Ques/2/Pick/Up Pick/Up/Food/at/Gas/Station./Purple/Spot/on/map.>>
+//<<MapQuestObject GameManager Quest2_P true>>
+//<<SetCurrentQuest GameManager Quest2_P>>
 ===

@@ -39,6 +39,7 @@ public class PlayerMovement : MonoBehaviour
     public GameObject BigMapCamera;
     public GameObject thridPersonCamera;
     public GameManager gm;
+    public PlayerInteraction playerInteraction;
 
     Camera cam;
 
@@ -247,10 +248,10 @@ public class PlayerMovement : MonoBehaviour
         {
             gravityVelocity.y = -2f;
             if (fallHurt)
-            {
+            {/*
                 gm.UpdateHealth(-5f);
                 gm.CameraShake();
-                fallHurt = false;
+                fallHurt = false;*/
             }
 
          
@@ -273,7 +274,7 @@ public class PlayerMovement : MonoBehaviour
 
         }
 
-        if (!Teleporting && Moveable && !Aimming)
+        if (!Teleporting && Moveable && !Aimming && !playerInteraction.inTheMiddleOfConversation)
         {
             if (gm.UIPageOpen) //如果打开UI界面， 玩家无法移动，移动相机
             {
@@ -337,7 +338,7 @@ public class PlayerMovement : MonoBehaviour
             
         }
 
-        if (Aimming) //实时更新Aiming 位置
+        if (Aimming && !playerInteraction.inTheMiddleOfConversation) //实时更新Aiming 位置
         {
             CheckAimming();
         }
@@ -372,7 +373,7 @@ public class PlayerMovement : MonoBehaviour
 
     void AimAction()
     {
-        if (!Teleporting && TeleportTimes > 0)
+        if (!Teleporting && TeleportTimes > 0 && !playerInteraction.inTheMiddleOfConversation)
         {
             Aimming = true;
             CheckAimming();

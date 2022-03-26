@@ -36,6 +36,10 @@ public class NPCDialogueManager : MonoBehaviour
 
     }
 
+    void OnDisable()
+    {
+        DisableTalkable();
+    }
 
     public void SetDialogue()
     {
@@ -75,8 +79,11 @@ public class NPCDialogueManager : MonoBehaviour
 
     public void ShowTalkUI(bool show)
     {
+        Debug.Log("NPC3");
+
         if (show)
         {
+            Debug.Log("NPC4");
             TalkUI.SetActive(true);
         }
         else
@@ -93,5 +100,6 @@ public class NPCDialogueManager : MonoBehaviour
         talkable = false;
 
     }
+
 
 }
