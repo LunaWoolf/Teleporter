@@ -295,7 +295,6 @@ public class PlayerMovement : MonoBehaviour
 
                 Vector3 move = transform.right * x + transform.forward * z;
 
-
               
 
                 controller.Move(move * speed * Time.deltaTime);
@@ -776,6 +775,12 @@ public class PlayerMovement : MonoBehaviour
         PlayerControls.PlayerAction.Enable();
     }
 
-
+    public void RepositionBigMapCamera()
+    {
+       
+        BigMapCamera.GetComponent<Transform>().position = new Vector3(0, 500, 0);
+        
+    }
+     
 
 }

@@ -346,6 +346,12 @@ public class GameManager : MonoBehaviour
             UIPageOpen = UICanvas.activeSelf;
             BigMapCamera.GetComponent<Transform>().position = new Vector3(0, 500, 0);
 
+            if (!UIPageOpen)
+            {
+                Player.GetComponent<PlayerMovement>().RepositionBigMapCamera();
+            }
+           
+
         }
        
 
