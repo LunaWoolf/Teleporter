@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Yarn.Unity;
+using UnityEngine.SceneManagement;
 
 public class PresistenceManagerScript : MonoBehaviour
 {
@@ -9,10 +10,11 @@ public class PresistenceManagerScript : MonoBehaviour
 
     public GameObject Player;
     public Vector3 PlayerNewPosition;
-
     public string Language = "zh-Hans";
-
     public DialogueRunner dr;
+
+  
+
 
     private void Awake()
     {
@@ -25,8 +27,6 @@ public class PresistenceManagerScript : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-
 
     }
 
@@ -49,9 +49,25 @@ public class PresistenceManagerScript : MonoBehaviour
         PlayerStatus.playerName = name;
     }
 
-    
+    private float timer = 0;
 
+    void Update()
+    {
+        if (SceneManager.GetActiveScene().name != "OpenningScene")
+        {
+            if (Input.anyKeyDown)
+                timer = 0;
+            else
+                timer += Time.deltaTime;
 
+            if (timer > 20)
+            {
+                timer = 0;
+                SceneManager.LoadScene("OpenningScene", LoadSceneMode.Single);
+            }
+        }
+     
+            
+    }
 
-  
 }

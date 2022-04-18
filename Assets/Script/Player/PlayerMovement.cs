@@ -285,6 +285,8 @@ public class PlayerMovement : MonoBehaviour
 
                 BigMapCamera.GetComponent<Transform>().position += move;
 
+
+
             }
             else //如果打开UI界面关闭， 玩家移动
             {
@@ -334,6 +336,7 @@ public class PlayerMovement : MonoBehaviour
 
             }
 
+
             
         }
 
@@ -342,6 +345,7 @@ public class PlayerMovement : MonoBehaviour
             CheckAimming();
         }
 
+      
     }
 
     void Jump()
@@ -372,34 +376,41 @@ public class PlayerMovement : MonoBehaviour
 
     void AimAction()
     {
-        if (!Teleporting && TeleportTimes > 0 && !playerInteraction.inTheMiddleOfConversation)
+        if (!gm.UIPageOpen)
         {
-            Aimming = true;
-            CheckAimming();
-        }
+            if (!Teleporting && TeleportTimes > 0 && !playerInteraction.inTheMiddleOfConversation)
+            {
+                Aimming = true;
+                CheckAimming();
+            }
 
-        gm.ToggleUIInstruction("Aim",false);
-        gm.ToggleUIInstruction("Teleport", true);
+            gm.ToggleUIInstruction("Aim", false);
+            gm.ToggleUIInstruction("Teleport", true);
+
+        }
+        
     }
 
     void TeleportAction()
     {
-        gm.ToggleUIInstruction("Teleport",false);
-
-        if (Aimming)
+        if (!gm.UIPageOpen)
         {
-            Aimming = false;
-            if (CheckPossess() == null)
-            {
-                StartCoroutine(Teleport(0f, Phantom.transform));
-            }
-            else
-            {
-                StartCoroutine(Possess(0f, CheckPossess().transform));
-            }
+            gm.ToggleUIInstruction("Teleport", false);
 
+            if (Aimming)
+            {
+                Aimming = false;
+                if (CheckPossess() == null)
+                {
+                    StartCoroutine(Teleport(0f, Phantom.transform));
+                }
+                else
+                {
+                    StartCoroutine(Possess(0f, CheckPossess().transform));
+                }
+
+            }
         }
-       
         
     }
 
@@ -678,16 +689,19 @@ public class PlayerMovement : MonoBehaviour
         
     }
 
+    public bool notEfject = false;
     public void EndPossess()
     {
         Moveable = false;
+        notEfject = true;
         PossessBody.GetComponent<CapsuleCollider>().enabled = false;
         //Wait for eject;
     }
 
     public void EjectPossess()
     {
-        
+
+        notEfject = false;
         cam.cullingMask ^= 1 << LayerMask.NameToLayer("PlayerEye");
         cam.cullingMask ^= 1 << LayerMask.NameToLayer("GuardEye");
 

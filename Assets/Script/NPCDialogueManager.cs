@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using Yarn.Unity;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
+
 
 public class NPCDialogueManager : MonoBehaviour
 {
-    
+
 
     private PlayerControls PlayerControls;
     private InputAction StartConversation;
@@ -32,7 +34,7 @@ public class NPCDialogueManager : MonoBehaviour
         StartConversation = PlayerControls.PlayerAction.StartConversation;
         StartConversation.Enable();
 
-        PlayerControls.PlayerAction.StartConversation.performed += ctx => NextDialogue();
+        //PlayerControls.PlayerAction.StartConversation.performed += ctx => NextDialogue();
 
     }
 
@@ -46,7 +48,7 @@ public class NPCDialogueManager : MonoBehaviour
 
         if (dialogueRunner != null && talkable)
         {
-   
+
             dialogueRunner.StartDialogue("Start");
             startDialogue = true;
         }
@@ -58,11 +60,11 @@ public class NPCDialogueManager : MonoBehaviour
         {
             Debug.Log("Exit");
 
-           
+
             dialogueRunner.Stop();
             //dialogueRunner.lineProvider.gameObject.SetActive(false);
             dialogueRunner.dialogueViews[0].gameObject.transform.parent.gameObject.SetActive(false);
-          
+
             //dialogueRunner.Clear();
         }
 
@@ -70,31 +72,43 @@ public class NPCDialogueManager : MonoBehaviour
     }
 
 
-    private void NextDialogue()
-    {
-        
-
-    }
-
-
     public void ShowTalkUI(bool show)
     {
-        Debug.Log("NPC3");
 
         if (show)
         {
-            Debug.Log("NPC4");
             TalkUI.SetActive(true);
         }
         else
         {
             TalkUI.SetActive(false);
-
+            
         }
 
 
     }
 
+    public SpriteRenderer TalkUIText;
+
+    public void ChangeTalkUIColor(bool active)
+    {
+        if (TalkUIText != null)
+        {
+            if (active)
+            {
+                TalkUIText.color = new Color(255f, 243f, 0f);
+            }
+            else
+            {
+                TalkUIText.color = new Color(0.5188f, 0.5188f, 0.5188f);
+                
+            }
+
+        }
+      
+
+    }
+        
     public void DisableTalkable()
     {
         talkable = false;

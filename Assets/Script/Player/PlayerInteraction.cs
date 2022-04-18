@@ -64,7 +64,7 @@ public class PlayerInteraction : MonoBehaviour
         //Fetch the Event System from the Scene
         m_EventSystem = eventSystem.GetComponent<EventSystem>();
 
-        StartCoroutine(AutomaticPlayDialogue());
+        //StartCoroutine(AutomaticPlayDialogue());
 
     }
 
@@ -180,6 +180,7 @@ public class PlayerInteraction : MonoBehaviour
                     {
                         conversationNPC = other.gameObject;
                         npcScript.ShowTalkUI(true);
+                        npcScript.ChangeTalkUIColor(true);
                     }
 
                 }
@@ -232,8 +233,11 @@ public class PlayerInteraction : MonoBehaviour
                         npcScript.PlayerExitBound();
                         inTheMiddleOfConversation = false;
                         conversationNPC = null;
+
                         npcScript.ShowTalkUI(false);
-                    
+                        npcScript.ChangeTalkUIColor(false);
+
+
 
                 }
             }
@@ -316,6 +320,7 @@ public class PlayerInteraction : MonoBehaviour
                 if (npcScript.talkable)
                 {
                     npcScript.SetDialogue();
+                    npcScript.ChangeTalkUIColor(false);
                     npcScript.ShowTalkUI(false);
                     inTheMiddleOfConversation = true;
                     Monologue_Text.SetActive(false);

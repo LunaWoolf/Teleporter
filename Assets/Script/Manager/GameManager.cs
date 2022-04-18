@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
     public Slider timeSlider;
 
     public bool inLight = false;
+    public int LightDemange = 10;
 
     public GameObject UICanvas;
     public GameObject BigMapCamera;
@@ -147,9 +148,13 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSeconds(1f);
             if (inLight && !Player.GetComponent<PlayerMovement>().possess)
             {
-                UpdateHealth(-5f);
+                UpdateHealth(-LightDemange);
             }
-            else if(playerHealth < 100f)
+            if (Player.GetComponent<PlayerMovement>().notEfject)
+            {
+                UpdateHealth(-1f);
+            }
+            else if (playerHealth < 100f)
             {
                 UpdateHealth(1f);
             }
@@ -400,8 +405,6 @@ public class GameManager : MonoBehaviour
 
     }
 
-    
-   
 
     [YarnCommand("MapQuestObject")]
     public void ToggleQuestSign(string questName, bool on)
@@ -415,8 +418,13 @@ public class GameManager : MonoBehaviour
     public GameObject Dialoguebox;
     public void ToogleDialogueUI()
     {
-        Dialoguebox.SetActive(!Dialoguebox.activeSelf);
+        //Dialoguebox.SetActive(!Dialoguebox.activeSelf);
 
     }
+
+
+
+
+
 
 }

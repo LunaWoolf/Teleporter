@@ -36,21 +36,15 @@ public class QuestManager : MonoBehaviour
 
     }
 
-    void Start()
-    {
-       
-
-
-    }
-
+ 
     private void OnEnable()
     {
 
-        PlayerControls.UI.OpenUIPage.performed += ctx =>ToggleUIPage();
+        /*PlayerControls.UI.OpenUIPage.performed += ctx =>ToggleUIPage();
         PlayerControls.UI.OpenUIPage.Enable();
 
         PlayerControls.PlayerAction.InstructionMenu.performed += ctx => ToggleInstructionPage();
-        PlayerControls.PlayerAction.InstructionMenu.Enable();
+        PlayerControls.PlayerAction.InstructionMenu.Enable();*/
 
     }
 
@@ -66,6 +60,25 @@ public class QuestManager : MonoBehaviour
     }
 
 
+    [YarnCommand("InputSystemEnable")]
+    public void InputSystemEnable(string input)
+    {
+        switch (input)
+        {
+            case "OpenUIPage":
+                PlayerControls.UI.OpenUIPage.performed += ctx => ToggleUIPage();
+                PlayerControls.UI.OpenUIPage.Enable();
+                break;
+            case "InstructionMenu":
+                PlayerControls.PlayerAction.InstructionMenu.performed += ctx => ToggleInstructionPage();
+                PlayerControls.PlayerAction.InstructionMenu.Enable();
+                break;
+            default:
+                break;
+
+        }
+
+    }
 
 
     [YarnCommand("CreateQuest_Q")]
