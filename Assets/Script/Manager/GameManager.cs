@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
     public List<Quest> questList = new List<Quest>();
     public GameObject QuestPanel;
     public GameObject QuestPrefab;
-
+    public AudioManager AudioManager;
 
     public List<Quest> inventoryList = new List<Quest>();
   
@@ -66,6 +66,7 @@ public class GameManager : MonoBehaviour
             QuestSignDictionary.Add(q.Questname, q.QuestSignObject);
 
         }
+
 
         
        
@@ -115,6 +116,12 @@ public class GameManager : MonoBehaviour
             healthText.text = " " + playerHealth + " % ";
         }
         StartCoroutine(Timer());
+
+        if (AudioManager == null)
+        {
+            AudioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
+
+        }
 
 
     }
@@ -198,6 +205,7 @@ public class GameManager : MonoBehaviour
     public void PlayAddQuestAnimation()
     {
         QuestUI.GetComponent<Animator>().SetTrigger("appear");
+        AudioManager.Play("CreateQuest");
     }
 
     
@@ -247,7 +255,9 @@ public class GameManager : MonoBehaviour
         Complete_Description.text = des;
         CompleteQuestUI.GetComponent<Animator>().SetTrigger("complete");
 
-       
+        AudioManager.Play("CompleteQuest");
+
+
 
     }
 
@@ -272,6 +282,8 @@ public class GameManager : MonoBehaviour
         QuestUI_Title.text = title;
         QuestUI_Description.text = des;
         QuestUI.GetComponent<Animator>().SetTrigger("appear");
+
+        AudioManager.Play("UpdateQuest");
 
     }
 

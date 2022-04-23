@@ -3,7 +3,7 @@ tags:
 ---
 Genny:晚上好，Brette#line:0b5da1f 
 Genny:我刚想问你是不是该出门了呢 #line:07101b7 
-Genny:还以为你又要睡过头了 #line:011b79c 
+Genny:还以为你又要睡过头了 #line:011b79p 
 Genny:对了！ #line:0a4d2ed 
 Genny:新给你的义眼，戴着还合适吗？  #line:0d88b6d
 <<ChangeCG Genny Happy>>
@@ -57,9 +57,6 @@ Genny: 看看第一单是在哪里取单的? #line:046b5b7
 Brette可以在他的手机上随时查询订单和地图  #line:078035b 
 (在手柄上按下 Y 键，或者键盘上按下 SHIFT，打开手机) #line:002badc 
 (如果想暂时关闭手机，请按同样的按键) #line:0b01d0b 
-Genny: 我在你的义眼上加了一个新模块，可以把地图投射到你的视野里. #line:0c06509 
-<<TurnOnCG MainCanvas MiniMap>>
-Genny: 但关键的时候大地图还是能提供更多信息。 #line:0859f7c 
 Genny: 对了！还是要注意监控摄像。别忘了，如果被拍到次数太多会被取消外卖员资格的。 #line:0730825 
 <<TurnOnCG MainCanvas HealthBar>>
 Genny: 如果你需要任何帮助但我又不在身边的时候，可以参考我写给你的这份【操作指南】. #line:0bd4ab8 

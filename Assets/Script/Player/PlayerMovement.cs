@@ -39,6 +39,7 @@ public class PlayerMovement : MonoBehaviour
     public GameObject BigMapCamera;
     public GameObject thridPersonCamera;
     public GameManager gm;
+    public AudioManager AudioManager;
     public PlayerInteraction playerInteraction;
 
     Camera cam;
@@ -235,6 +236,12 @@ public class PlayerMovement : MonoBehaviour
             c.colorFilter.value = SpotLightRed;
         }
 
+        if (AudioManager == null)
+        {
+            AudioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
+
+        }
+
     }
 
     bool fallHurt = false;
@@ -382,10 +389,13 @@ public class PlayerMovement : MonoBehaviour
             {
                 Aimming = true;
                 CheckAimming();
+                AudioManager.Play("Aim");
             }
 
             gm.ToggleUIInstruction("Aim", false);
             gm.ToggleUIInstruction("Teleport", true);
+
+            
 
         }
         
@@ -399,6 +409,7 @@ public class PlayerMovement : MonoBehaviour
 
             if (Aimming)
             {
+               
                 Aimming = false;
                 if (CheckPossess() == null)
                 {
@@ -408,6 +419,7 @@ public class PlayerMovement : MonoBehaviour
                 {
                     StartCoroutine(Possess(0f, CheckPossess().transform));
                 }
+                AudioManager.Play("Teleport");
 
             }
         }

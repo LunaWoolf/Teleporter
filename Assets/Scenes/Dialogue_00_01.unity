@@ -347,6 +347,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43a8002354c884b088b5870c850af786, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loadingScreen: {fileID: 318968045}
 --- !u!4 &21558381
 Transform:
   m_ObjectHideFlags: 0
@@ -532,6 +533,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7096590000898091355, guid: a4cf2b105a9ed459f9427e6e684fae56, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7096590000898091358, guid: a4cf2b105a9ed459f9427e6e684fae56, type: 3}
       propertyPath: m_Name
       value: MainCanvas
@@ -621,6 +626,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &318968045 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3159405739958798865, guid: 6be6152e8e1e844e593263e3209fabab, type: 3}
+  m_PrefabInstance: {fileID: 3159405739639839484}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &542521210
 GameObject:
   m_ObjectHideFlags: 0
@@ -1242,7 +1252,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!82 &1133413478
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1624,8 +1634,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1682833801}
   - component: {fileID: 1682833800}
-  - component: {fileID: 1682833799}
   - component: {fileID: 1682833802}
+  - component: {fileID: 1682833799}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1919,6 +1929,7 @@ GameObject:
   - component: {fileID: 3579681406373214593}
   - component: {fileID: 3831113770588092822}
   - component: {fileID: 2753718018592502269}
+  - component: {fileID: 2753718018592502270}
   m_Layer: 0
   m_Name: DialogueManager2.0
   m_TagString: Untagged
@@ -1933,12 +1944,26 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2753718018592502268}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 10f0777399ec04ef6957da2ae823eb8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   textLanguageCode: zh-Hans
+--- !u!114 &2753718018592502270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2753718018592502268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b6798449caec4a32a5ad27badb06624, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textLanguageCode: zh-Hans
+  audioLanguage: zh-Hans
 --- !u!114 &2788043410772073459
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1956,6 +1981,67 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!1001 &3159405739639839484
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3159405739958798865, guid: 6be6152e8e1e844e593263e3209fabab, type: 3}
+      propertyPath: m_Name
+      value: LoadingScreen
+      objectReference: {fileID: 0}
+    - target: {fileID: 3159405739958798865, guid: 6be6152e8e1e844e593263e3209fabab, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3159405739958798866, guid: 6be6152e8e1e844e593263e3209fabab, type: 3}
+      propertyPath: m_RootOrder
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 3159405739958798866, guid: 6be6152e8e1e844e593263e3209fabab, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 706
+      objectReference: {fileID: 0}
+    - target: {fileID: 3159405739958798866, guid: 6be6152e8e1e844e593263e3209fabab, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 397
+      objectReference: {fileID: 0}
+    - target: {fileID: 3159405739958798866, guid: 6be6152e8e1e844e593263e3209fabab, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3159405739958798866, guid: 6be6152e8e1e844e593263e3209fabab, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3159405739958798866, guid: 6be6152e8e1e844e593263e3209fabab, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3159405739958798866, guid: 6be6152e8e1e844e593263e3209fabab, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3159405739958798866, guid: 6be6152e8e1e844e593263e3209fabab, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3159405739958798866, guid: 6be6152e8e1e844e593263e3209fabab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3159405739958798866, guid: 6be6152e8e1e844e593263e3209fabab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3159405739958798866, guid: 6be6152e8e1e844e593263e3209fabab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6be6152e8e1e844e593263e3209fabab, type: 3}
 --- !u!4 &3183266951089177474
 Transform:
   m_ObjectHideFlags: 0
@@ -2193,7 +2279,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: -281.00015}
+  m_AnchoredPosition: {x: 0, y: -281.0001}
   m_SizeDelta: {x: -400.00003, y: 0}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!1 &3292657647720331326
@@ -2333,7 +2419,7 @@ MonoBehaviour:
   startAutomatically: 1
   automaticallyContinueLines: 0
   runSelectedOptionAsLine: 0
-  lineProvider: {fileID: 2753718018592502269}
+  lineProvider: {fileID: 2753718018592502270}
   verboseLogging: 1
   onNodeStart:
     m_PersistentCalls:

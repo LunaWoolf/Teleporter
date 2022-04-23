@@ -60,7 +60,7 @@ public class PresistenceManagerScript : MonoBehaviour
             else
                 timer += Time.deltaTime;
 
-            if (timer > 20)
+            if (timer > 200)
             {
                 timer = 0;
                 SceneManager.LoadScene("OpenningScene", LoadSceneMode.Single);

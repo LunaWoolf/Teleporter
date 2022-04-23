@@ -63,7 +63,7 @@ public class MouseLook : MonoBehaviour
             playerBody.Rotate(Vector3.up * mouseX); //roate playerbody
 
 
-            float mouseY = MapZoom.ReadValue<Vector2>().y * mapZoomSensitivity;
+            float mouseY = MapZoom.ReadValue<Vector2>().y * mapZoomSensitivity * -1f;
 
             Vector3 mapZoom = transform.up * mouseY;
 

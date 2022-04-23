@@ -6,7 +6,26 @@ using Yarn.Unity;
 
 public class SceneManage : MonoBehaviour
 {
+    public static SceneManage Instance { get; private set; }
+    public GameObject loadingScreen;
+
     PresistenceManagerScript pms;
+
+
+    private void Awake()
+    {
+        /*if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }*/
+
+    }
+
 
     public void Start()
     {
@@ -15,21 +34,48 @@ public class SceneManage : MonoBehaviour
         
     }
 
+    List<AsyncOperation> sceneLoading = new List<AsyncOperation>();
+
+
     [YarnCommand("LoadLevel")]
     public void LoadLevel(string levelName)
     {
-     
-        SceneManager.LoadScene(levelName, LoadSceneMode.Single);
-
-     
+        if (loadingScreen != null)
+        {
+            loadingScreen.gameObject.SetActive(true);
+        }
        
-  
 
+        //SceneManager.LoadScene(levelName, LoadSceneMode.Single);
+        //sceneLoading.Add(SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene()));
+        sceneLoading.Add(SceneManager.LoadSceneAsync(levelName, LoadSceneMode.Additive));
+
+        StartCoroutine(GetSceneLoadProgress());
+        
     }
 
-    public void LoadChapter0()
+    public IEnumerator GetSceneLoadProgress()
     {
+        for (int i = 0; i < sceneLoading.Count; i++)
+        {
 
+            while (!sceneLoading[i].isDone)
+            {
+                yield return null;
+            }
+            SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
+
+            yield return new WaitForSeconds(1.5f);
+
+            if (loadingScreen != null)
+            {
+                loadingScreen.gameObject.SetActive(false);
+            }
+
+
+        }
     }
+
+
 
 }
