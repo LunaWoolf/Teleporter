@@ -9,17 +9,17 @@ ScriptedImporter:
   assetBundleVariant: 
   script: {fileID: 11500000, guid: 053561912b1654d80a424bb0696a74ae, type: 3}
   sourceScripts:
-  - {fileID: 6391573757903218779, guid: e39094b31f8124441898a7f426330b64, type: 3}
+  - {fileID: 6391573757903218779, guid: e44559df2ef1b4f7b8dcef58e83412ef, type: 3}
   compileErrors: []
   serializedDeclarations: []
   defaultLanguage: zh-Hans
   languagesToSourceAssets:
   - languageID: en
     stringsFile: {fileID: 4900000, guid: 0a45834eb113646919d480da9428607e, type: 3}
-    assetsFolder: {fileID: 102900000, guid: 0c9dccf29d5484a949db11cda6e6d023, type: 3}
+    assetsFolder: {instanceID: 0}
   - languageID: zh-Hans
     stringsFile: {instanceID: 0}
-    assetsFolder: {fileID: 102900000, guid: 0c9dccf29d5484a949db11cda6e6d023, type: 3}
+    assetsFolder: {instanceID: 0}
   useAddressableAssets: 1
   searchAllAssembliesForActions: 1
   assembliesToSearch: []

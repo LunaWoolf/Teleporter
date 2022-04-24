@@ -1,0 +1,79 @@
+title: Start
+tags: 
+colorID: 0
+position: 343,751
+---
+<<CreateQuest GameManager Quest1 Order0154/Pick/Up Pick/Up/Food/at/the/Orange/spot>>
+
+I think Ginny would tell me if she'd designed you. #line:00100a
+She doesn’t seem like someone who would pull such a prank. #line:00100b
+She’s a super bad liar. She can’t keep secrets. #line:00100c
+Or it’s just because I know her too well, I can tell when she is lying.#line:00100d
+<<wait 10>>
+Sometimes I want to move to another city,#line:00200a
+But I did some research, and it turns out: #line:00200b
+All cities are equally crap #line:00200c
+so there is no point in running away. #line:00200d  
+       
+I hate the rain. #line:00300a
+I hope it doesn’t mess up my headphones. #line:00300b
+I don’t think they're waterproof. #line:00300c
+
+I used to have a friend who played guitar really well #line:00400a
+I haven't heard from him for a while.#line:00400b
+
+I like to climb to the top of the tallest building in the City. #line:00500a
+It reminds me of climbing this huge tree back in my hometown.#line:00500b
+I'm not sure if that tree is still alive, though…#line:00500c
+I think it's pretty old, and I'm afraid it passed away#line:00500d
+But if it's alive, I would love to bring you to see it one day.#line:00500e
+
+I don’t dislike my hometown.#line:00600a
+It’s just…very different from the City.#line:00600b
+But that’s okay.#line:00600c
+I don’t want it to change.#line:00600d
+I don’t want my hometown to be like the City,#line:00600e
+just like I don’t want the City to get any similar to my home.#line:00600f
+I guess what I’m trying to say is, #line:00600g
+I like them being different.#line:00600h
+Cause then it makes me think that I was different when I moved to the City.#line:00600i
+
+Can I ask you a question?#line:00700a
+I always want to ask,#line:00700b
+Why did you choose me?#line:00700c
+I mean...this power is kind of useless to me.#line:00700d
+Not blaming you, I mean, it's not your fault.#line:00700e
+It's just...If you give somebody else this incredible power,#line:00700f
+they could do much more meaningful stuff with it.#line:00700g
+Instead of just delivering food...#line:00700h
+
+We are listening to an UnRead song right now.#line:00800a
+A lot of people dislike them because of their frontman, Yur#line:00800b
+He has a very weird singing voice#line:00800c
+But that’s exactly why I love them.#line:00800d
+His vocals remind me of my hometown:#line:00800e
+the muddy road, the harsh wind,#line:00800f
+and the smell of stillness and rivers. #line:00800g
+He has a really special voice.#line:00800h
+Also, he has a weird personality, but that’s another story.#line:00800i
+
+And their drummer, Tong Tong.#line:00900a
+She is so cool!!#line:00900b
+But I once saw a picture of her when she was still in high school.#line:00900c
+She looks completely different in that picture.#line:00900d
+Back then, She seems a little…nerdy.#line:00900e
+And that makes me think:#line:00900f
+If she could change that much after high school,#line:00900g
+Maybe I could too.#line:00900h
+
+When the band first comes out, #line:01000a
+Corvus, the guitarist, is the most popular member among fans.#line:01000b
+I mean, just look at him!#line:01000c
+He looks flawless!#line:01000d
+I wish I could be stylish like him.#line:01000e
+But I’m too short… His outfits only work on tall people.#line:01000f
+
+Ah, I really, really want to see them perform on the music festival#line:01100a
+I hope I can save enough money for the ticket.#line:01100b
+
+===
