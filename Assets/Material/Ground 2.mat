@@ -151,14 +151,14 @@ Material:
     - _Smoothness3: 1
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
-    - _SpecularIntensity: 0.198
+    - _SpecularIntensity: 0
     - _SrcBlend: 1
     - _Surface: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
     - _tint: 1
     m_Colors:
-    - _BaseColor: {r: 0.20754719, g: 0.20754719, b: 0.20754719, a: 1}
+    - _BaseColor: {r: 0.2735849, g: 0.15873086, b: 0.15873086, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0.6226415, g: 0.6226415, b: 0.6226415, a: 1}
     - _EmissionColor_1: {r: 1, g: 1, b: 1, a: 0}

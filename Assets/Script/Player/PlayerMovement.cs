@@ -34,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
 
     public GameObject Phantom;
     public GameObject Brette_Phantom;
+    public Material PhantomMaterial;
 
     public GameObject firstPersonCamera;
     public GameObject BigMapCamera;
@@ -81,10 +82,7 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask impenetrableMask;
     public LayerMask PossessebleMask;
 
-    //___________________________________________________________________________________________________________
-    [Header("TEST")]
-    public GameObject Building_regular;
-    public GameObject Building_transparent;
+
     //___________________________________________________________________________________________________________
     public VolumeProfile SpotLightProfile;
     public Color SpotLightRed;
@@ -98,7 +96,7 @@ public class PlayerMovement : MonoBehaviour
 
         Moveable = true;
 
-
+       // PhantomMaterial.SetFloat("_Tele",-0.1f);
     }
 
     private void OnEnable() { 
@@ -122,8 +120,8 @@ public class PlayerMovement : MonoBehaviour
         PlayerControls.PlayerAction.AbortAimming.performed += ctx => AbortAiming();
         PlayerControls.PlayerAction.AbortAimming.Enable();
 
-        PlayerControls.PlayerAction.Jump.performed += ctx => Jump();
-        PlayerControls.PlayerAction.Jump.Enable();
+        //PlayerControls.PlayerAction.Jump.performed += ctx => Jump();
+        //PlayerControls.PlayerAction.Jump.Enable();
 
 
 
@@ -177,35 +175,50 @@ public class PlayerMovement : MonoBehaviour
     public Material TransparentMaterial;
     public Material[] orginalMaterials;
     public GameObject SuperTeleportObject;
+    public GameObject SuperTeleportCursor;
     //___________________________________________________________________________________________________________
     void SuperTeleport()
     {
-      
+        SuperTeleportCursor.SetActive(true);
+
+
         Vector3 phantomTargetPosition = cam.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height / 2, teleportingDistance));
         RaycastHit hit;
+
         if (Physics.Raycast(this.transform.position, phantomTargetPosition - this.transform.position, out hit, teleportingDistance, impenetrableMask))
         {
            
             SuperTeleportObject = hit.transform.gameObject;
-            orginalMaterials = SuperTeleportObject.GetComponentInChildren<MeshRenderer>().materials;
 
-            SuperTeleportObject.GetComponentInChildren<MeshRenderer>().materials[0] = TransparentMaterial;
-
-            SuperTeleportObject.GetComponent<MeshRenderer>().materials[0] = TransparentMaterial;
-
-            Material[] tMaterials = new Material[hit.transform.gameObject.GetComponentInChildren<MeshRenderer>().materials.Length];
-
-
-            for (int i = 0; i < tMaterials.Length; i++)
+            if (SuperTeleportObject.TryGetComponent(out MeshRenderer meshRednerer))
             {
-                tMaterials[i] = TransparentMaterial;
-                
+                orginalMaterials = SuperTeleportObject.GetComponent<MeshRenderer>().materials;
+
+                Material[] tMaterials = new Material[hit.transform.gameObject.GetComponent<MeshRenderer>().materials.Length];
+
+                for (int i = 0; i < tMaterials.Length; i++)
+                {
+                    tMaterials[i] = TransparentMaterial;
+
+                }
+                SuperTeleportObject.GetComponent<MeshRenderer>().materials = tMaterials;
+
             }
+            else
+            {
+                orginalMaterials = SuperTeleportObject.GetComponentInChildren<MeshRenderer>().materials;
 
-            SuperTeleportObject.GetComponentInChildren<MeshRenderer>().materials = tMaterials;
-            SuperTeleportObject.GetComponent<MeshRenderer>().materials = tMaterials;
+                Material[] tMaterials = new Material[hit.transform.gameObject.GetComponentInChildren<MeshRenderer>().materials.Length];
 
 
+                for (int i = 0; i < tMaterials.Length; i++)
+                {
+                    tMaterials[i] = TransparentMaterial;
+
+                }
+                SuperTeleportObject.GetComponentInChildren<MeshRenderer>().materials = tMaterials;
+
+            }
         }
 
         
@@ -213,9 +226,18 @@ public class PlayerMovement : MonoBehaviour
 
     void CancleSuperTeleport()
     {
+        SuperTeleportCursor.SetActive(false);
         if (SuperTeleportObject != null && orginalMaterials.Length > 0)
         {
-            SuperTeleportObject.GetComponentInChildren<MeshRenderer>().materials = orginalMaterials;
+            if (SuperTeleportObject.TryGetComponent(out MeshRenderer meshRednerer))
+            {
+                SuperTeleportObject.GetComponent<MeshRenderer>().materials = orginalMaterials;
+            }
+            else
+            {
+                SuperTeleportObject.GetComponentInChildren<MeshRenderer>().materials = orginalMaterials;
+            }
+               
         }
         
     }    
@@ -385,7 +407,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!gm.UIPageOpen)
         {
-            if (!Teleporting && TeleportTimes > 0 && !playerInteraction.inTheMiddleOfConversation)
+            if (!playerInteraction.inTheMiddleOfConversation)
             {
                 Aimming = true;
                 CheckAimming();
@@ -407,9 +429,9 @@ public class PlayerMovement : MonoBehaviour
         {
             gm.ToggleUIInstruction("Teleport", false);
 
-            if (Aimming)
+            if (!Teleporting && TeleportTimes > 0 && Aimming)
             {
-               
+
                 Aimming = false;
                 if (CheckPossess() == null)
                 {
@@ -420,6 +442,11 @@ public class PlayerMovement : MonoBehaviour
                     StartCoroutine(Possess(0f, CheckPossess().transform));
                 }
                 AudioManager.Play("Teleport");
+
+            }
+            else
+            {
+                AbortAiming();
 
             }
         }
@@ -540,6 +567,7 @@ public class PlayerMovement : MonoBehaviour
         if (TeleportTimes < 1)
         {
             BretteEye.color = EyeColor_Charge;
+            PhantomMaterial.SetFloat("_Tele", -1f);
         }
 
         if (possess)
@@ -596,19 +624,46 @@ public class PlayerMovement : MonoBehaviour
         gravity = -9.18f;
     }
 
+    int RestoreTimer = 0;
     IEnumerator RestoreTeleportTimes()
     {
         yield return new WaitForSeconds(5f);
-
+       
         if (TeleportTimes < 2)
         {
             TeleportTimes++;
         }
 
-        if (TeleportTimes > 0)
+        if (TeleportTimes == 1)
         {
             BretteEye.color = EyeColor_Ready;
+            PhantomMaterial.SetFloat("_Tele", 0f);
+
         }
+
+        if (TeleportTimes == 2)
+        {
+            PhantomMaterial.SetFloat("_Tele", 2f);
+        }
+        /*while (TeleportTimes < 2)
+        {
+            yield return new WaitForSeconds(1f);
+            RestoreTimer++;
+            if (RestoreTimer == 5)
+            {
+                TeleportTimes++;
+            }
+
+            if (TeleportTimes > 0)
+            {
+                BretteEye.color = EyeColor_Ready;
+                
+            }
+            PhantomMaterial.SetFloat("_Tele", Mathf.Min(2,TeleportTimes + (5/RestoreTimer)));
+        }
+        RestoreTimer = 0;
+        PhantomMaterial.SetFloat("_Tele", 2f);*/
+
     }
 
    

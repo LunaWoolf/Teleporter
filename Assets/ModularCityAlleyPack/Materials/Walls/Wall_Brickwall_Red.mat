@@ -20,8 +20,8 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _Albedo:
-        m_Texture: {fileID: 2800000, guid: 9b9437b60e43e324d94daec6991edff0, type: 3}
-        m_Scale: {x: 1, y: 1}
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 0.5, y: 0.5}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
         m_Texture: {fileID: 2800000, guid: 58c95c17c568510429d8a2167f4dc89d, type: 3}
@@ -56,8 +56,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalMap:
-        m_Texture: {fileID: 2800000, guid: cba841225c817f945a01642897162f5d, type: 3}
-        m_Scale: {x: 1, y: 1}
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 0.2, y: 0.2}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
         m_Texture: {fileID: 2800000, guid: 85ef32e4197e21e43a5de366f55aee21, type: 3}
@@ -103,31 +103,33 @@ Material:
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
+    - _DistanceCutoff: 0.3735937
     - _DstBlend: 0
     - _EnvironmentReflections: 1
     - _GlossMapScale: 1
     - _Glossiness: 0.635
     - _GlossyReflections: 1
-    - _Lightintensity: 0.287
+    - _Lightintensity: 0
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 0.6
+    - _OutlineWidth: 0.008635561
     - _Parallax: 0.02
     - _QueueOffset: 0
     - _RIM: 0
     - _ReceiveShadows: 1
-    - _ShadowIntensity: 0.477
+    - _ShadowIntensity: 0
     - _Smoothness: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
-    - _SpecularIntensity: 1
+    - _SpecularIntensity: 0
     - _SrcBlend: 1
     - _Surface: 0
     - _UVSec: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0.9245283, g: 0.9245283, b: 0.9245283, a: 1}
+    - _BaseColor: {r: 0.3679245, g: 0.31412423, b: 0.31412423, a: 1}
     - _Color: {r: 0.8308824, g: 0.8308824, b: 0.8308824, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _RIMTint: {r: 0, g: 0, b: 0, a: 0}

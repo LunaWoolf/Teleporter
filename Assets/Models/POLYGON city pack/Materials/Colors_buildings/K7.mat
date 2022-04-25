@@ -108,6 +108,7 @@ Material:
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
+    - _DistanceCutoff: 0
     - _DstBlend: 0
     - _EnvironmentReflections: 1
     - _Frequency: 1
@@ -126,6 +127,7 @@ Material:
     - _OffsetLength2: 1
     - _OffsetTime: 0
     - _OffsetTime2: 0
+    - _OutlineWidth: 0
     - _Parallax: 0.02
     - _QueueOffset: 0
     - _RIM: 0
