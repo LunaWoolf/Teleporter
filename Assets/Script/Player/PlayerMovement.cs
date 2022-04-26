@@ -96,7 +96,7 @@ public class PlayerMovement : MonoBehaviour
 
         Moveable = true;
 
-       // PhantomMaterial.SetFloat("_Tele",-0.1f);
+        PhantomMaterial.SetFloat("_Tele",2f); // default material
     }
 
     private void OnEnable() { 
@@ -173,7 +173,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     public Material TransparentMaterial;
-    public Material[] orginalMaterials;
+    public Material[][] orginalMaterials = new Material[20][];
     public GameObject SuperTeleportObject;
     public GameObject SuperTeleportCursor;
     //___________________________________________________________________________________________________________
@@ -185,39 +185,29 @@ public class PlayerMovement : MonoBehaviour
         Vector3 phantomTargetPosition = cam.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height / 2, teleportingDistance));
         RaycastHit hit;
 
+       
         if (Physics.Raycast(this.transform.position, phantomTargetPosition - this.transform.position, out hit, teleportingDistance, impenetrableMask))
         {
            
             SuperTeleportObject = hit.transform.gameObject;
 
-            if (SuperTeleportObject.TryGetComponent(out MeshRenderer meshRednerer))
+            MeshRenderer[] mrs = SuperTeleportObject.GetComponentsInChildren<MeshRenderer>();
+
+        
+            for (int k = 0; k < mrs.Length; k++)
             {
-                orginalMaterials = SuperTeleportObject.GetComponent<MeshRenderer>().materials;
+                MeshRenderer mr = mrs[k];
+                orginalMaterials[k] = mr.materials;
 
-                Material[] tMaterials = new Material[hit.transform.gameObject.GetComponent<MeshRenderer>().materials.Length];
+                Material[] mrtMaterials = new Material[mr.materials.Length];
 
-                for (int i = 0; i < tMaterials.Length; i++)
+
+                for (int j = 0; j < mrtMaterials.Length; j++)
                 {
-                    tMaterials[i] = TransparentMaterial;
+                    mrtMaterials[j] = TransparentMaterial;
 
                 }
-                SuperTeleportObject.GetComponent<MeshRenderer>().materials = tMaterials;
-
-            }
-            else
-            {
-                orginalMaterials = SuperTeleportObject.GetComponentInChildren<MeshRenderer>().materials;
-
-                Material[] tMaterials = new Material[hit.transform.gameObject.GetComponentInChildren<MeshRenderer>().materials.Length];
-
-
-                for (int i = 0; i < tMaterials.Length; i++)
-                {
-                    tMaterials[i] = TransparentMaterial;
-
-                }
-                SuperTeleportObject.GetComponentInChildren<MeshRenderer>().materials = tMaterials;
-
+                mr.materials = mrtMaterials;
             }
         }
 
@@ -227,17 +217,19 @@ public class PlayerMovement : MonoBehaviour
     void CancleSuperTeleport()
     {
         SuperTeleportCursor.SetActive(false);
+
         if (SuperTeleportObject != null && orginalMaterials.Length > 0)
         {
-            if (SuperTeleportObject.TryGetComponent(out MeshRenderer meshRednerer))
+           
+            MeshRenderer[] mrs = SuperTeleportObject.GetComponentsInChildren<MeshRenderer>();
+
+            for (int k = 0; k < mrs.Length; k++)
             {
-                SuperTeleportObject.GetComponent<MeshRenderer>().materials = orginalMaterials;
-            }
-            else
-            {
-                SuperTeleportObject.GetComponentInChildren<MeshRenderer>().materials = orginalMaterials;
-            }
+                MeshRenderer mr = mrs[k];
+                mr.materials = orginalMaterials[k];
                
+            }
+   
         }
         
     }    

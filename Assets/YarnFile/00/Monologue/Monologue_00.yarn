@@ -4,7 +4,7 @@ colorID: 0
 position: 343,751
 ---
 <<CreateQuest GameManager Quest1 Order0154/Pick/Up Pick/Up/Food/at/the/Orange/spot>>
-
+<<wait 40>>
 I think Ginny would tell me if she'd designed you. #line:00100a
 She doesn’t seem like someone who would pull such a prank. #line:00100b
 She’s a super bad liar. She can’t keep secrets. #line:00100c
@@ -27,6 +27,8 @@ It reminds me of climbing this huge tree back in my hometown.#line:00500b
 I'm not sure if that tree is still alive, though…#line:00500c
 I think it's pretty old, and I'm afraid it passed away#line:00500d
 But if it's alive, I would love to bring you to see it one day.#line:00500e
+<<CreateQuest GameManager Top Climb/To/The/Top Climb/To/the/top/of/the/highest/building>>
+<<MapQuestObject GameManager SideQuest_01 true>>
 <<wait 60>>
 I don’t dislike my hometown.#line:00600a
 It’s just…very different from the City.#line:00600b

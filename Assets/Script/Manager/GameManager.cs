@@ -348,13 +348,10 @@ public class GameManager : MonoBehaviour
     }
 
 
-
+    public List<GameObject> InGameTargetUI = new List<GameObject>();
 
     public void ToggleUIPage()
     {
-        //if (UICanvas == null)
-        //{
-        //UICanvas = GameObject.Find("UICanvas");
         
 
         if (UICanvas != null)
@@ -367,7 +364,23 @@ public class GameManager : MonoBehaviour
             {
                 Player.GetComponent<PlayerMovement>().RepositionBigMapCamera();
             }
-           
+
+            if (UIPageOpen)
+            {
+                foreach (GameObject t in InGameTargetUI)
+                {
+                    t.SetActive(false);
+                }
+            }
+
+            if (UIPageOpen)
+            {
+                foreach (GameObject t in InGameTargetUI)
+                {
+                    t.SetActive(true);
+                }
+            }
+
 
         }
        
