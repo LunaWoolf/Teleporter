@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
 
 
     public float speed = 12f;
+    public float mapMouseSensitivity = 100f;
     public float gravity = -9.18f;
     public float jumpHeight = 3.5f;
     public bool jump;
@@ -299,8 +300,8 @@ public class PlayerMovement : MonoBehaviour
         {
             if (gm.UIPageOpen) //如果打开UI界面， 玩家无法移动，移动相机
             {
-                float x = movement.ReadValue<Vector2>().x;
-                float z = movement.ReadValue<Vector2>().y;
+                float x = movement.ReadValue<Vector2>().x * mapMouseSensitivity * Time.deltaTime;
+                float z = movement.ReadValue<Vector2>().y * mapMouseSensitivity * Time.deltaTime;
 
                 Vector3 move = transform.right * x + transform.forward * z;
 
@@ -438,6 +439,7 @@ public class PlayerMovement : MonoBehaviour
             }
             else
             {
+                AudioManager.Play("Fail");
                 AbortAiming();
 
             }
@@ -812,13 +814,7 @@ public class PlayerMovement : MonoBehaviour
 
         }
 
-        /*if (other.gameObject.tag == "XRayInstruction")
-       {
-           gm.ToggleUIInstruction("Xray", true);
-
-       }
-       */
-
+    
     }
 
 
@@ -830,11 +826,7 @@ public class PlayerMovement : MonoBehaviour
 
         }
 
-        /*if (other.gameObject.tag == "XRayInstruction")
-        {
-            gm.ToggleUIInstruction("Xray", false);
-
-        }*/
+     
 
     }
 

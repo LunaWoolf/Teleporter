@@ -131,17 +131,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": """",
-                    ""id"": ""0871c768-874a-453a-8da6-502874587589"",
-                    ""path"": ""<Mouse>/delta"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""CameraMovement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
                     ""name"": ""WASD"",
                     ""id"": ""4f9212c5-4cca-47b5-be82-d72f418158e6"",
                     ""path"": ""2DVector"",
@@ -331,7 +320,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""db451810-c5cb-40c8-8a63-bbbb2acd0116"",
-                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""path"": ""<Gamepad>/start"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -475,6 +464,14 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""OptionMenu"",
+                    ""type"": ""Button"",
+                    ""id"": ""d4fc74d7-e8d8-411c-ba91-26c98397f664"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -497,6 +494,17 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""OpenUIPage"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dfa75556-1e11-4ab9-9fd7-40c2fc3e2428"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""OptionMenu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -525,6 +533,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_OpenUIPage = m_UI.FindAction("OpenUIPage", throwIfNotFound: true);
+        m_UI_OptionMenu = m_UI.FindAction("OptionMenu", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -729,11 +738,13 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputActionMap m_UI;
     private IUIActions m_UIActionsCallbackInterface;
     private readonly InputAction m_UI_OpenUIPage;
+    private readonly InputAction m_UI_OptionMenu;
     public struct UIActions
     {
         private @PlayerControls m_Wrapper;
         public UIActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @OpenUIPage => m_Wrapper.m_UI_OpenUIPage;
+        public InputAction @OptionMenu => m_Wrapper.m_UI_OptionMenu;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -746,6 +757,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @OpenUIPage.started -= m_Wrapper.m_UIActionsCallbackInterface.OnOpenUIPage;
                 @OpenUIPage.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnOpenUIPage;
                 @OpenUIPage.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnOpenUIPage;
+                @OptionMenu.started -= m_Wrapper.m_UIActionsCallbackInterface.OnOptionMenu;
+                @OptionMenu.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnOptionMenu;
+                @OptionMenu.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnOptionMenu;
             }
             m_Wrapper.m_UIActionsCallbackInterface = instance;
             if (instance != null)
@@ -753,6 +767,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @OpenUIPage.started += instance.OnOpenUIPage;
                 @OpenUIPage.performed += instance.OnOpenUIPage;
                 @OpenUIPage.canceled += instance.OnOpenUIPage;
+                @OptionMenu.started += instance.OnOptionMenu;
+                @OptionMenu.performed += instance.OnOptionMenu;
+                @OptionMenu.canceled += instance.OnOptionMenu;
             }
         }
     }
@@ -779,5 +796,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     public interface IUIActions
     {
         void OnOpenUIPage(InputAction.CallbackContext context);
+        void OnOptionMenu(InputAction.CallbackContext context);
     }
 }

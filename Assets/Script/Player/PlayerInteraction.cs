@@ -304,7 +304,7 @@ public class PlayerInteraction : MonoBehaviour
     public void EndDialogue()
     {
         inTheMiddleOfConversation = false;
-        Monologue_Text.SetActive(true);
+        //Monologue_Text.SetActive(true);
         automaticPlayDialogue = true;
     }
 
@@ -323,7 +323,7 @@ public class PlayerInteraction : MonoBehaviour
                     npcScript.ChangeTalkUIColor(false);
                     npcScript.ShowTalkUI(false);
                     inTheMiddleOfConversation = true;
-                    Monologue_Text.SetActive(false);
+                    //Monologue_Text.SetActive(false);
 
                 }
                 
@@ -359,6 +359,17 @@ public class PlayerInteraction : MonoBehaviour
             yield return new WaitForSeconds(waitTime);
 
         }
+    }
+
+    [YarnCommand("custom_wait")]
+    static IEnumerator CustomWait()
+    {
+
+        // Wait for 1 second
+        yield return new WaitForSeconds(1.0f);
+
+        // Because this method returns IEnumerator, it's a coroutine. 
+        // Yarn Spinner will wait until onComplete is called.
     }
 
 

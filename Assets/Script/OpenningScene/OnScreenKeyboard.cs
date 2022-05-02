@@ -338,6 +338,8 @@ public class OnScreenKeyboard : MonoBehaviour
 	private void SelectLeft()
 	{
 		selectedButton--;
+		GUI.Button(keyRects[selectedButton], (shiftState != ShiftState.Off) ? upperKeys[selectedButton] : lowerKeys[selectedButton],
+						   (joystickEnabled && selectedButton == selectedButton && Input.GetButton(joyPressButton) ? pressedStyle : keyStyle));
 
 		// If we've hit the start of a row, wrap to the end of it instead
 		if (IsRowMarker(selectedButton) || selectedButton < 0)

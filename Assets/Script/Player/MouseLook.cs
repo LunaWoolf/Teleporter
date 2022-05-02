@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public class MouseLook : MonoBehaviour
 {
     public float mouseSensitivity = 100f;
+    public float mapMouseSensitivity = 100f;
     public float mapZoomSensitivity = 2f;
     public Transform playerBody;
     private PlayerControls PlayerControls;
@@ -56,11 +57,11 @@ public class MouseLook : MonoBehaviour
 
         if (gm.UIPageOpen) //如果打开UI界面， 玩家无法移动，移动相机
         {
-            float mouseX = CameraMovement.ReadValue<Vector2>().x * mouseSensitivity * Time.deltaTime;
+            float mouseX = CameraMovement.ReadValue<Vector2>().x * mapMouseSensitivity * Time.deltaTime;
             
 
 
-            playerBody.Rotate(Vector3.up * mouseX); //roate playerbody
+            //playerBody.Rotate(Vector3.up * mouseX); //roate playerbody
 
 
             float mouseY = MapZoom.ReadValue<Vector2>().y * mapZoomSensitivity * -1f;

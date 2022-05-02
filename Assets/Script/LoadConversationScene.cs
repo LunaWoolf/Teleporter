@@ -6,7 +6,8 @@ using UnityEngine.SceneManagement;
 public class LoadConversationScene : MonoBehaviour
 {
     public string levelName;
-    
+    public SceneManage sceneManager;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
@@ -17,13 +18,12 @@ public class LoadConversationScene : MonoBehaviour
 
             }
             Debug.Log("scene");
-            SceneManager.UnloadSceneAsync("Chapter0");
-            SceneManager.LoadScene(levelName, LoadSceneMode.Single);
+            sceneManager.LoadLevel(levelName);
+
+            //SceneManager.UnloadSceneAsync("Chapter0");
+
+            //SceneManager.LoadScene(levelName, LoadSceneMode.Single);
             
-
-           
-
-           
 
         }
     }

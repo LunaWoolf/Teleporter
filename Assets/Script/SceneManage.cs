@@ -30,12 +30,10 @@ public class SceneManage : MonoBehaviour
     public void Start()
     {
         //pms = GameObject.Find("PersistenceManager").GetComponent<PresistenceManagerScript>();
-       
-        
+
     }
 
     List<AsyncOperation> sceneLoading = new List<AsyncOperation>();
-
 
     [YarnCommand("LoadLevel")]
     public void LoadLevel(string levelName)
@@ -45,9 +43,6 @@ public class SceneManage : MonoBehaviour
             loadingScreen.gameObject.SetActive(true);
         }
        
-
-        //SceneManager.LoadScene(levelName, LoadSceneMode.Single);
-        //sceneLoading.Add(SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene()));
         sceneLoading.Add(SceneManager.LoadSceneAsync(levelName, LoadSceneMode.Additive));
 
         StartCoroutine(GetSceneLoadProgress());
@@ -58,7 +53,6 @@ public class SceneManage : MonoBehaviour
     {
         for (int i = 0; i < sceneLoading.Count; i++)
         {
-
             while (!sceneLoading[i].isDone)
             {
                 yield return null;
@@ -71,7 +65,6 @@ public class SceneManage : MonoBehaviour
             {
                 loadingScreen.gameObject.SetActive(false);
             }
-
 
         }
     }

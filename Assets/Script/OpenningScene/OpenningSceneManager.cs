@@ -26,6 +26,7 @@ public class OpenningSceneManager : MonoBehaviour
 
     public void VideoStart()
     {
+        Debug.Log("start");
         vid.Play();
         vid.loopPointReached += CheckOver;
         TouchScreenKeyboard.Open("");
@@ -33,11 +34,11 @@ public class OpenningSceneManager : MonoBehaviour
 
     void Update()
     {
-        if (EventSystem.currentSelectedGameObject == null)
+        /*if (EventSystem.currentSelectedGameObject == null)
         {
             EventSystem.SetSelectedGameObject(FirstButton);
 
-        }
+        }*/
 
         PlayerNameInputField.onEndEdit.AddListener(val =>
         {
@@ -50,6 +51,7 @@ public class OpenningSceneManager : MonoBehaviour
 
     void CheckOver(UnityEngine.Video.VideoPlayer vp)
     {
+        Debug.Log("okay");
         LanguagechoicePage.SetActive(true);
     }
 
@@ -62,6 +64,11 @@ public class OpenningSceneManager : MonoBehaviour
     {
         PresistenceManagerScript.Instance.Language = lan;
         //sceneManager.LoadLevel("Chapter0");
+        sceneManager.LoadLevel("Dialogue_00_01");
+    }
+
+    public void GotoNextScene()
+    {
         sceneManager.LoadLevel("Dialogue_00_01");
     }
 

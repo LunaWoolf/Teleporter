@@ -118,17 +118,6 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "",
-                    "id": "0871c768-874a-453a-8da6-502874587589",
-                    "path": "<Mouse>/delta",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "CameraMovement",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
                     "name": "WASD",
                     "id": "4f9212c5-4cca-47b5-be82-d72f418158e6",
                     "path": "2DVector",
@@ -318,7 +307,7 @@
                 {
                     "name": "",
                     "id": "db451810-c5cb-40c8-8a63-bbbb2acd0116",
-                    "path": "<Gamepad>/leftShoulder",
+                    "path": "<Gamepad>/start",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -462,6 +451,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "OptionMenu",
+                    "type": "Button",
+                    "id": "d4fc74d7-e8d8-411c-ba91-26c98397f664",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -484,6 +481,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "OpenUIPage",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "dfa75556-1e11-4ab9-9fd7-40c2fc3e2428",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "OptionMenu",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -373,7 +373,7 @@ public class GameManager : MonoBehaviour
                 }
             }
 
-            if (UIPageOpen)
+            if (!UIPageOpen)
             {
                 foreach (GameObject t in InGameTargetUI)
                 {
