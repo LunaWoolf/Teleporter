@@ -7,6 +7,7 @@ using MilkShake;
 using TMPro;
 using Yarn.Unity;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 [System.Serializable]
 public class GameManager : MonoBehaviour
@@ -55,8 +56,8 @@ public class GameManager : MonoBehaviour
     public QuestSign[] QuestSignList;
     [SerializeField] public Dictionary<string, GameObject> QuestSignDictionary = new Dictionary<string, GameObject>();
 
+    public EventSystem eventSystem;
 
-   
     void Awake()
     {
     
@@ -390,7 +391,6 @@ public class GameManager : MonoBehaviour
     public GameObject InstructionCanvas;
     public void ToggleInstructionPage()
     {
-      
 
 
         if (InstructionCanvas != null)

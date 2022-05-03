@@ -13,9 +13,6 @@ public class PresistenceManagerScript : MonoBehaviour
     public string Language = "zh-Hans";
     public DialogueRunner dr;
 
-  
-
-
     private void Awake()
     {
         if (Instance == null)
