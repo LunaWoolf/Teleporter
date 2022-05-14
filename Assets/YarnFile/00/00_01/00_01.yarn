@@ -1,6 +1,7 @@
 ﻿title: Start
 tags:
 ---
+<<InputSystemEnable QuestManager InstructionMenu>>
 Genny:晚上好，Brette#line:0b5da1f 
 Genny:我刚想问你是不是该出门了呢 #line:07101b7 
 Genny:还以为你又要睡过头了 #line:011b79p 
@@ -60,9 +61,9 @@ Brette可以在他的手机上随时查询订单和地图  #line:078035b
 Genny: 对了！还是要注意监控摄像。别忘了，如果被拍到次数太多会被取消外卖员资格的。 #line:0730825 
 <<TurnOnCG MainCanvas HealthBar>>
 Genny: 如果你需要任何帮助但我又不在身边的时候，可以参考我写给你的这份【操作指南】. #line:0bd4ab8 
+<<InputSystemEnable QuestManager OpenUIPage>>
 (在手柄上按下Option，打开【操作指南】) #line:0bd4ab
-<<TurnOnCG MainCanvas Instruction>>
-<<InputSystemEnable QuestManager InstructionMenu>>
+//<<TurnOnCG MainCanvas Instruction>>
 Genny:那工作顺利哦！注意安全！ #line:01c8588 
 <<jump Meta>>
 ===
@@ -70,7 +71,9 @@ Genny:那工作顺利哦！注意安全！ #line:01c8588
 title: Meta
 ---
 <<TurnOffCG Genny Genny>>
+<<TurnOffCG MainCanvas Back>>
 Brette: 好了... #line:035da95 
+Brette takes a look at his face in the mirror and takes a look at you -- His Prosthetic Eye  #line:040801a 
 Brette: So Ginny didn't know you existed, right? {PlayerName()}. #line:04ea19e 
 Brette: To be honest, I thought you were some kind of AI she made at first.  #line:0b80aec 
 Brette: But then, with the super powers come with you, I don't know… #line:0eaaec9 

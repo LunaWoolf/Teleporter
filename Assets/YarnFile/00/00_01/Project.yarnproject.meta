@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c9dbbe6d192ed4f4494e7bd04ca6a590
+guid: 22bcf0cf8e6094827877d867741edf68
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -15,11 +15,11 @@ ScriptedImporter:
   defaultLanguage: zh-Hans
   languagesToSourceAssets:
   - languageID: en
-    stringsFile: {fileID: 4900000, guid: 0a45834eb113646919d480da9428607e, type: 3}
+    stringsFile: {fileID: 4900000, guid: 29e9b577157b54caa8c1628500eb3ab3, type: 3}
     assetsFolder: {instanceID: 0}
   - languageID: zh-Hans
-    stringsFile: {instanceID: 0}
+    stringsFile: {fileID: 4900000, guid: 5f98a8b06593546fa97c9cd8a8c2f0f4, type: 3}
     assetsFolder: {instanceID: 0}
-  useAddressableAssets: 1
-  searchAllAssembliesForActions: 1
+  useAddressableAssets: 0
+  searchAllAssembliesForActions: 0
   assembliesToSearch: []

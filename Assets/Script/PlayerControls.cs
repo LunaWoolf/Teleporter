@@ -297,17 +297,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""c7be8983-676b-4e8f-939d-436ff4f01414"",
-                    ""path"": ""<Gamepad>/dpad/down"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""NextLine"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""2d17e763-331b-4804-a4e7-c1c57063dd0a"",
                     ""path"": ""<Keyboard>/p"",
                     ""interactions"": """",

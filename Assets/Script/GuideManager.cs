@@ -13,7 +13,7 @@ public class GuideManager : MonoBehaviour
     public VideoPlayer VideoPlayer;
     public Image image;
     
-    void DisableGuideCanvas()
+    public void DisableGuideCanvas()
     {
         GuideCanvas.SetActive(false);
 

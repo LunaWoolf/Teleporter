@@ -9,7 +9,7 @@ Five stars, there you go.
 <<CompleteQuestAnimation GameManager Order0154 Complete./Tip:/3.5$>>
 
 
-<<CreateQuest GameManager Quest3 Quest0163/Pick/Up Pick/Up/Food/at/the/Red/spot>>
+<<CreateQuest GameManager Quest3 Quest0163 Pick/Up/Food/at/the/Green/spot>>
 <<MapQuestObject GameManager Quest3_P true>>
 <<SetCurrentQuest GameManager Quest3_P>>
 <<MapQuestObject GameManager Quest1_D false>>

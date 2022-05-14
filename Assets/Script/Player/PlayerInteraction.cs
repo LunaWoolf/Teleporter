@@ -34,6 +34,9 @@ public class PlayerInteraction : MonoBehaviour
     public LayerMask TalkNPCMask;
 
     public GameManager gm;
+    public AudioManager AudioManager;
+
+
 
 
     private void Awake()
@@ -65,6 +68,7 @@ public class PlayerInteraction : MonoBehaviour
         m_EventSystem = eventSystem.GetComponent<EventSystem>();
 
         //StartCoroutine(AutomaticPlayDialogue());
+
 
     }
 
@@ -303,7 +307,10 @@ public class PlayerInteraction : MonoBehaviour
 
     public void EndDialogue()
     {
+        AudioManager.Play("NPCConversation");
         inTheMiddleOfConversation = false;
+        dialogueRunner.automaticallyContinueLines = true;
+        NextDialogue();
         //Monologue_Text.SetActive(true);
         automaticPlayDialogue = true;
     }
@@ -313,16 +320,20 @@ public class PlayerInteraction : MonoBehaviour
 
     public void StartNPCConversation()
     {
-        if (!inTheMiddleOfConversation)
+        if (!inTheMiddleOfConversation && !gm.UIPageOpen && !gm.InstructionPageOpen)
         {
             if (conversationNPC != null && conversationNPC.TryGetComponent<NPCDialogueManager>(out NPCDialogueManager npcScript))
             {
                 if (npcScript.talkable)
                 {
+                    AudioManager.Play("NPCConversation");
                     npcScript.SetDialogue();
                     npcScript.ChangeTalkUIColor(false);
                     npcScript.ShowTalkUI(false);
                     inTheMiddleOfConversation = true;
+
+                    dialogueRunner.automaticallyContinueLines = false;
+
                     //Monologue_Text.SetActive(false);
 
                 }
@@ -339,19 +350,16 @@ public class PlayerInteraction : MonoBehaviour
       
         while (true)
         {
-            yield return new WaitForSeconds(10f);
+            yield return new WaitForSeconds(7f);
             if (automaticPlayDialogue)
             {
-
                 NextDialogue();
             }
            
-          
-
         }
     }
 
-    IEnumerator WaitPlayDialogue(float waitTime)
+    /*IEnumerator WaitPlayDialogue(float waitTime)
     {
         while (automaticPlayDialogue)
         {
@@ -359,7 +367,7 @@ public class PlayerInteraction : MonoBehaviour
             yield return new WaitForSeconds(waitTime);
 
         }
-    }
+    }*/
 
     [YarnCommand("custom_wait")]
     static IEnumerator CustomWait()

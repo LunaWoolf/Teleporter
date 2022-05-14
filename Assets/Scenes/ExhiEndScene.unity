@@ -289,7 +289,7 @@ GameObject:
   - component: {fileID: 116305540}
   - component: {fileID: 116305542}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Restart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -309,6 +309,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneManager: {fileID: 978466391}
   pms: {fileID: 0}
+  eventSystem: {fileID: 983554167}
 --- !u!4 &116305541
 Transform:
   m_ObjectHideFlags: 0
@@ -335,6 +336,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f870caa4d5a54b85850223b6dd8944d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canRestart: 0
   restart: {fileID: 116305540}
 --- !u!1 &674735522
 GameObject:
@@ -715,6 +717,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loadingScreen: {fileID: 822613663}
+  Player: {fileID: 0}
+  EventSystem: {fileID: 0}
+  audioManager: {fileID: 0}
 --- !u!4 &978466392
 Transform:
   m_ObjectHideFlags: 0
@@ -1404,7 +1409,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: e85009aea952d422cbd94c172d5de176, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.512
+  m_Volume: 0.301
   m_Pitch: 1
   Loop: 1
   Mute: 0

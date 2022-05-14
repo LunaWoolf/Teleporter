@@ -15,6 +15,9 @@ public class MouseLook : MonoBehaviour
     float xRotation = 0f;
     public GameManager gm;
     public GameObject BigMapCamera;
+    public float mapZoomInLimit = 60f;
+    public float mapZoomOutLimit = 900f;
+
 
 
     private void Awake()
@@ -57,7 +60,7 @@ public class MouseLook : MonoBehaviour
 
         if (gm.UIPageOpen) //如果打开UI界面， 玩家无法移动，移动相机
         {
-            float mouseX = CameraMovement.ReadValue<Vector2>().x * mapMouseSensitivity * Time.deltaTime;
+            //float mouseX = CameraMovement.ReadValue<Vector2>().x * mapMouseSensitivity * Time.deltaTime;
             
 
 
@@ -68,12 +71,16 @@ public class MouseLook : MonoBehaviour
 
             Vector3 mapZoom = transform.up * mouseY;
 
-            BigMapCamera.GetComponent<Transform>().position += mapZoom;
+            //Vector3 mapZoomClamp = transform.up * Mathf.Clamp(BigMapCamera.GetComponent<Transform>().position.y + mapZoom.y, 60f, 1000f);
 
+            if ((BigMapCamera.GetComponent<Transform>().position + mapZoom).y > mapZoomInLimit && (BigMapCamera.GetComponent<Transform>().position + mapZoom).y < mapZoomOutLimit)
+            {
+                BigMapCamera.GetComponent<Transform>().position += mapZoom;
 
+            }
             
         }
-        else //如果打开UI界面关闭， 玩家移动
+        else if(!gm.InstructionPageOpen)//如果打开UI界面关闭， 玩家移动
         {
             float mouseX = CameraMovement.ReadValue<Vector2>().x * mouseSensitivity * Time.deltaTime;
             float mouseY = CameraMovement.ReadValue<Vector2>().y * mouseSensitivity * Time.deltaTime;

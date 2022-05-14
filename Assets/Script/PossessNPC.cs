@@ -23,6 +23,8 @@ public class PossessNPC : MonoBehaviour
     public bool Possessable;
     public bool startDialogue;
 
+    public GameObject TalkUI;
+
 
     private void Awake()
     {
@@ -95,4 +97,22 @@ public class PossessNPC : MonoBehaviour
      
     }
 
+    public void ChangeUI(bool b)
+    {
+        if (TalkUI != null)
+        {
+            if (b)
+            {
+                TalkUI.SetActive(true);
+
+            }
+            else
+            {
+                TalkUI.SetActive(false);
+            }
+        }
+
+        
+
+    }
 }

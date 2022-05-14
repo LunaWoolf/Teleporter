@@ -10,8 +10,12 @@ public class PresistenceManagerScript : MonoBehaviour
 
     public GameObject Player;
     public Vector3 PlayerNewPosition;
-    public string Language = "zh-Hans";
+    public string Language = "en";
     public DialogueRunner dr;
+    public GameObject EventSystem;
+    public GameObject audioManager;
+    public bool pause;
+    public Restart restart;
 
     private void Awake()
     {
@@ -22,7 +26,9 @@ public class PresistenceManagerScript : MonoBehaviour
         }
         else
         {
-            Destroy(gameObject);
+            Destroy(Instance.gameObject);
+            DontDestroyOnLoad(gameObject);
+
         }
 
     }
@@ -50,7 +56,7 @@ public class PresistenceManagerScript : MonoBehaviour
 
     void Update()
     {
-        if (SceneManager.GetActiveScene().name != "OpenningScene")
+        if (SceneManager.GetActiveScene().name != "OpenningScene" && !pause)
         {
             if (Input.anyKeyDown)
                 timer = 0;
@@ -60,11 +66,21 @@ public class PresistenceManagerScript : MonoBehaviour
             if (timer > 200)
             {
                 timer = 0;
-                SceneManager.LoadScene("OpenningScene", LoadSceneMode.Single);
+                restart = FindObjectOfType<Restart>();
+                if (restart != null)
+                    restart.RestartGame();
+                
             }
         }
-     
-            
+       
     }
 
+    public void ActivePlayer()
+    {
+        Player.SetActive(true);
+        Player.GetComponentInChildren<PlayerInteraction>().EndDialogue();
+        EventSystem.SetActive(true);
+        audioManager.SetActive(true);
+
+    }
 }

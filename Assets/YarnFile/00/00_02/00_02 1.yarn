@@ -1,0 +1,7 @@
+﻿title: Start
+tags:
+---
+//<<CompleteQuest GameManager SideQuest_01>>
+//<<CompleteQuestAnimation GameManager Climb/To/The/Top Complete>>
+<<MapQuestObject GameManager SideQuest_01 false>>
+===

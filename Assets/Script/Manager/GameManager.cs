@@ -42,9 +42,11 @@ public class GameManager : MonoBehaviour
     public DialogueRunner MainDialogueRunner;
     public YarnProject Monologue2;
 
-    PresistenceManagerScript pms;
+    public PresistenceManagerScript pms;
     public GameObject Player;
+    public SceneManage sceneManager;
 
+    
     [System.Serializable]
 
     public struct QuestSign
@@ -67,16 +69,47 @@ public class GameManager : MonoBehaviour
             QuestSignDictionary.Add(q.Questname, q.QuestSignObject);
 
         }
+    
 
 
-        
-       
+        float player_x = PlayerPrefs.GetFloat("p_x");
+        float player_y = PlayerPrefs.GetFloat("p_y");
+        float player_z = PlayerPrefs.GetFloat("p_z");
+
+        string q_id = PlayerPrefs.GetString("q_id");
+        string q_title = PlayerPrefs.GetString("q_title");
+        string q_des = PlayerPrefs.GetString("q_des");
+
+        /*
+        if (PlayerPrefs.GetInt("save") == 1)
+        {
+            Player.transform.position = new Vector3(player_x, player_y, player_z);
+            CreateQuest(q_id, q_title, q_des);
+            PlayerPrefs.SetInt("save", 0);
+            PlayerPrefs.Save();
+        }*/
+
+        if (AudioManager == null)
+        {
+            AudioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
+
+        }
+
+        if (sceneManager == null)
+        {
+            sceneManager = GameObject.Find("SceneManager").GetComponent<SceneManage>();
+
+        }
+
+
+
     }
 
     void Start()
     {
-        /*pms = GameObject.Find("PersistenceManager").GetComponent<PresistenceManagerScript>();
-        pms.LoadPlayerPosition();
+        pms = FindObjectOfType<PresistenceManagerScript>();
+            
+        /*pms.LoadPlayerPosition();
         if (pms.Player != null)
         {
            
@@ -89,26 +122,23 @@ public class GameManager : MonoBehaviour
 
         ToggleQuestSign(PlayerStatus.currentQuest, true);
 
+ 
+
+
         if (PlayerStatus.QuestList == null)
         {
             PlayerStatus.QuestList = QuestSignList;
+
         }
 
-        if (PlayerStatus.currentYarnProject != null)
+
+        /*if (PlayerPrefs.GetInt("mono") == 2)
         {
-            MainDialogueRunner.yarnProject = PlayerStatus.currentYarnProject;
-
-        }
-
-
-
-        Player.transform.position = PlayerStatus.playerPosition;
-
-
-        //PlayerStatus.currentYarnProject = Monologue2;
-
-
-
+            MainDialogueRunner.yarnProject = Monologue2;
+            PlayerPrefs.SetInt("mono", 0);
+            PlayerPrefs.Save();
+        }*/
+        
 
 
         if (healthText != null)
@@ -124,6 +154,12 @@ public class GameManager : MonoBehaviour
 
         }
 
+        if (sceneManager == null)
+        {
+            sceneManager = GameObject.Find("SceneManager").GetComponent<SceneManage>();
+
+        }
+       
 
     }
 
@@ -142,9 +178,10 @@ public class GameManager : MonoBehaviour
         if (timeSlider != null)
             timeSlider.value = playerHealth;
 
-        if (playerHealth == 0)
+        if (playerHealth <= 0 && sceneManager != null)
         {
-            SceneManager.LoadScene("DeadScene", LoadSceneMode.Single);
+            sceneManager.LoadLevel("DeadScene");
+         
         }
     }
 
@@ -174,14 +211,10 @@ public class GameManager : MonoBehaviour
     [YarnCommand("CreateQuest")]
     public void CreateQuest(string id, string title, string description)
     {
-        //Debug.Log(id);
-        //Debug.Log(title);
-        //Debug.Log(description);
+        
 
         title = title.Replace('/', ' ');
         description = description.Replace('/', ' ');
-
-   
 
         Quest questNew = new Quest(id,title,description);
 
@@ -198,6 +231,16 @@ public class GameManager : MonoBehaviour
         QuestUI.GetComponentInChildren<QuestObject>().SetQuest(questNew);
         PlayAddQuestAnimation();
 
+        if (id != "Top")
+        {
+            PlayerPrefs.SetString("q_id", id);
+            PlayerPrefs.SetString("q_title", title);
+            PlayerPrefs.SetString("q_des", description);
+            PlayerPrefs.Save();
+
+        }
+   
+
     }
 
     public GameObject QuestUI;
@@ -206,7 +249,8 @@ public class GameManager : MonoBehaviour
     public void PlayAddQuestAnimation()
     {
         QuestUI.GetComponent<Animator>().SetTrigger("appear");
-        AudioManager.Play("CreateQuest");
+        if(AudioManager != null)
+            AudioManager.Play("CreateQuest");
     }
 
     
@@ -223,7 +267,9 @@ public class GameManager : MonoBehaviour
             {
                 q.questObject.SetActive(false);
 
-                PlayerStatus.questStatus = id;
+
+               
+                //PlayerStatus.questStatus = id;
             }
         }
 
@@ -285,7 +331,7 @@ public class GameManager : MonoBehaviour
         QuestUI.GetComponent<Animator>().SetTrigger("appear");
 
         AudioManager.Play("UpdateQuest");
-
+       
     }
 
  
@@ -336,8 +382,15 @@ public class GameManager : MonoBehaviour
             {
                 q.questObject.GetComponent<QuestObject>().ChangeDescription(des);
 
+
             }
         }
+      
+        PlayerPrefs.SetString("q_des", des);
+        PlayerPrefs.Save();
+
+
+
 
 
     }
@@ -346,6 +399,7 @@ public class GameManager : MonoBehaviour
     public void SetCurrentQuest(string questID)
     {
         PlayerStatus.currentQuest = questID;
+
     }
 
 
@@ -353,17 +407,19 @@ public class GameManager : MonoBehaviour
 
     public void ToggleUIPage()
     {
-        
 
+        
         if (UICanvas != null)
         {
+        
             UICanvas.SetActive(!UICanvas.activeSelf);
             UIPageOpen = UICanvas.activeSelf;
-            BigMapCamera.GetComponent<Transform>().position = new Vector3(0, 500, 0);
+            //BigMapCamera.GetComponent<Transform>().position = new Vector3(0, 700, 0);
 
             if (!UIPageOpen)
             {
-                Player.GetComponent<PlayerMovement>().RepositionBigMapCamera();
+                BigMapCamera.GetComponent<Transform>().position = new Vector3(0, 700, 0);
+                //Player.GetComponent<PlayerMovement>().RepositionBigMapCamera();
             }
 
             if (UIPageOpen)
@@ -389,13 +445,31 @@ public class GameManager : MonoBehaviour
     }
 
     public GameObject InstructionCanvas;
+    public bool InstructionPageOpen = false;
     public void ToggleInstructionPage()
     {
 
-
+       
         if (InstructionCanvas != null)
         {
+            //Debug.Log("Inr");
             InstructionCanvas.SetActive(!InstructionCanvas.activeSelf);
+
+            if (InstructionCanvas.activeSelf)
+            {
+
+                InstructionPageOpen = true;
+                if (pms != null)
+                    pms.pause = true;
+
+            }
+            else
+            {
+                InstructionPageOpen = false;
+                if (pms != null)
+                    pms.pause = false;
+            }
+                
 
         }
 
@@ -436,7 +510,7 @@ public class GameManager : MonoBehaviour
     {
 
         QuestSignDictionary[questName].SetActive(on);
-
+        
 
     }
 
@@ -446,6 +520,8 @@ public class GameManager : MonoBehaviour
         //Dialoguebox.SetActive(!Dialoguebox.activeSelf);
 
     }
+
+  
 
 
 

@@ -89,8 +89,13 @@ public class PlayerMovement : MonoBehaviour
     public Color SpotLightRed;
     public Color SpotLightGreen;
 
+    [Header("MapMovement")]
+    public float mapMoveZMin = -800;
+    public float mapMoveZMax = 800;
+    public float mapMoveXMin = -800f;
+    public float mapMoveXMax = 800f;
 
-
+    bool t = false;
     private void Awake()
     {
         PlayerControls = new PlayerControls();
@@ -98,6 +103,15 @@ public class PlayerMovement : MonoBehaviour
         Moveable = true;
 
         PhantomMaterial.SetFloat("_Tele",2f); // default material
+
+
+        PlayerControls.UI.OpenUIPage.performed += ctx => gm.ToggleUIPage();
+        PlayerControls.PlayerAction.InstructionMenu.performed += ctx => gm.ToggleInstructionPage();
+        PlayerControls.PlayerAction.Teleport.started += ctx => AimAction();
+        PlayerControls.PlayerAction.Teleport.performed += ctx => TeleportAction();
+        PlayerControls.PlayerAction.AbortAimming.performed += ctx => AbortAiming();
+        PlayerControls.PlayerAction.SuperTeleport.started += ctx => SuperTeleport();
+        PlayerControls.PlayerAction.SuperTeleport.performed += ctx => CancleSuperTeleport();
     }
 
     private void OnEnable() { 
@@ -108,17 +122,18 @@ public class PlayerMovement : MonoBehaviour
         CameraMovement = PlayerControls.PlayerAction.CameraMovement;
         CameraMovement.Enable();
 
-        PlayerControls.PlayerAction.Teleport.started += ctx => AimAction();
-        PlayerControls.PlayerAction.Teleport.performed += ctx => TeleportAction();
+
+        //PlayerControls.PlayerAction.Teleport.started += ctx => AimAction();
+        //PlayerControls.PlayerAction.Teleport.performed += ctx => TeleportAction();
         PlayerControls.PlayerAction.Teleport.Enable();
 
-        PlayerControls.UI.OpenUIPage.performed += ctx => gm.ToggleUIPage();
+        //PlayerControls.UI.OpenUIPage.performed += ctx => gm.ToggleUIPage();
         PlayerControls.UI.OpenUIPage.Enable();
 
-        PlayerControls.PlayerAction.InstructionMenu.performed += ctx => gm.ToggleInstructionPage();
+        //PlayerControls.PlayerAction.InstructionMenu.performed += ctx => gm.ToggleInstructionPage();
         PlayerControls.PlayerAction.InstructionMenu.Enable();
 
-        PlayerControls.PlayerAction.AbortAimming.performed += ctx => AbortAiming();
+        //PlayerControls.PlayerAction.AbortAimming.performed += ctx => AbortAiming();
         PlayerControls.PlayerAction.AbortAimming.Enable();
 
         //PlayerControls.PlayerAction.Jump.performed += ctx => Jump();
@@ -129,18 +144,19 @@ public class PlayerMovement : MonoBehaviour
         //___________________________________________________________________________________________________________
 
 
-        PlayerControls.PlayerAction.SuperTeleport.started += ctx => SuperTeleport();
-        PlayerControls.PlayerAction.SuperTeleport.performed += ctx => CancleSuperTeleport();
+        //PlayerControls.PlayerAction.SuperTeleport.started += ctx => SuperTeleport();
+        //PlayerControls.PlayerAction.SuperTeleport.performed += ctx => CancleSuperTeleport();
         PlayerControls.PlayerAction.SuperTeleport.Enable();
 
 
         //___________________________________________________________________________________________________________
     }
 
-    private void OnDestroy()
+   
+    private void OnDisable()
     {
 
-        
+        Debug.Log("disable");
         movement.Disable();
         CameraMovement.Disable();
 
@@ -260,11 +276,18 @@ public class PlayerMovement : MonoBehaviour
     }
 
     bool fallHurt = false;
+    bool LastSecGrouned;
     void Update()
     {
 
+        
         isGrounded = Physics.CheckSphere(groundCheck.position,groundDistance,groundMask);
-
+        /*if (isGrounded && !LastSecGrouned)
+        {
+            AudioManager.Play("Land");
+        }
+        LastSecGrouned = isGrounded;*/
+       
 
         if (isGrounded)
         {
@@ -274,6 +297,12 @@ public class PlayerMovement : MonoBehaviour
                 gm.UpdateHealth(-5f);
                 gm.CameraShake();
                 fallHurt = false;*/
+                gm.UpdateHealth(-5f);
+                fallHurt = false;
+                AudioManager.Play("Land");
+
+
+
             }
 
          
@@ -286,7 +315,7 @@ public class PlayerMovement : MonoBehaviour
 
                 controller.Move(gravityVelocity * Time.deltaTime);
 
-                if (gravityVelocity.y < -20f)
+                if (gravityVelocity.y < -10f)
                 {
                     fallHurt = true;
                 }
@@ -303,14 +332,26 @@ public class PlayerMovement : MonoBehaviour
                 float x = movement.ReadValue<Vector2>().x * mapMouseSensitivity * Time.deltaTime;
                 float z = movement.ReadValue<Vector2>().y * mapMouseSensitivity * Time.deltaTime;
 
-                Vector3 move = transform.right * x + transform.forward * z;
+                Vector3 movex = transform.right * x;
 
-                BigMapCamera.GetComponent<Transform>().position += move;
+                Vector3 movez = transform.forward * z;
+
+                if ((BigMapCamera.GetComponent<Transform>().position + movex).x > mapMoveXMin && (BigMapCamera.GetComponent<Transform>().position + movex).x < mapMoveXMax)
+                {
+                    BigMapCamera.GetComponent<Transform>().position += movex;
+
+                }
+
+                if ((BigMapCamera.GetComponent<Transform>().position + movez).z > mapMoveZMin && (BigMapCamera.GetComponent<Transform>().position + movez).z < mapMoveZMax)
+                {
+                    BigMapCamera.GetComponent<Transform>().position += movez;
+
+                }
 
 
 
             }
-            else //如果打开UI界面关闭， 玩家移动
+            else if(!gm.InstructionPageOpen) //如果打开UI界面关闭， 玩家移动
             {
                 float x = movement.ReadValue<Vector2>().x;
                 float z = movement.ReadValue<Vector2>().y;
@@ -452,7 +493,7 @@ public class PlayerMovement : MonoBehaviour
         bool possessTargetExist = false;
         Vector3 phantomTargetPosition = cam.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height / 2, teleportingDistance));
         RaycastHit hit;
-        if (Physics.Raycast(this.transform.position, phantomTargetPosition - this.transform.position, out hit, teleportingDistance, PossessebleMask))
+        if (Physics.Raycast(this.transform.position, phantomTargetPosition - this.transform.position, out hit, teleportingDistance, PossessebleMask) && !possess)
         {
 
             GameObject possessTarget = hit.transform.gameObject;
@@ -500,29 +541,48 @@ public class PlayerMovement : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(this.transform.position, phantomTargetPosition - this.transform.position, out hit, teleportingDistance, PossessebleMask))
             {
-                if (AimPossessTarget!= null && AimPossessTarget == hit.transform.gameObject)
-                {
-                    //do nothing
-                }
-                else
-                {
-                    if (AimPossessTarget != null && AimPossessTarget.TryGetComponent<PossessNPC>(out PossessNPC pNPC_old))
+                    if (!possess)//如果当前不在possess
                     {
-                        pNPC_old.ChangeMaterial(false);
-                    }
-                    AimPossessTarget = hit.transform.gameObject;
+                        if (AimPossessTarget != null && AimPossessTarget == hit.transform.gameObject)
+                        {
+                            //do nothing
+                        }
+                        else
+                        {
+                            if (AimPossessTarget != null && AimPossessTarget.TryGetComponent<PossessNPC>(out PossessNPC pNPC_old))
+                            {
+                                pNPC_old.ChangeMaterial(false);
+                            }
+                            AimPossessTarget = hit.transform.gameObject;
 
-                    if (AimPossessTarget.TryGetComponent<PossessNPC>(out PossessNPC pNPC_new))
+                            if (AimPossessTarget.TryGetComponent<PossessNPC>(out PossessNPC pNPC_new))
+                            {
+                                pNPC_new.ChangeMaterial(true);
+                            }
+
+                        }
+                        possessTargetExist = true;
+                        phantomTargetPosition = Vector3.Lerp(transform.position, hit.point, 0.9f);
+
+                    }
+                    else
                     {
-                        pNPC_new.ChangeMaterial(true);
+                        phantomTargetPosition = Vector3.Lerp(transform.position, hit.point, 0.5f);
+                        if (AimPossessTarget != null)
+                        {
+                            if (AimPossessTarget.TryGetComponent<PossessNPC>(out PossessNPC pNPC_old))
+                            {
+                                pNPC_old.ChangeMaterial(false);
+                            }
+                            AimPossessTarget = null;
+                        }
                     }
 
-                }
-                possessTargetExist = true;
+                
             }
             else if (Physics.Raycast(this.transform.position, phantomTargetPosition - this.transform.position, out hit, teleportingDistance, impenetrableMask))
             {
-                phantomTargetPosition = Vector3.Lerp(transform.position, hit.point, 0.8f);
+                phantomTargetPosition = Vector3.Lerp(transform.position, hit.point, 0.5f);
                 if (AimPossessTarget != null)
                 {
                     if (AimPossessTarget.TryGetComponent<PossessNPC>(out PossessNPC pNPC_old))
@@ -709,6 +769,7 @@ public class PlayerMovement : MonoBehaviour
             if (AimPossessTarget.TryGetComponent<PossessNPC>(out PossessNPC pNPC_old))
             {
                 pNPC_old.ChangeMaterial(false);
+                pNPC_old.ChangeUI(false);
             }
             AimPossessTarget = null;
         }
@@ -766,6 +827,7 @@ public class PlayerMovement : MonoBehaviour
         cam.cullingMask ^= 1 << LayerMask.NameToLayer("PlayerEye");
         cam.cullingMask ^= 1 << LayerMask.NameToLayer("GuardEye");
 
+        PossessBody.GetComponent<PossessNPC>().ChangeUI(true);
 
         if (SpotLightProfile.TryGet<ColorAdjustments>(out var c))
         {
@@ -840,12 +902,12 @@ public class PlayerMovement : MonoBehaviour
         PlayerControls.PlayerAction.Enable();
     }
 
-    public void RepositionBigMapCamera()
+    /*public void RepositionBigMapCamera()
     {
        
         BigMapCamera.GetComponent<Transform>().position = new Vector3(0, 500, 0);
         
-    }
+    }*/
      
 
 }

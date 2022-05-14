@@ -123,6 +123,8 @@ Brette : {PlayerName()}！交给你了！ #line:03a100d
 
 Brette :  Okay，差不多了！ #line:0390fc4 
 
+<<TurnOnCG Background Color>>
+
 瞬移发动后，势能清零 #line:0bb406a 
 
 Brette : 呼———— 还好平安落地了。 #line:09862fd 

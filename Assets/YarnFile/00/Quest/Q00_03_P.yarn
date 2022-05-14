@@ -10,7 +10,7 @@ It's dark because...nobody lives there or works at there anymore.
 Anyway…take care.
 <<UpdateQuest GameManager Quest3 PickedUp>>
 <<UpdateQuestAnimation GameManager Quest3 STATU/UPDATE>>
-<<UpdateQuestDescription GameManager Quest3 Send/To/the/Factory./Red/Spot/On/Map>>
+<<UpdateQuestDescription GameManager Quest3 Send/To/the/Factory./Green/Spot/On/Map>>
 <<MapQuestObject GameManager Quest3_D true>>
 <<SetCurrentQuest GameManager Quest3_D>>
 <<MapQuestObject GameManager Quest3_P false>>

@@ -19,9 +19,7 @@ public class OpenningSceneManager : MonoBehaviour
     void Start()
     {
         PlayerStatus.playerPosition = new Vector3(233.65f, 1.55f, -21.5f);
-        //Debug.Log(PlayerStatus.playerPosition);
-
-        //vk.ShowTouchKeyboard();
+       
     }
 
     public void VideoStart()

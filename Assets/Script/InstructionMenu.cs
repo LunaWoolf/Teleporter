@@ -11,7 +11,7 @@ public class InstructionMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        eventSystem.SetSelectedGameObject(firstButton);
     }
 
     // Update is called once per frame
