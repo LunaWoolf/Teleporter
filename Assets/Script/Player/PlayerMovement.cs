@@ -156,7 +156,7 @@ public class PlayerMovement : MonoBehaviour
     private void OnDisable()
     {
 
-        Debug.Log("disable");
+        //Debug.Log("disable");
         movement.Disable();
         CameraMovement.Disable();
 
@@ -582,7 +582,7 @@ public class PlayerMovement : MonoBehaviour
             }
             else if (Physics.Raycast(this.transform.position, phantomTargetPosition - this.transform.position, out hit, teleportingDistance, impenetrableMask))
             {
-                phantomTargetPosition = Vector3.Lerp(transform.position, hit.point, 0.5f);
+                phantomTargetPosition = Vector3.Lerp(transform.position, hit.point, 0.7f);
                 if (AimPossessTarget != null)
                 {
                     if (AimPossessTarget.TryGetComponent<PossessNPC>(out PossessNPC pNPC_old))

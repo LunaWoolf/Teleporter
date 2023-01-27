@@ -255,9 +255,11 @@ public class QuestManager : MonoBehaviour
 
     public void ToggleUIPage()
     {
+        Debug.Log("UI");
        
         if (UICanvas != null)
         {
+            Debug.Log("UI111");
             UICanvas.SetActive(!UICanvas.activeSelf);
             UIPageOpen = UICanvas.activeSelf;
        

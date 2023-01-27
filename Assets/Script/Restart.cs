@@ -20,12 +20,10 @@ public class Restart : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.LeftCommand) && Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.R))
+        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.R))
         {
             RestartGame();
         }
-
-
 
     }
 
@@ -34,20 +32,27 @@ public class Restart : MonoBehaviour
         PlayerPrefs.DeleteAll();
         PlayerStatus.currentQuest = "Quest1_P";
         pms = GameObject.Find("PersistenceManager");
-
-       
+      
         if (sceneManager == null)
         {
+            //Debug.Log("okay");
             sceneManager = GameObject.Find("SceneManager").GetComponent<SceneManage>();
         }
         
         if (sceneManager != null)
         {
-            eventSystem.SetActive(false);
+
+            
+            if (eventSystem != null)
+            {
+                eventSystem.SetActive(false);
+            }
+            
             sceneManager.LoadLevel("OpenningScene");
         }
         if (pms != null)
         {
+            Debug.Log("okay03");
             Destroy(pms.gameObject);
         }
 

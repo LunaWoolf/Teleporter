@@ -196,17 +196,6 @@
                 },
                 {
                     "name": "",
-                    "id": "5abd8975-960a-4b62-8872-b718b1fcedc9",
-                    "path": "<Keyboard>/m",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "OpenBigMap",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "886f81fb-c5c5-45af-9b0f-35b83ab1e34a",
                     "path": "<Gamepad>/rightTrigger",
                     "interactions": "",
@@ -229,28 +218,6 @@
                 },
                 {
                     "name": "",
-                    "id": "255fade7-8e33-43d3-b729-9d98b68fe588",
-                    "path": "<Keyboard>/e",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "StartConversation",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "b2e27797-c08a-4d9c-85cd-ddbb2eb57dbe",
-                    "path": "<Keyboard>/q",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "AbortAimming",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "cdae1028-0ae8-49a7-938a-73146f378bee",
                     "path": "<Gamepad>/buttonEast",
                     "interactions": "",
@@ -268,28 +235,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "Jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "f831ce43-f61d-4361-be08-31326e5ad98d",
-                    "path": "<Keyboard>/space",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "2d17e763-331b-4804-a4e7-c1c57063dd0a",
-                    "path": "<Keyboard>/p",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "InstructionMenu",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -451,17 +396,6 @@
                 }
             ],
             "bindings": [
-                {
-                    "name": "",
-                    "id": "664664f2-6118-4499-945e-3871cd37edee",
-                    "path": "<Keyboard>/shift",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "OpenUIPage",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
                 {
                     "name": "",
                     "id": "38a3e01c-e271-4776-ae72-72348cbcb49d",

@@ -61,7 +61,6 @@ Brette可以在他的手机上随时查询订单和地图  #line:078035b
 Genny: 对了！还是要注意监控摄像。别忘了，如果被拍到次数太多会被取消外卖员资格的。 #line:0730825 
 <<TurnOnCG MainCanvas HealthBar>>
 Genny: 如果你需要任何帮助但我又不在身边的时候，可以参考我写给你的这份【操作指南】. #line:0bd4ab8 
-<<InputSystemEnable QuestManager OpenUIPage>>
 (在手柄上按下Option，打开【操作指南】) #line:0bd4ab
 //<<TurnOnCG MainCanvas Instruction>>
 Genny:那工作顺利哦！注意安全！ #line:01c8588 
