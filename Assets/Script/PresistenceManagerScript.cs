@@ -27,7 +27,7 @@ public class PresistenceManagerScript : MonoBehaviour
         else
         {
             Destroy(Instance.gameObject);
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
 
         }
 
