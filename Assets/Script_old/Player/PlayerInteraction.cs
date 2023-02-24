@@ -190,7 +190,7 @@ public class PlayerInteraction : MonoBehaviour
                 }
 
                 //npcScript.SetDialogue();
-                gm.ToggleUIInstruction("Possess", true); //UI instruction
+                //gm.ToggleUIInstruction("Possess", true); //UI instruction
             }
 
         }
@@ -204,7 +204,7 @@ public class PlayerInteraction : MonoBehaviour
 
         if (other.gameObject.tag == "XRayInstruction")
         {
-            gm.ToggleUIInstruction("Xray", true);
+            //gm.ToggleUIInstruction("Xray", true);
 
         }
 
@@ -225,7 +225,7 @@ public class PlayerInteraction : MonoBehaviour
             if (inTheMiddleOfConversation)
             {
                 EndDialogue();
-                gm.ToogleDialogueUI();
+                //gm.ToogleDialogueUI();
 
             }
 
@@ -249,14 +249,14 @@ public class PlayerInteraction : MonoBehaviour
 
             if (other.gameObject.tag == "XRayInstruction")
             {
-                gm.ToggleUIInstruction("Xray", false);
+                //gm.ToggleUIInstruction("Xray", false);
 
             }
 
 
 
       
-            gm.ToggleUIInstruction("Possess", false);
+            //gm.ToggleUIInstruction("Possess", false);
         }
 
     }
@@ -320,7 +320,7 @@ public class PlayerInteraction : MonoBehaviour
 
     public void StartNPCConversation()
     {
-        if (!inTheMiddleOfConversation && !gm.UIPageOpen && !gm.InstructionPageOpen)
+        if (!inTheMiddleOfConversation /*&& !gm.UIPageOpen && !gm.InstructionPageOpen*/)
         {
             if (conversationNPC != null && conversationNPC.TryGetComponent<NPCDialogueManager>(out NPCDialogueManager npcScript))
             {

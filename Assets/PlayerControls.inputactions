@@ -108,6 +108,28 @@
                 },
                 {
                     "name": "",
+                    "id": "c2207814-a718-4ba1-89c5-4884ffcaa3db",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Teleport",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9ff3d3b0-79f9-4e0a-8102-efce48669642",
+                    "path": "<Keyboard>/l",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Teleport",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "be5cf101-e9d4-4602-8548-3fe22fd77e03",
                     "path": "<Gamepad>/rightStick",
                     "interactions": "",
@@ -353,7 +375,7 @@
                 {
                     "name": "",
                     "id": "9ea066ba-87b9-4429-b28e-322e35734268",
-                    "path": "<Keyboard>/slash",
+                    "path": "<Keyboard>/backquote",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

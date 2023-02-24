@@ -9,6 +9,7 @@ using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
+
     public CharacterController controller;
     private PlayerControls PlayerControls;
     private InputAction movement;
@@ -104,14 +105,14 @@ public class PlayerMovement : MonoBehaviour
 
         PhantomMaterial.SetFloat("_Tele",2f); // default material
 
-
+        /*
         PlayerControls.UI.OpenUIPage.performed += ctx => gm.ToggleUIPage();
         PlayerControls.PlayerAction.InstructionMenu.performed += ctx => gm.ToggleInstructionPage();
         PlayerControls.PlayerAction.Teleport.started += ctx => AimAction();
         PlayerControls.PlayerAction.Teleport.performed += ctx => TeleportAction();
         PlayerControls.PlayerAction.AbortAimming.performed += ctx => AbortAiming();
         PlayerControls.PlayerAction.SuperTeleport.started += ctx => SuperTeleport();
-        PlayerControls.PlayerAction.SuperTeleport.performed += ctx => CancleSuperTeleport();
+        PlayerControls.PlayerAction.SuperTeleport.performed += ctx => CancleSuperTeleport();*/
     }
 
     private void OnEnable() { 
@@ -160,20 +161,20 @@ public class PlayerMovement : MonoBehaviour
         movement.Disable();
         CameraMovement.Disable();
 
-        PlayerControls.PlayerAction.Teleport.started -= ctx => AimAction();
-        PlayerControls.PlayerAction.Teleport.performed -= ctx => TeleportAction();
+        //PlayerControls.PlayerAction.Teleport.started -= ctx => AimAction();
+        //PlayerControls.PlayerAction.Teleport.performed -= ctx => TeleportAction();
         PlayerControls.PlayerAction.Teleport.Disable();
 
-        PlayerControls.UI.OpenUIPage.performed -= ctx => gm.ToggleUIPage();
+        //PlayerControls.UI.OpenUIPage.performed -= ctx => gm.ToggleUIPage();
         PlayerControls.UI.OpenUIPage.Disable();
 
-        PlayerControls.PlayerAction.InstructionMenu.performed -= ctx => gm.ToggleInstructionPage();
+        //PlayerControls.PlayerAction.InstructionMenu.performed -= ctx => gm.ToggleInstructionPage();
         PlayerControls.PlayerAction.InstructionMenu.Disable();
 
-        PlayerControls.PlayerAction.AbortAimming.performed -= ctx => AbortAiming();
+        //PlayerControls.PlayerAction.AbortAimming.performed -= ctx => AbortAiming();
         PlayerControls.PlayerAction.AbortAimming.Disable();
 
-        PlayerControls.PlayerAction.Jump.performed -= ctx => Jump();
+        //PlayerControls.PlayerAction.Jump.performed -= ctx => Jump();
         PlayerControls.PlayerAction.Jump.Disable();
 
 
@@ -297,7 +298,7 @@ public class PlayerMovement : MonoBehaviour
                 gm.UpdateHealth(-5f);
                 gm.CameraShake();
                 fallHurt = false;*/
-                gm.UpdateHealth(-5f);
+                //gm.UpdateHealth(-5f);
                 fallHurt = false;
                 AudioManager.Play("Land");
 
@@ -327,7 +328,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (!Teleporting && Moveable && !Aimming && !playerInteraction.inTheMiddleOfConversation)
         {
-            if (gm.UIPageOpen) //如果打开UI界面， 玩家无法移动，移动相机
+            /*if (gm.UIPageOpen) //如果打开UI界面， 玩家无法移动，移动相机
             {
                 float x = movement.ReadValue<Vector2>().x * mapMouseSensitivity * Time.deltaTime;
                 float z = movement.ReadValue<Vector2>().y * mapMouseSensitivity * Time.deltaTime;
@@ -351,7 +352,7 @@ public class PlayerMovement : MonoBehaviour
 
 
             }
-            else if(!gm.InstructionPageOpen) //如果打开UI界面关闭， 玩家移动
+            /*else if(!gm.InstructionPageOpen) //如果打开UI界面关闭， 玩家移动
             {
                 float x = movement.ReadValue<Vector2>().x;
                 float z = movement.ReadValue<Vector2>().y;
@@ -395,7 +396,7 @@ public class PlayerMovement : MonoBehaviour
                 else
                 {
                     walkingTime = 0;
-                }
+                }*/
 
             }
 
@@ -403,14 +404,15 @@ public class PlayerMovement : MonoBehaviour
             
         }
 
-        if (Aimming && !playerInteraction.inTheMiddleOfConversation) //实时更新Aiming 位置
+        /*if (Aimming && !playerInteraction.inTheMiddleOfConversation) //实时更新Aiming 位置
         {
             CheckAimming();
-        }
+        }*/
 
       
     }
 
+/*
     void Jump()
     {
         if (isGrounded)
@@ -432,13 +434,14 @@ public class PlayerMovement : MonoBehaviour
             Brette_Phantom.SetActive(false);
             this.GetComponent<CharacterController>().enabled = true;
 
-            gm.ToggleUIInstruction("Teleport", false);
+            //gm.ToggleUIInstruction("Teleport", false);
         }
     }
 
 
     void AimAction()
     {
+        /*
         if (!gm.UIPageOpen)
         {
             if (!playerInteraction.inTheMiddleOfConversation)
@@ -453,12 +456,14 @@ public class PlayerMovement : MonoBehaviour
 
             
 
-        }
+        }*/
         
-    }
+    //}
 
+/*
     void TeleportAction()
     {
+        /*
         if (!gm.UIPageOpen)
         {
             gm.ToggleUIInstruction("Teleport", false);
@@ -484,10 +489,11 @@ public class PlayerMovement : MonoBehaviour
                 AbortAiming();
 
             }
-        }
+        }*/
         
-    }
+    //}
 
+/*
     public GameObject CheckPossess()
     {
         bool possessTargetExist = false;
@@ -718,10 +724,10 @@ public class PlayerMovement : MonoBehaviour
         RestoreTimer = 0;
         PhantomMaterial.SetFloat("_Tele", 2f);*/
 
-    }
+ //   }
 
    
-
+/*
 
     IEnumerator Possess(float delayTime, Transform teleportPosition)
     {
@@ -910,4 +916,4 @@ public class PlayerMovement : MonoBehaviour
     }*/
      
 
-}
+//}

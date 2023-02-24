@@ -58,7 +58,7 @@ public class MouseLook : MonoBehaviour
     {
       
 
-        if (gm.UIPageOpen) //如果打开UI界面， 玩家无法移动，移动相机
+        if (/*gm.UIPageOpen*/ true) //如果打开UI界面， 玩家无法移动，移动相机
         {
             //float mouseX = CameraMovement.ReadValue<Vector2>().x * mapMouseSensitivity * Time.deltaTime;
             
@@ -80,7 +80,7 @@ public class MouseLook : MonoBehaviour
             }
             
         }
-        else if(!gm.InstructionPageOpen)//如果打开UI界面关闭， 玩家移动
+        /*else if(!gm.InstructionPageOpen)//如果打开UI界面关闭， 玩家移动
         {
             float mouseX = CameraMovement.ReadValue<Vector2>().x * mouseSensitivity * Time.deltaTime;
             float mouseY = CameraMovement.ReadValue<Vector2>().y * mouseSensitivity * Time.deltaTime;
@@ -92,7 +92,7 @@ public class MouseLook : MonoBehaviour
             transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f); //rotate self(camera)
             playerBody.Rotate(Vector3.up * mouseX); //roate playerbody
 
-        }
+        }*/
 
 
     }
